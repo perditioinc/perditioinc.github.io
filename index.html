@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perditio</title>
+    <title>Colorful Globe with Stars</title>
     <link rel="stylesheet" href="styles.css">
- <style>
+    <style>
         /* Reset body styles */
         body {
             margin: 0;
@@ -85,7 +85,7 @@
     </div>
     
     <script>
-        // JavaScript to create a colorful spinning globe and bouncing stars
+        // JavaScript to create a colorful glowing globe and bouncing stars
         document.addEventListener("DOMContentLoaded", () => {
             const canvas = document.getElementById('globe'); // Get canvas element
             const ctx = canvas.getContext('2d'); // Get 2D context
@@ -117,11 +117,21 @@
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                // Draw the globe
+                // Draw the glowing effect around the globe
                 ctx.save();
                 ctx.translate(canvas.width / 2, canvas.height / 2);
                 ctx.rotate(globeAngle);
-                ctx.fillStyle = 'rgba(0, 119, 190, 0.8)'; // Globe color
+                
+                // Create a glowing effect by drawing multiple larger circles
+                for (let glowRadius = 120; glowRadius > 60; glowRadius -= 5) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${0.3 - (0.3 - (120 - glowRadius) / 60)})`; // Gradient for glow
+                    ctx.beginPath();
+                    ctx.arc(0, 0, glowRadius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Draw the black globe
+                ctx.fillStyle = 'black'; // Globe color
                 ctx.beginPath();
                 ctx.arc(0, 0, globeRadius, 0, Math.PI * 2);
                 ctx.fill();
