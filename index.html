@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Groove Festival 2025 - Coming Soon</title>
+    <title>Dark Groove 2025 World Tour - Coming Soon</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Add these styles to make the canvas responsive */
         body {
             margin: 0;
             overflow: hidden;
-            background: linear-gradient(to bottom, #ff7e5f, #feb47b); /* Festive gradient background */
-            color: white; /* Text color for better contrast */
-            font-family: 'Arial', sans-serif;
         }
 
         #canvas-container {
@@ -20,30 +18,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Canvas behind other elements */
+            z-index: -1; /* Ensure the canvas is behind other elements */
         }
 
         .container {
             position: relative;
-            z-index: 1; /* Container above the canvas */
+            z-index: 1; /* Bring this container above the canvas */
             text-align: center;
             padding: 20px;
-            backdrop-filter: blur(5px); /* Blur effect for better readability */
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         h1 {
-            font-size: 3em; /* Increased font size for emphasis */
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-size: 1.8em;
+            font-size: 2.5em;
             margin-bottom: 20px;
         }
 
-        h3 {
+        h2 {
             font-size: 1.5em;
             margin-bottom: 20px;
         }
@@ -62,24 +54,22 @@
         button {
             padding: 10px 15px;
             font-size: 1em;
-            background-color: #ffca3a; /* Bright button color */
+            background-color: #f39c12;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #ffb700; /* Darker button color on hover */
+            background-color: #e67e22;
         }
     </style>
 </head>
 <body>
     <div id="canvas-container"></div>
     <div class="container">
-        <h1>Dark Groove Festival 2025</h1>
-        <h2>Coming Soon!</h2>
-        <h3>Join the Vibe!</h3>
+        <h1>New Store Coming Soon!</h1>
+        <h2>Dark Groove 2025 World Tour Loading...</h2>
         <form id="notificationForm">
             <label for="email">Sign up for notifications:</label>
             <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -96,14 +86,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // Add a ground plane
-        const planeGeometry = new THREE.PlaneGeometry(50, 50);
-        const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
-        const ground = new THREE.Mesh(planeGeometry, planeMaterial);
+        // Create a ground plane
+        const groundGeometry = new THREE.PlaneGeometry(50, 50);
+        const groundMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
+        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
         ground.rotation.x = -Math.PI / 2; // Rotate to lay flat
         scene.add(ground);
 
-        // Function to create festival tents (cubes)
+        // Create festival tents (cubes)
+        const tents = [];
         function createTent(x, z) {
             const geometry = new THREE.BoxGeometry(2, 2, 2);
             const material = new THREE.MeshStandardMaterial({ color: Math.random() * 0xffffff });
@@ -111,7 +102,7 @@
             tent.position.set(x, 1, z);
             tent.userData = { type: 'tent' }; // Add user data for interaction
             scene.add(tent);
-            return tent;
+            tents.push(tent); // Add to the tents array
         }
 
         // Create some tents
@@ -122,4 +113,84 @@
         }
 
         // Add a stage (a larger cube)
- 
+        const stageGeometry = new THREE.BoxGeometry(4, 1, 4);
+        const stageMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+        const stage = new THREE.Mesh(stageGeometry, stageMaterial);
+        stage.position.set(0, 1, -10); // Position the stage at the back
+        stage.userData = { type: 'stage' }; // Add user data for interaction
+        scene.add(stage);
+
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        camera.position.set(0, 5, 15);
+        camera.lookAt(0, 0, 0);
+
+        // Function to create confetti
+        const confettiCount = 200;
+        const confetti = [];
+        for (let i = 0; i < confettiCount; i++) {
+            const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+            const material = new THREE.MeshStandardMaterial({ color: Math.random() * 0xffffff });
+            const confettiPiece = new THREE.Mesh(geometry, material);
+            confettiPiece.position.set(Math.random() * 50 - 25, Math.random() * 50 + 10, Math.random() * 50 - 25);
+            confettiPiece.velocityY = Math.random() * -0.5 - 0.5; // Random downward velocity
+            scene.add(confettiPiece);
+            confetti.push(confettiPiece);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update confetti positions
+            confetti.forEach(piece => {
+                piece.position.y += piece.velocityY;
+                if (piece.position.y < -10) {
+                    piece.position.y = Math.random() * 50 + 10; // Reset position when below the ground
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle mouse clicks to explode tents
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        window.addEventListener('click', (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(scene.children);
+
+            intersects.forEach(intersect => {
+                if (intersect.object.userData.type === 'tent') {
+                    explodeTent(intersect.object);
+                }
+            });
+        });
+
+        function explodeTent(tent) {
+            const scaleFactor = 2; // Change this value for explosion size
+            tent.scale.set(scaleFactor, scaleFactor, scaleFactor); // Scale the tent up
+            tent.material.color.set(0xffff00); // Change color to yellow for explosion effect
+
+            // Optionally, remove the tent after a short delay
+            setTimeout(() => {
+                scene.remove(tent);
+            }, 500); // Remove after 500ms
+        }
+
+        // Resize the renderer on window resize
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width 
