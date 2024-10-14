@@ -94,8 +94,9 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-            // Variables for globe
-            const globeRadius = 200; // Increased globe size
+            // Variables for globe size based on screen width
+            const isMobile = window.innerWidth < 768; // Adjust threshold for mobile
+            const globeRadius = isMobile ? 100 : 200; // Use 100 for mobile, 200 for desktop
             let globeAngle = 0;
 
             // Create an array for bouncing spheres (stars)
@@ -123,8 +124,8 @@
                 ctx.rotate(globeAngle);
                 
                 // Create a glowing effect by drawing multiple larger circles
-                for (let glowRadius = 220; glowRadius > 160; glowRadius -= 5) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${0.3 - (0.3 - (220 - glowRadius) / 60)})`; // Gradient for glow
+                for (let glowRadius = globeRadius + 20; glowRadius > globeRadius - 60; glowRadius -= 5) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${0.3 - (0.3 - (glowRadius - globeRadius) / 60)})`; // Gradient for glow
                     ctx.beginPath();
                     ctx.arc(0, 0, glowRadius, 0, Math.PI * 2);
                     ctx.fill();
