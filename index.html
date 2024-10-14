@@ -43,6 +43,11 @@
             margin-bottom: 20px;
         }
 
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
         form {
             margin-top: 20px;
         }
@@ -91,56 +96,30 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // Create colorful spheres to represent festival elements
-        const createSphere = (color, x, y, z) => {
-            const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-            const material = new THREE.MeshStandardMaterial({ color: color });
-            const sphere = new THREE.Mesh(geometry, material);
-            sphere.position.set(x, y, z);
-            scene.add(sphere);
-            return sphere;
-        };
+        // Add a ground plane
+        const planeGeometry = new THREE.PlaneGeometry(50, 50);
+        const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x228B22 });
+        const ground = new THREE.Mesh(planeGeometry, planeMaterial);
+        ground.rotation.x = -Math.PI / 2; // Rotate to lay flat
+        scene.add(ground);
 
-        const spheres = [];
-        const colors = [0xff5733, 0x33ff57, 0x3357ff, 0xff33a1, 0xffcc33]; // Array of colors
+        // Function to create festival tents (cubes)
+        function createTent(x, z) {
+            const geometry = new THREE.BoxGeometry(2, 2, 2);
+            const material = new THREE.MeshStandardMaterial({ color: Math.random() * 0xffffff });
+            const tent = new THREE.Mesh(geometry, material);
+            tent.position.set(x, 1, z);
+            tent.userData = { type: 'tent' }; // Add user data for interaction
+            scene.add(tent);
+            return tent;
+        }
+
+        // Create some tents
         for (let i = 0; i < 5; i++) {
-            const x = Math.random() * 10 - 5; // Random position
-            const y = Math.random() * 10 - 5; // Random position
-            const z = Math.random() * -20; // Random depth
-            spheres.push(createSphere(colors[i % colors.length], x, y, z));
+            const x = Math.random() * 30 - 15; // Random position on the x-axis
+            const z = Math.random() * 30 - 15; // Random position on the z-axis
+            createTent(x, z);
         }
 
-        // Add a light source
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-        const pointLight = new THREE.PointLight(0xffffff, 1);
-        pointLight.position.set(5, 5, 5);
-        scene.add(pointLight);
-
-        camera.position.z = 10;
-
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            spheres.forEach(sphere => {
-                sphere.rotation.x += 0.01;
-                sphere.rotation.y += 0.01;
-            });
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // Resize the renderer on window resize
-        window.addEventListener('resize', () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        });
-
-        document.getElementById('notificationForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            alert(`Thank you for signing up, ${email}!`);
-   
+        // Add a stage (a larger cube)
+ 
