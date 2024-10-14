@@ -23,14 +23,9 @@ body {
   max-width: 300px; /* Limit maximum size */
   max-height: 300px; /* Limit maximum size */
   margin: -40vw 0 0 -40vw; /* Center the globe */
-  background-image: url('https://threejsfundamentals.org/threejs/resources/images/earth.jpg'); /* Earth texture */
-  background-size: cover;
   border-radius: 50%; /* Make it circular */
   animation: rotate 10s linear infinite; /* Rotate the globe */
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 
-              0 0 40px rgba(255, 0, 0, 0.7), 
-              0 0 60px rgba(0, 255, 0, 0.7), 
-              0 0 80px rgba(0, 0, 255, 0.7); /* Colorful glow effect */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Base glow effect */
   z-index: -1; /* Place it behind the content */
 }
 
@@ -41,6 +36,30 @@ body {
   }
   to {
     transform: rotateY(360deg);
+  }
+}
+
+/* Glow effect animation */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 
+                0 0 30px rgba(255, 0, 0, 0.7);
+  }
+  25% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 1), 
+                0 0 30px rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 0, 255, 1), 
+                0 0 30px rgba(0, 0, 255, 0.7);
+  }
+  75% {
+    box-shadow: 0 0 20px rgba(255, 255, 0, 1), 
+                0 0 30px rgba(255, 255, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 
+                0 0 30px rgba(255, 0, 0, 0.7);
   }
 }
 
