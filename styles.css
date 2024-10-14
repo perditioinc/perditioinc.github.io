@@ -11,51 +11,32 @@ body {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   text-align: center;
+  position: relative; /* Make body a positioned ancestor */
 }
 
 /* Container for the globe */
 #globe-container {
-  width: 50vw; /* Responsive width */
-  height: 50vw; /* Responsive height to maintain aspect ratio */
+  width: 40vmin; /* Use vmin for responsiveness based on the smallest viewport dimension */
+  height: 40vmin; /* Maintain aspect ratio with vmin */
   max-width: 300px; /* Limit maximum size */
   max-height: 300px; /* Limit maximum size */
   border-radius: 50%; /* Make it circular */
   animation: rotate 10s linear infinite; /* Rotate the globe */
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Base glow effect */
   z-index: -1; /* Place it behind the content */
+  position: absolute; /* Absolute positioning for centering */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust position for perfect centering */
 }
 
 /* Rotate animation */
 @keyframes rotate {
   from {
-    transform: rotateY(0deg);
+    transform: translate(-50%, -50%) rotateY(0deg); /* Keep translate for centering */
   }
   to {
-    transform: rotateY(360deg);
-  }
-}
-
-/* Glow effect animation */
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 
-                0 0 30px rgba(255, 0, 0, 0.7);
-  }
-  25% {
-    box-shadow: 0 0 20px rgba(0, 255, 0, 1), 
-                0 0 30px rgba(0, 255, 0, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(0, 0, 255, 1), 
-                0 0 30px rgba(0, 0, 255, 0.7);
-  }
-  75% {
-    box-shadow: 0 0 20px rgba(255, 255, 0, 1), 
-                0 0 30px rgba(255, 255, 0, 0.7);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 
-                0 0 30px rgba(255, 0, 0, 0.7);
+    transform: translate(-50%, -50%) rotateY(360deg); /* Keep translate for centering */
   }
 }
 
