@@ -14,6 +14,16 @@ canvas.height = window.innerHeight;
 
 let angle = 0; // For rotating the globe
 
+// Colors for the glow effect
+const colors = [
+    'rgba(255, 0, 0, 0.5)',
+    'rgba(0, 255, 0, 0.5)',
+    'rgba(0, 0, 255, 0.5)',
+    'rgba(255, 255, 0, 0.5)',
+    'rgba(255, 0, 255, 0.5)',
+    'rgba(0, 255, 255, 0.5)'
+];
+
 // Function to draw the globe
 function drawGlobe() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -25,9 +35,9 @@ function drawGlobe() {
 
     // Create a gradient for the globe
     const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-    gradient.addColorStop(0.5, 'rgba(0, 0, 255, 0.5)');
-    gradient.addColorStop(1, 'rgba(0, 255, 0, 0.2)');
+    colors.forEach((color, index) => {
+        gradient.addColorStop(index / (colors.length - 1), color);
+    });
 
     ctx.fillStyle = gradient;
     ctx.beginPath();
@@ -35,7 +45,7 @@ function drawGlobe() {
     ctx.fill();
 
     // Update the rotation angle
-    angle += 0.5; // Control the speed of rotation
+    angle += 1; // Control the speed of rotation
     ctx.save(); // Save the current context
     ctx.translate(x, y); // Move to center
     ctx.rotate(angle * Math.PI / 180); // Rotate
