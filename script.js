@@ -1,89 +1,66 @@
-// Set up the scene, camera, and renderer
+// script.js
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('globe-container').appendChild(renderer.domElement);
 
-// Create the globe geometry and material
-const geometry = new THREE.SphereGeometry(2, 64, 64);
-const textureLoader = new THREE.TextureLoader();
-const material = new THREE.MeshBasicMaterial({
-    map: textureLoader.load('https://raw.githubusercontent.com/Zeptir/Textures/main/earth.jpg'), // Earth texture
-    transparent: true,
-});
-
-// Create the globe mesh
-const globe = new THREE.Mesh(geometry, material);
+// Create a globe
+const globeGeometry = new THREE.SphereGeometry(1, 32, 32);
+const globeMaterial = new THREE.MeshBasicMaterial({ color: 0x0077be, wireframe: false });
+const globe = new THREE.Mesh(globeGeometry, globeMaterial);
 scene.add(globe);
 
-// Function to create a small sphere (star)
-function createStar() {
-    const geometry = new THREE.SphereGeometry(0.1, 32, 32); // Smaller sphere
-    const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
-    const star = new THREE.Mesh(geometry, material);
-
-    // Set random position
-    star.position.x = (Math.random() - 0.5) * 10;
-    star.position.y = (Math.random() - 0.5) * 10;
-    star.position.z = (Math.random() - 0.5) * 10;
-
-    // Set random velocity
-    star.velocity = {
-        x: (Math.random() - 0.5) * 0.02,
-        y: (Math.random() - 0.5) * 0.02,
-        z: (Math.random() - 0.5) * 0.02,
-    };
-
-    return star;
-}
-
-// Create multiple stars
+// Create bouncing stars
 const stars = [];
-for (let i = 0; i < 100; i++) { // Number of stars
-    const star = createStar();
+const starCount = 50;
+
+for (let i = 0; i < starCount; i++) {
+    const starGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
+    const star = new THREE.Mesh(starGeometry, starMaterial);
+
+    // Random positions
+    star.position.x = Math.random() * 10 - 5;
+    star.position.y = Math.random() * 10 - 5;
+    star.position.z = Math.random() * 10 - 5;
+
     stars.push(star);
     scene.add(star);
 }
 
-// Position the camera
-camera.position.z = 5;
+// Camera position
+camera.position.z = 3;
 
 // Animation loop
 function animate() {
+    requestAnimationFrame(animate);
+
     // Rotate the globe
-    globe.rotation.y += 0.01; // Rotate the globe
+    globe.rotation.y += 0.01;
 
-    // Update stars' positions
+    // Bounce stars
     stars.forEach(star => {
-        // Update position
-        star.position.x += star.velocity.x;
-        star.position.y += star.velocity.y;
-        star.position.z += star.velocity.z;
+        star.position.x += (Math.random() - 0.5) * 0.01;
+        star.position.y += (Math.random() - 0.5) * 0.01;
+        star.position.z += (Math.random() - 0.5) * 0.01;
 
-        // Bounce off the edges
-        if (star.position.x <= -5 || star.position.x >= 5) {
-            star.velocity.x *= -1; // Reverse x velocity
-        }
-        if (star.position.y <= -5 || star.position.y >= 5) {
-            star.velocity.y *= -1; // Reverse y velocity
-        }
-        if (star.position.z <= -5 || star.position.z >= 5) {
-            star.velocity.z *= -1; // Reverse z velocity
-        }
+        // Bounce stars back into view
+        if (Math.abs(star.position.x) > 5) star.position.x = -star.position.x;
+        if (Math.abs(star.position.y) > 5) star.position.y = -star.position.y;
+        if (Math.abs(star.position.z) > 5) star.position.z = -star.position.z;
     });
 
-    // Render the scene
     renderer.render(scene, camera);
-    requestAnimationFrame(animate); // Call animate for the next frame
 }
 
-// Resize the canvas on window resize
+animate();
+
+// Responsive design for window resizing
 window.addEventListener('resize', () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
 });
-
-// Start the animation
-animate();
