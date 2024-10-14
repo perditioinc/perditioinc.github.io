@@ -71,3 +71,4 @@ window.addEventListener('resize', () => {
 
 // Start the drawing loop
 draw();
+
