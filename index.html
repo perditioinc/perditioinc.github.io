@@ -5,9 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perditio</title>
     <link rel="stylesheet" href="styles.css">
+ <style>
+        /* Reset body styles */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Container for the globe */
+        #globe-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1; /* Place it behind the content */
+            transform: translate(-50%, -50%); /* Center the globe container */
+        }
+
+        /* Canvas styles */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Content styles */
+        .content {
+            z-index: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100%; /* Fill the full height */
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <div id="globe-container"></div>
+    <div id="globe-container">
+        <canvas id="globe"></canvas> <!-- Canvas element for drawing -->
+    </div>
     <div class="content">
         <h1>New Store Coming Soon</h1>
         <h2>Dark Groove 2025 World Tour Loading...</h2>
@@ -15,6 +83,83 @@
         <input type="email" placeholder="Enter your email" />
         <button>Notify Me!</button>
     </div>
-    <script src="script.js"></script>
+    
+    <script>
+        // JavaScript to create a colorful spinning globe and bouncing stars
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById('globe'); // Get canvas element
+            const ctx = canvas.getContext('2d'); // Get 2D context
+
+            // Set canvas size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Variables for globe
+            const globeRadius = 100;
+            let globeAngle = 0;
+
+            // Create an array for bouncing spheres (stars)
+            const spheres = [];
+            const sphereCount = 30;
+
+            for (let i = 0; i < sphereCount; i++) {
+                spheres.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: 5 + Math.random() * 10,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    speedX: (Math.random() - 0.5) * 2,
+                    speedY: (Math.random() - 0.5) * 2
+                });
+            }
+
+            // Draw the globe and bouncing spheres
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw the globe
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(globeAngle);
+                ctx.fillStyle = 'rgba(0, 119, 190, 0.8)'; // Globe color
+                ctx.beginPath();
+                ctx.arc(0, 0, globeRadius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // Draw the bouncing spheres
+                spheres.forEach(sphere => {
+                    ctx.fillStyle = sphere.color;
+                    ctx.beginPath();
+                    ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Move the sphere
+                    sphere.x += sphere.speedX;
+                    sphere.y += sphere.speedY;
+
+                    // Bounce off edges
+                    if (sphere.x + sphere.radius > canvas.width || sphere.x - sphere.radius < 0) {
+                        sphere.speedX *= -1;
+                    }
+                    if (sphere.y + sphere.radius > canvas.height || sphere.y - sphere.radius < 0) {
+                        sphere.speedY *= -1;
+                    }
+                });
+
+                globeAngle += 0.01; // Increase angle for spinning effect
+                requestAnimationFrame(draw);
+            }
+
+            // Responsive design for window resizing
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            // Start the drawing loop
+            draw();
+        });
+    </script>
 </body>
 </html>
