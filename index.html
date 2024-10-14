@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dark Groove 2025 World Tour</title>
-  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       margin: 0;
       overflow: hidden;
       position: relative;
+      font-family: Arial, sans-serif;
+      color: white; /* Text color for visibility */
     }
     #globe-container {
       position: absolute;
@@ -23,7 +24,6 @@
       position: relative;
       z-index: 1; /* Bring the content in front */
       text-align: center;
-      color: white; /* Change text color for visibility */
       padding: 20px;
     }
   </style>
@@ -41,8 +41,45 @@
     </form>
   </div>
 
-  <!-- Add Three.js from CDN -->
+  <!-- Load Three.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
-  <script src="script.js" defer></script>
+  <script>
+    // Create the scene, camera, and renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 10;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('globe-container').appendChild(renderer.domElement);
+
+    // Create the sphere geometry and material
+    const geometry = new THREE.SphereGeometry(5, 64, 64);
+    const texture = new THREE.TextureLoader().load('https://threejsfundamentals.org/threejs/resources/images/earth.jpg'); // Earth texture
+    const material = new THREE.MeshBasicMaterial({ map: texture });
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    // Animation loop to rotate the sphere
+    function animate() {
+      requestAnimationFrame(animate);
+      sphere.rotation.y += 0.005; // Adjust speed as needed
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Handle window resizing
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Handle form submission
+    document.getElementById('notification-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('You will be notified soon!');
+    });
+  </script>
 </body>
 </html>
