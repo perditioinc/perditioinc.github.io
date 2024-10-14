@@ -12,32 +12,49 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let angle = 0; // For rotating the globe
+
 // Function to draw the globe
 function drawGlobe() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  // Draw the globe
-  const radius = Math.min(canvas.width, canvas.height) / 3;
-  const x = canvas.width / 2;
-  const y = canvas.height / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw the globe
+    const radius = Math.min(canvas.width, canvas.height) / 3;
+    const x = canvas.width / 2;
+    const y = canvas.height / 2;
 
-  // Create a gradient for the globe
-  const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-  gradient.addColorStop(0, 'rgba(255, 255, 255, 0.5)');
-  gradient.addColorStop(1, 'rgba(0, 0, 255, 0.7)');
-  
-  ctx.fillStyle = gradient;
-  ctx.beginPath();
-  ctx.arc(x, y, radius, 0, Math.PI * 2);
-  ctx.fill();
+    // Create a gradient for the globe
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+    gradient.addColorStop(0.5, 'rgba(0, 0, 255, 0.5)');
+    gradient.addColorStop(1, 'rgba(0, 255, 0, 0.2)');
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Update the rotation angle
+    angle += 0.5; // Control the speed of rotation
+    ctx.save(); // Save the current context
+    ctx.translate(x, y); // Move to center
+    ctx.rotate(angle * Math.PI / 180); // Rotate
+    ctx.translate(-x, -y); // Move back
+    ctx.restore(); // Restore context
 }
 
 // Resize canvas on window resize
 window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  drawGlobe();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawGlobe();
 });
 
+// Animation loop
+function animate() {
+    drawGlobe();
+    requestAnimationFrame(animate); // Call animate for the next frame
+}
+
 // Initial draw
-drawGlobe();
+animate();
