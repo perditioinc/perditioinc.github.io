@@ -5,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dark Groove 2025 World Tour</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    #globe-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Send the background behind content */
+    }
+    .content {
+      position: relative;
+      z-index: 1; /* Bring the content in front */
+      text-align: center;
+      color: white; /* Change text color for visibility */
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
   <div id="globe-container"></div>
@@ -19,7 +41,8 @@
     </form>
   </div>
 
-  <!-- Script with type="module" for ES modules -->
-  <script type="module" src="script.js"></script>
+  <!-- Add Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
