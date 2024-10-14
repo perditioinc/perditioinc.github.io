@@ -1,39 +1,43 @@
-// // Log to check if script is running
-// console.log('Script is running');
+// Create the globe container
+const globeContainer = document.getElementById('globe-container');
 
-// // Create the scene, camera, and renderer
-// const scene = new THREE.Scene();
-// const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-// camera.position.z = 10;
+// Create a canvas element
+const canvas = document.createElement('canvas');
+globeContainer.appendChild(canvas);
 
-// const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-// renderer.setSize(window.innerWidth, window.innerHeight);
-// document.getElementById('globe-container').appendChild(renderer.domElement);
+// Get the canvas context
+const ctx = canvas.getContext('2d');
 
-// // Create the sphere geometry and material
-// const geometry = new THREE.SphereGeometry(5, 64, 64);
-// const texture = new THREE.TextureLoader().load('https://threejsfundamentals.org/threejs/resources/images/earth.jpg'); // Earth texture
-// const material = new THREE.MeshBasicMaterial({ map: texture });
-// const sphere = new THREE.Mesh(geometry, material);
-// scene.add(sphere);
+// Set canvas dimensions
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// // Animation loop to rotate the sphere
-// function animate() {
-//   requestAnimationFrame(animate);
-//   sphere.rotation.y += 0.005; // Adjust speed as needed
-//   renderer.render(scene, camera);
-// }
-// animate();
+// Function to draw the globe
+function drawGlobe() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw the globe
+  const radius = Math.min(canvas.width, canvas.height) / 3;
+  const x = canvas.width / 2;
+  const y = canvas.height / 2;
 
-// // Handle window resizing
-// window.addEventListener('resize', () => {
-//   camera.aspect = window.innerWidth / window.innerHeight;
-//   camera.updateProjectionMatrix();
-//   renderer.setSize(window.innerWidth, window.innerHeight);
-// });
+  // Create a gradient for the globe
+  const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 0.5)');
+  gradient.addColorStop(1, 'rgba(0, 0, 255, 0.7)');
+  
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fill();
+}
 
-// // Handle form submission
-// document.getElementById('notification-form').addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   alert('You will be notified soon!');
-// });
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  drawGlobe();
+});
+
+// Initial draw
+drawGlobe();
