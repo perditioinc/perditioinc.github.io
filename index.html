@@ -1,24 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dark Groove 2025 World Tour</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="globe-container">
-    <div class="globe"></div>
-  </div>
+/* Reset body styles */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
-  <div class="content">
-    <h1>New Store Coming Soon</h1>
-    <h2>Dark Groove 2025 World Tour Loading...</h2>
-    <p>Sign up for notifications to hear more!</p>
-    <form>
-      <input type="email" placeholder="Enter your email" required>
-      <button type="submit">Notify Me</button>
-    </form>
-  </div>
-</body>
-</html>
+/* Container for the spinning globe */
+.globe-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1; /* Place it behind the content */
+}
+
+/* Spinning globe effect */
+.globe {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #3498db 10%, #2980b9 30%, #2ecc71 45%, 
+    #27ae60 60%, #f1c40f 70%, #e67e22 85%, #e74c3c
+  );
+  animation: spin 8s linear infinite;
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Content styles */
+.content {
+  z-index: 1;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
