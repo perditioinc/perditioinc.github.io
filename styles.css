@@ -22,7 +22,7 @@ body {
   height: 80vw; /* Responsive height to maintain aspect ratio */
   max-width: 300px; /* Limit maximum size */
   max-height: 300px; /* Limit maximum size */
-  margin: -40vw 0 0 -40vw; /* Center the globe */
+  transform: translate(-50%, -50%); /* Center the globe */
   border-radius: 50%; /* Make it circular */
   animation: rotate 10s linear infinite; /* Rotate the globe */
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Base glow effect */
@@ -32,10 +32,10 @@ body {
 /* Rotate animation */
 @keyframes rotate {
   from {
-    transform: rotateY(0deg);
+    transform: translate(-50%, -50%) rotateY(0deg); /* Keep translate for centering */
   }
   to {
-    transform: rotateY(360deg);
+    transform: translate(-50%, -50%) rotateY(360deg); /* Keep translate for centering */
   }
 }
 
@@ -97,6 +97,5 @@ button:hover {
   #globe-container {
     width: 70vw; /* Smaller width for mobile */
     height: 70vw; /* Smaller height for mobile */
-    margin: -35vw 0 0 -35vw; /* Center for mobile */
   }
 }
