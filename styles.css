@@ -16,17 +16,39 @@ body {
 /* Container for the globe */
 #globe-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  width: 80vw; /* Responsive width */
+  height: 80vw; /* Responsive height to maintain aspect ratio */
+  max-width: 300px; /* Limit maximum size */
+  max-height: 300px; /* Limit maximum size */
+  margin: -40vw 0 0 -40vw; /* Center the globe */
+  background-image: url('https://threejsfundamentals.org/threejs/resources/images/earth.jpg'); /* Earth texture */
+  background-size: cover;
+  border-radius: 50%; /* Make it circular */
+  animation: rotate 10s linear infinite; /* Rotate the globe */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 
+              0 0 40px rgba(255, 0, 0, 0.7), 
+              0 0 60px rgba(0, 255, 0, 0.7), 
+              0 0 80px rgba(0, 0, 255, 0.7); /* Colorful glow effect */
   z-index: -1; /* Place it behind the content */
+}
+
+/* Rotate animation */
+@keyframes rotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 /* Content styles */
 .content {
-  z-index: 1;
+  z-index: 1; /* Bring content in front */
+  position: relative; /* Needed for proper layering */
+  padding: 20px; /* Add padding for content */
 }
 
 input {
@@ -34,6 +56,8 @@ input {
   margin: 10px;
   border-radius: 5px;
   border: none;
+  width: 100%; /* Full width for mobile */
+  max-width: 250px; /* Limit max width for larger screens */
 }
 
 button {
@@ -47,4 +71,13 @@ button {
 
 button:hover {
   background-color: #2980b9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  #globe-container {
+    width: 70vw; /* Smaller width for mobile */
+    height: 70vw; /* Smaller height for mobile */
+    margin: -35vw 0 0 -35vw; /* Center for mobile */
+  }
 }
