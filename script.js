@@ -1,66 +1,73 @@
 // script.js
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('globe-container').appendChild(renderer.domElement);
+const canvas = document.getElementById('globe');
+const ctx = canvas.getContext('2d');
 
-// Create a globe
-const globeGeometry = new THREE.SphereGeometry(1, 32, 32);
-const globeMaterial = new THREE.MeshBasicMaterial({ color: 0x0077be, wireframe: false });
-const globe = new THREE.Mesh(globeGeometry, globeMaterial);
-scene.add(globe);
+// Set canvas size
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// Create bouncing stars
-const stars = [];
-const starCount = 50;
+// Variables for globe
+const globeRadius = 100;
+let globeAngle = 0;
 
-for (let i = 0; i < starCount; i++) {
-    const starGeometry = new THREE.SphereGeometry(0.05, 8, 8);
-    const starMaterial = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
-    const star = new THREE.Mesh(starGeometry, starMaterial);
+// Create an array for bouncing spheres
+const spheres = [];
+const sphereCount = 30;
 
-    // Random positions
-    star.position.x = Math.random() * 10 - 5;
-    star.position.y = Math.random() * 10 - 5;
-    star.position.z = Math.random() * 10 - 5;
-
-    stars.push(star);
-    scene.add(star);
+for (let i = 0; i < sphereCount; i++) {
+    spheres.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: 5 + Math.random() * 10,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        speedX: (Math.random() - 0.5) * 2,
+        speedY: (Math.random() - 0.5) * 2
+    });
 }
 
-// Camera position
-camera.position.z = 3;
+// Draw the globe and bouncing spheres
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
+    // Draw the globe
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(globeAngle);
+    ctx.fillStyle = 'rgba(0, 119, 190, 0.8)'; // Globe color
+    ctx.beginPath();
+    ctx.arc(0, 0, globeRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
 
-    // Rotate the globe
-    globe.rotation.y += 0.01;
+    // Draw the bouncing spheres
+    spheres.forEach(sphere => {
+        ctx.fillStyle = sphere.color;
+        ctx.beginPath();
+        ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2);
+        ctx.fill();
 
-    // Bounce stars
-    stars.forEach(star => {
-        star.position.x += (Math.random() - 0.5) * 0.01;
-        star.position.y += (Math.random() - 0.5) * 0.01;
-        star.position.z += (Math.random() - 0.5) * 0.01;
+        // Move the sphere
+        sphere.x += sphere.speedX;
+        sphere.y += sphere.speedY;
 
-        // Bounce stars back into view
-        if (Math.abs(star.position.x) > 5) star.position.x = -star.position.x;
-        if (Math.abs(star.position.y) > 5) star.position.y = -star.position.y;
-        if (Math.abs(star.position.z) > 5) star.position.z = -star.position.z;
+        // Bounce off edges
+        if (sphere.x + sphere.radius > canvas.width || sphere.x - sphere.radius < 0) {
+            sphere.speedX *= -1;
+        }
+        if (sphere.y + sphere.radius > canvas.height || sphere.y - sphere.radius < 0) {
+            sphere.speedY *= -1;
+        }
     });
 
-    renderer.render(scene, camera);
+    globeAngle += 0.01; // Increase angle for spinning effect
+    requestAnimationFrame(draw);
 }
-
-animate();
 
 // Responsive design for window resizing
 window.addEventListener('resize', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 });
+
+// Start the drawing loop
+draw();
