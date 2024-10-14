@@ -16,13 +16,15 @@ body {
 
 /* Container for the globe */
 #globe-container {
-  width: 40vmin; /* Use vmin for responsiveness based on the smallest viewport dimension */
-  height: 40vmin; /* Maintain aspect ratio with vmin */
+  width: 40vmin; /* Use vmin for responsiveness */
+  height: 40vmin; /* Maintain aspect ratio */
   max-width: 300px; /* Limit maximum size */
   max-height: 300px; /* Limit maximum size */
   border-radius: 50%; /* Make it circular */
   animation: rotate 10s linear infinite; /* Rotate the globe */
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Base glow effect */
+  box-shadow: 0 0 20px rgba(255, 0, 0, 1), /* Base glow effect */
+              0 0 30px rgba(0, 255, 0, 1),
+              0 0 40px rgba(0, 0, 255, 1);
   z-index: -1; /* Place it behind the content */
   position: absolute; /* Absolute positioning for centering */
   top: 50%; /* Center vertically */
