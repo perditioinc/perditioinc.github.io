@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById('globe');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('globe'); // Get canvas element
+    if (!canvas) {
+        console.error('Canvas element not found!');
+        return; // Exit if canvas is not found
+    }
+    const ctx = canvas.getContext('2d'); // Get 2D context
 
     // Set canvas size
     canvas.width = window.innerWidth;
@@ -72,4 +76,3 @@ document.addEventListener("DOMContentLoaded", () => {
     // Start the drawing loop
     draw();
 });
-
