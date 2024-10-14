@@ -13,16 +13,13 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let angle = 0; // For rotating the globe
+let colorOffset = 0; // Offset for the color cycle
 
-// Colors for the glow effect
-const colors = [
-    'rgba(255, 0, 0, 0.5)',
-    'rgba(0, 255, 0, 0.5)',
-    'rgba(0, 0, 255, 0.5)',
-    'rgba(255, 255, 0, 0.5)',
-    'rgba(255, 0, 255, 0.5)',
-    'rgba(0, 255, 255, 0.5)'
-];
+// Function to create a color at a given index
+function getColor(index) {
+    const hue = (index + colorOffset) % 360; // Change hue based on index and offset
+    return `hsl(${hue}, 100%, 50%)`; // HSL color for vibrant colors
+}
 
 // Function to draw the globe
 function drawGlobe() {
@@ -35,17 +32,18 @@ function drawGlobe() {
 
     // Create a gradient for the globe
     const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-    colors.forEach((color, index) => {
-        gradient.addColorStop(index / (colors.length - 1), color);
-    });
+    for (let i = 0; i < 6; i++) {
+        gradient.addColorStop(i / 5, getColor(i)); // Create a colorful gradient
+    }
 
     ctx.fillStyle = gradient;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
     ctx.fill();
 
-    // Update the rotation angle
+    // Update the rotation angle and color offset
     angle += 1; // Control the speed of rotation
+    colorOffset += 1; // Change color offset for cycling colors
     ctx.save(); // Save the current context
     ctx.translate(x, y); // Move to center
     ctx.rotate(angle * Math.PI / 180); // Rotate
