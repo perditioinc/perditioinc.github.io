@@ -1,29 +1,23 @@
-// Import the required components from the Three.js module
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
-
-// Set up the scene, camera, and renderer
+// Create the scene, camera, and renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.z = 10;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-
-// Append the renderer to the DOM
 document.getElementById('globe-container').appendChild(renderer.domElement);
 
-// Create the globe with SphereGeometry
+// Create the sphere geometry and material
 const geometry = new THREE.SphereGeometry(5, 64, 64);
-const texture = new THREE.TextureLoader().load('https://threejsfundamentals.org/threejs/resources/images/earth.jpg');
+const texture = new THREE.TextureLoader().load('https://threejsfundamentals.org/threejs/resources/images/earth.jpg'); // Use an earth texture
 const material = new THREE.MeshBasicMaterial({ map: texture });
-const globe = new THREE.Mesh(geometry, material);
-scene.add(globe);
+const sphere = new THREE.Mesh(geometry, material);
+scene.add(sphere);
 
-// Animation loop to rotate the globe
+// Animation loop to rotate the sphere
 function animate() {
   requestAnimationFrame(animate);
-  globe.rotation.y += 0.005; // Rotate the globe slowly
+  sphere.rotation.y += 0.005; // Adjust speed as needed
   renderer.render(scene, camera);
 }
 animate();
