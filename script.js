@@ -1,60 +1,89 @@
-// Create the globe container
-const globeContainer = document.getElementById('globe-container');
+// Set up the scene, camera, and renderer
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById('globe-container').appendChild(renderer.domElement);
 
-// Create a canvas element
-const canvas = document.createElement('canvas');
-globeContainer.appendChild(canvas);
+// Create the globe geometry and material
+const geometry = new THREE.SphereGeometry(2, 64, 64);
+const textureLoader = new THREE.TextureLoader();
+const material = new THREE.MeshBasicMaterial({
+    map: textureLoader.load('https://raw.githubusercontent.com/Zeptir/Textures/main/earth.jpg'), // Earth texture
+    transparent: true,
+});
 
-// Get the canvas context
-const ctx = canvas.getContext('2d');
+// Create the globe mesh
+const globe = new THREE.Mesh(geometry, material);
+scene.add(globe);
 
-// Set canvas dimensions
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Function to create a small sphere (star)
+function createStar() {
+    const geometry = new THREE.SphereGeometry(0.1, 32, 32); // Smaller sphere
+    const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
+    const star = new THREE.Mesh(geometry, material);
 
-let angle = 0; // For rotating the globe
+    // Set random position
+    star.position.x = (Math.random() - 0.5) * 10;
+    star.position.y = (Math.random() - 0.5) * 10;
+    star.position.z = (Math.random() - 0.5) * 10;
 
-// Function to draw the globe
-function drawGlobe() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw the globe
-    const radius = Math.min(canvas.width, canvas.height) / 3;
-    const x = canvas.width / 2;
-    const y = canvas.height / 2;
+    // Set random velocity
+    star.velocity = {
+        x: (Math.random() - 0.5) * 0.02,
+        y: (Math.random() - 0.5) * 0.02,
+        z: (Math.random() - 0.5) * 0.02,
+    };
 
-    // Create a gradient for the globe
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-    gradient.addColorStop(0.5, 'rgba(0, 0, 255, 0.5)');
-    gradient.addColorStop(1, 'rgba(0, 255, 0, 0.2)');
-
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Update the rotation angle
-    angle += 0.5; // Control the speed of rotation
-    ctx.save(); // Save the current context
-    ctx.translate(x, y); // Move to center
-    ctx.rotate(angle * Math.PI / 180); // Rotate
-    ctx.translate(-x, -y); // Move back
-    ctx.restore(); // Restore context
+    return star;
 }
 
-// Resize canvas on window resize
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawGlobe();
-});
+// Create multiple stars
+const stars = [];
+for (let i = 0; i < 100; i++) { // Number of stars
+    const star = createStar();
+    stars.push(star);
+    scene.add(star);
+}
+
+// Position the camera
+camera.position.z = 5;
 
 // Animation loop
 function animate() {
-    drawGlobe();
+    // Rotate the globe
+    globe.rotation.y += 0.01; // Rotate the globe
+
+    // Update stars' positions
+    stars.forEach(star => {
+        // Update position
+        star.position.x += star.velocity.x;
+        star.position.y += star.velocity.y;
+        star.position.z += star.velocity.z;
+
+        // Bounce off the edges
+        if (star.position.x <= -5 || star.position.x >= 5) {
+            star.velocity.x *= -1; // Reverse x velocity
+        }
+        if (star.position.y <= -5 || star.position.y >= 5) {
+            star.velocity.y *= -1; // Reverse y velocity
+        }
+        if (star.position.z <= -5 || star.position.z >= 5) {
+            star.velocity.z *= -1; // Reverse z velocity
+        }
+    });
+
+    // Render the scene
+    renderer.render(scene, camera);
     requestAnimationFrame(animate); // Call animate for the next frame
 }
 
-// Initial draw
+// Resize the canvas on window resize
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+});
+
+// Start the animation
 animate();
