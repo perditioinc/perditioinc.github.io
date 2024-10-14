@@ -1,43 +1,60 @@
-// Set up the scene, camera, and renderer
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('globe-container').appendChild(renderer.domElement);
+// Create the globe container
+const globeContainer = document.getElementById('globe-container');
 
-// Create the globe geometry and material
-const geometry = new THREE.SphereGeometry(2, 64, 64);
-const textureLoader = new THREE.TextureLoader();
-const material = new THREE.MeshBasicMaterial({
-    map: textureLoader.load('https://raw.githubusercontent.com/Zeptir/Textures/main/earth.jpg'), // Earth texture
-    transparent: true,
+// Create a canvas element
+const canvas = document.createElement('canvas');
+globeContainer.appendChild(canvas);
+
+// Get the canvas context
+const ctx = canvas.getContext('2d');
+
+// Set canvas dimensions
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let angle = 0; // For rotating the globe
+
+// Function to draw the globe
+function drawGlobe() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw the globe
+    const radius = Math.min(canvas.width, canvas.height) / 3;
+    const x = canvas.width / 2;
+    const y = canvas.height / 2;
+
+    // Create a gradient for the globe
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+    gradient.addColorStop(0.5, 'rgba(0, 0, 255, 0.5)');
+    gradient.addColorStop(1, 'rgba(0, 255, 0, 0.2)');
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Update the rotation angle
+    angle += 0.5; // Control the speed of rotation
+    ctx.save(); // Save the current context
+    ctx.translate(x, y); // Move to center
+    ctx.rotate(angle * Math.PI / 180); // Rotate
+    ctx.translate(-x, -y); // Move back
+    ctx.restore(); // Restore context
+}
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawGlobe();
 });
-
-// Create the globe mesh
-const globe = new THREE.Mesh(geometry, material);
-scene.add(globe);
-
-// Set up the light
-const pointLight = new THREE.PointLight(0xffffff, 1);
-pointLight.position.set(5, 5, 5);
-scene.add(pointLight);
-
-// Position the camera
-camera.position.z = 5;
 
 // Animation loop
 function animate() {
-    globe.rotation.y += 0.01; // Rotate the globe
-    renderer.render(scene, camera);
+    drawGlobe();
     requestAnimationFrame(animate); // Call animate for the next frame
 }
 
-// Resize the canvas on window resize
-window.addEventListener('resize', () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-});
-
-// Start the animation
+// Initial draw
 animate();
