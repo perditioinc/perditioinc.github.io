@@ -23,19 +23,15 @@ body {
   animation: rotate 10s linear infinite; /* Rotate the globe */
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Base glow effect */
   z-index: -1; /* Place it behind the content */
-  position: absolute; /* Absolute positioning for centering */
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Adjust position for perfect centering */
 }
 
 /* Rotate animation */
 @keyframes rotate {
   from {
-    transform: translate(-50%, -50%) rotateY(0deg); /* Keep translate for centering */
+    transform: rotateY(0deg);
   }
   to {
-    transform: translate(-50%, -50%) rotateY(360deg); /* Keep translate for centering */
+    transform: rotateY(360deg);
   }
 }
 
@@ -46,4 +42,61 @@ body {
                 0 0 30px rgba(255, 0, 0, 0.7);
   }
   25% {
-    box-shadow: 0 0 20px rgba(0, 255, 0
+    box-shadow: 0 0 20px rgba(0, 255, 0, 1), 
+                0 0 30px rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 0, 255, 1), 
+                0 0 30px rgba(0, 0, 255, 0.7);
+  }
+  75% {
+    box-shadow: 0 0 20px rgba(255, 255, 0, 1), 
+                0 0 30px rgba(255, 255, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 
+                0 0 30px rgba(255, 0, 0, 0.7);
+  }
+}
+
+/* Content styles */
+.content {
+  z-index: 1; /* Bring content in front */
+  position: relative; /* Needed for proper layering */
+  padding: 20px; /* Add padding for content */
+  display: flex; /* Use flex to center content */
+  flex-direction: column; /* Arrange items in a column */
+  align-items: center; /* Center items horizontally */
+}
+
+/* Input styles */
+input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+  width: 100%; /* Full width for mobile */
+  max-width: 250px; /* Limit max width for larger screens */
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  #globe-container {
+    width: 60vw; /* Smaller width for mobile */
+    height: 60vw; /* Smaller height for mobile */
+  }
+}
