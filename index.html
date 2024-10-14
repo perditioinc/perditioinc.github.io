@@ -4,74 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dark Groove 2025 World Tour</title>
-  <style>
-    /* Reset body styles */
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* Container for the globe */
-    #globe-container {
-      position: absolute;
-      top: 50%; /* Center vertically */
-      left: 50%; /* Center horizontally */
-      width: 300px; /* Adjust size as needed */
-      height: 300px; /* Adjust size as needed */
-      margin: -150px 0 0 -150px; /* Center the globe */
-      background-image: url('https://threejsfundamentals.org/threejs/resources/images/earth.jpg'); /* Earth texture */
-      background-size: cover;
-      border-radius: 50%; /* Make it circular */
-      animation: rotate 10s linear infinite; /* Rotate the globe */
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Glow effect */
-      z-index: -1; /* Place it behind the content */
-    }
-
-    /* Rotate animation */
-    @keyframes rotate {
-      from {
-        transform: rotateY(0deg);
-      }
-      to {
-        transform: rotateY(360deg);
-      }
-    }
-
-    /* Content styles */
-    .content {
-      z-index: 1; /* Bring content in front */
-      position: relative; /* Needed for proper layering */
-    }
-
-    input {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #2980b9;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
 </head>
 <body>
   <div id="globe-container"></div>
