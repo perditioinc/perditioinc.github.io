@@ -1,48 +1,52 @@
 /* Reset body styles */
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: Helvetica, sans-serif;
-    background-color: #000;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Helvetica, sans-serif;
+  background-color: #000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Container for the globe */
 #globe-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: -1; /* Place it behind the content */
-    transform: translate(-50%, -50%); /* Center the globe container */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1; /* Place it behind the content */
+  transform: translate(-50%, -50%); /* Center the globe container */
 }
 
 /* Canvas styles */
 canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* Content styles */
 .content {
-    z-index: 1;
-    position: relative;
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
-    height: 100%; /* Fill the full height */
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  height: 100%; /* Fill the full height */
+  padding: 20px; /* Padding for spacing */
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
+/* Font loading */
 @font-face {
   font-family: 'Dark Witches';
   src: url('fonts/DarkWitches.ttf') format('truetype'); /* Update the path to your font file */
@@ -50,6 +54,7 @@ canvas {
   font-style: normal;
 }
 
+/* Header styling */
 h1, .header {
   font-family: 'Dark Witches', sans-serif; /* Fallback to a default font if Dark Witches isn't available */
   font-size: 15rem; /* Adjust as needed */
@@ -63,4 +68,76 @@ h1, h2 {
 h2 {
   margin-top: 0px; /* Optional: Add a small space between h1 and h2 */
   font-size: 3rem; /* Adjust as needed */
+}
+
+/* Form container styles */
+.form-container {
+  width: 100vw; /* Ensure it fills the full viewport width */
+  height: 80vh; /* Make the container take up 80% of the viewport height */
+  margin: 0; /* Remove any margins */
+  padding: 20px; /* Add padding to prevent clipping */
+  display: flex;
+  justify-content: center; /* Center iframe horizontally */
+  align-items: center; /* Center iframe vertically */
+  box-sizing: border-box; /* Include padding in the total width/height calculation */
+  overflow-y: auto; /* Allow scrolling in the iframe if content overflows */
+  max-width: 100%; /* Allow the form container to stretch to the width */
+}
+
+/* Google Form iframe styles */
+.form-container iframe {
+  width: 100%; /* Make the iframe fill the container's width */
+  height: 100%; /* Make the iframe fill the container's height */
+  border: none;
+  min-height: 500px; /* Set a minimum height to prevent the iframe from becoming too small */
+  aspect-ratio: 1 / 1.5; /* Maintain a 2:3 aspect ratio */
+  display: block; /* Ensure it behaves like a block-level element */
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  /* Adjust font sizes for smaller screens */
+  h1 {
+    font-size: 10rem; /* Adjust to fit on mobile */
+  }
+
+  h2 {
+    font-size: 2rem; /* Smaller font for h2 */
+    margin-top: 0px; /* Optional: Add space between h1 and h2 */
+  }
+
+  /* Adjust the content area to be more compact */
+  .content {
+    height: auto; /* Allow content to adjust based on content size */
+    padding: 20px; /* Add padding for better spacing */
+    overflow-y: auto; /* Allow scrolling if the content overflows */
+  }
+
+  /* Adjust iframe height and width on mobile */
+  .form-container {
+    height: 70vh; /* Use less height on mobile for better fit */
+    padding: 10px; /* Add padding for mobile */
+  }
+
+  .form-container iframe {
+    min-height: 400px; /* Smaller minimum height for mobile */
+    aspect-ratio: 1 / 1.5; /* Adjust aspect ratio for mobile */
+  }
+}
+
+/* Optional: Further adjustments for very small screens (phones in portrait mode) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 6rem; /* Smaller font size for very small screens */
+  }
+
+  h2 {
+    font-size: 1.65rem; /* Even smaller font for h2 */
+  }
+
+  /* Further compacting for small screens */
+  .form-container iframe {
+    min-height: 300px; /* Even smaller minimum height */
+    aspect-ratio: 1 / 1.5; /* Adjust aspect ratio for very small screens */
+  }
 }
