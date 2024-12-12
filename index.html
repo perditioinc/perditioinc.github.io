@@ -19,73 +19,8 @@
     <meta name="twitter:card" content="summary_large_image">
     
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Reset body styles */
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            font-family: Helvetica, sans-serif;
-            background-color: #000;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        /* Container for the globe */
-        #globe-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: -1; /* Place it behind the content */
-            transform: translate(-50%, -50%); /* Center the globe container */
-        }
-
-        /* Canvas styles */
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        /* Content styles */
-        .content {
-            z-index: 1;
-            position: relative;
-            display: flex;
-            flex-direction: column; /* Stack elements vertically */
-            justify-content: center; /* Center vertically */
-            align-items: center; /* Center horizontally */
-            height: 100%; /* Fill the full height */
-        }
-
-        input {
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
 </head>
+
 <body>
     <div id="globe-container">
         <canvas id="globe"></canvas> <!-- Canvas element for drawing -->
@@ -94,8 +29,13 @@
         <h1>Dark Groove</h1>
         <h2>2025 Festival World Tour</h2>
         <p>Music x Art x Food x Fashion x Technology</p>
-        <input type="email" placeholder="Enter your email" />
-        <button>JOIN THE WAITING LIST</button>
+
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsIZHQNtd1Kfn2RNs2yw3VqyIyQPyBiiGq5AQ0Jb3BnhcAjA/viewform?embedded=true" 
+            width="640" height="689" frameborder="0" marginheight="0" marginwidth="0">Loading…
+        </iframe>
+
+        <p>Immersive Experiences for Social Good by Perditio Inc. &#169; 2025</p>
+
     </div>
     
     <script>
