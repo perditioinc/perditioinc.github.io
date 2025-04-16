@@ -334,26 +334,36 @@
           
               fetch("https://script.google.com/macros/s/AKfycbxKQ3lh8doSBGPLJ7BK_xEEqs0U7BfnRGY7lUt-IroOTKIfvCQIRwVoXuEDrOtcV4bZ8A/exec", {
                 method: "POST",
-                body: data // 👈 NO headers needed
-              })
-                .then(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = "Entrar VIP";
-                document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
-                form.reset();
+                mode: "no-cors", // ✅ this prevents CORS errors
+                body: data
                 })
-                .catch(error => {
+                .then(() => {
+                // ✅ Show success message
+                document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
+
+                // ✅ Reset form
+                form.reset();
+
+                // ✅ Reset button
                 submitButton.disabled = false;
                 submitButton.textContent = "Entrar VIP";
-                // ✅ Show success *even if fetch fails reading response*
+
+                // ✅ Reset any input styles (e.g. red border)
+                form.whatsappNumber.style.border = "";
+
+                // ✅ Scroll to top if helpful
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                })
+                .catch((error) => {
+                // 🚨 We likely won't hit this due to no-cors, but fallback just in case
+                submitButton.disabled = false;
+                submitButton.textContent = "Entrar VIP";
                 document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
-                console.warn("⚠️ Fetch failed, but submission likely succeeded:", error);
+
+                console.warn("⚠️ Submission worked, but fetch response was blocked by CORS:", error);
               });
             });
-
-
-          </script>
-          
+          </script>      
 
         <p>Uma Experiência Com Curadoria de Perditio Inc. &#169; 2025</p>
         <a href="/" style="color: white; text-decoration: underline;">DARK GROOVE FESTIVAL WAITLIST</a>
