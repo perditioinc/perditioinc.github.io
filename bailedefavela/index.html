@@ -262,10 +262,19 @@
               <option value="8">8</option>
               <option value="9">9</option>
               <option value="10">10</option>
-            </select><br><br>
-            
-            <div id="guestContainer"></div>           
-            <label for="countryCode">EMAIL</label><br>
+            </select><br><br>           
+            <div id="guestContainer"></div>  
+            <label for="ticketType">TIPO DE INGRESSO</label><br>
+            <select name="ticketType" required>
+                <option value="guest" selected>🌞Membros VIP grátis antes das 23h</option>
+                <option value="presale" disabled>👑VIP+ Pré-Venda 500MZN Entrada Expedida</option>
+             </select><br><br> 
+            <div id="paymentSection" style="display: none;">
+                <label for="mpesaPhone">Número M-PESA:</label><br>
+                <input type="text" name="mpesaPhone" id="mpesaPhone" placeholder="Número M-PESA" /><br><br>
+                <p id="paymentStatus" style="margin-top: 5px;"></p>
+            </div>                      
+            <label for="email">EMAIL</label><br>
             <input type="email" name="email" required placeholder="E-mail para confirmação" /><br><br>
             <button type="submit" id="submitButton">Entrar VIP</button>
           </form>
@@ -273,98 +282,162 @@
           <p id="statusMessage" style="margin-top: 10px;"></p>
           
           <script>
-            document.getElementById("vipForm").addEventListener("submit", function (e) {
-              e.preventDefault();
+            document.getElementById("vipForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
 
-              const submitButton = document.getElementById("submitButton");
-                // Show loading
-                submitButton.disabled = true;
-                submitButton.textContent = "🔄 Processando...";
-                document.getElementById("statusMessage").innerText = "🔄 Enviando seus dados...";
-          
-              const form = e.target;
+            const form = e.target;
+            const submitButton = document.getElementById("submitButton");
+            const ticketType = form.ticketType.value;
+            const guestCount = parseInt(form.guestCount.value || "0", 10);
+            const totalAmount = 500 * (1 + guestCount);
 
-              //WhatsApp Number 
-              const countryCode = form.countryCode.value;
-              const whatsappNumber = form.whatsappNumber.value.trim().replace(/\s+/g, "");
-              const phoneOnlyDigits = /^\d+$/;
-              const fullWhatsApp = countryCode + whatsappNumber;
+            // Reset
+            document.getElementById("statusMessage").innerText = "";
+            submitButton.disabled = true;
+            submitButton.textContent = "🔄 Processando...";
 
-              //Checks if valid WhatsApp Number
-              if (!phoneOnlyDigits.test(whatsappNumber) || whatsappNumber.length < 7) {
+            // Validate WhatsApp number
+            const whatsappNumber = form.whatsappNumber.value.trim().replace(/\s+/g, "");
+            if (!/^\d{7,}$/.test(whatsappNumber)) {
                 form.whatsappNumber.style.border = "2px solid red";
-                document.getElementById("statusMessage").innerText = "❌ Insira um número de WhatsApp válido (somente dígitos, pelo menos 7 dígitos).";
-                return; // 🚫 Stops form from submitting
-              } else {
-                form.whatsappNumber.style.border = ""; // ✅ Reset border if valid
-              }
-
-              // Basic email format check
-              const email = form.email.value.trim();
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-              if (!emailRegex.test(email)) {
-                document.getElementById("statusMessage").innerText = "❌ Insira um endereço de e-mail válido.";
-                return;
-              }
-
-              const dia = form.birthDay.value;
-              const mes = form.birthMonth.value;
-              const ano = form.birthYear.value;
-              const birthday = `${ano}-${mes}-${dia}`;
-
-              // Validate date (optional)
-              if (!dia || !mes || !ano) {
-                document.getElementById("statusMessage").innerText = "❌ Por favor, selecione uma data de nascimento válida.";
-                return;
-              }
-
-              const guestCount = parseInt(form.guestCount.value);
-
-
-              // SEND TO GOOGLE SHEETS
-              const data = new URLSearchParams({
-                firstName: form.firstName.value,
-                lastName: form.lastName.value,
-                whatsapp: fullWhatsApp,
-                email: email,
-                birthday: birthday,
-                guestCount: guestCount.toString()
-              });
-          
-              fetch("https://script.google.com/macros/s/AKfycbxKQ3lh8doSBGPLJ7BK_xEEqs0U7BfnRGY7lUt-IroOTKIfvCQIRwVoXuEDrOtcV4bZ8A/exec", {
-                method: "POST",
-                mode: "no-cors", // ✅ this prevents CORS errors
-                body: data
-                })
-                .then(() => {
-                // ✅ Show success message
-                document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
-
-                // ✅ Reset form
-                form.reset();
-
-                // ✅ Reset button
+                document.getElementById("statusMessage").innerText = "❌ Insira um número de WhatsApp válido.";
                 submitButton.disabled = false;
                 submitButton.textContent = "Entrar VIP";
-
-                // ✅ Reset any input styles (e.g. red border)
+                return;
+            } else {
                 form.whatsappNumber.style.border = "";
+            }
 
-                // ✅ Scroll to top if helpful
+            // Validate email
+            const email = form.email.value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById("statusMessage").innerText = "❌ Insira um endereço de e-mail válido.";
+                submitButton.disabled = false;
+                submitButton.textContent = "Entrar VIP";
+                return;
+            }
+
+            // Validate birthday
+            const dia = form.birthDay.value, mes = form.birthMonth.value, ano = form.birthYear.value;
+            if (!dia || !mes || !ano) {
+                document.getElementById("statusMessage").innerText = "❌ Por favor, selecione uma data de nascimento válida.";
+                submitButton.disabled = false;
+                submitButton.textContent = "Entrar VIP";
+                return;
+            }
+
+            const birthday = `${ano}-${mes}-${dia}`;
+            const whatsapp = form.countryCode.value + whatsappNumber;
+
+            // ✅ Presale logic: require M-PESA number
+            let mpesaPhone = "";
+            if (ticketType === "presale") {
+                mpesaPhone = document.getElementById("mpesaPhone").value.trim();
+                if (!/^\d{8,}$/.test(mpesaPhone)) {
+                document.getElementById("statusMessage").innerText = "❌ Insira um número M-PESA válido.";
+                submitButton.disabled = false;
+                submitButton.textContent = `Entrar VIP+ e Pagar ${totalAmount}MZN`;
+                return;
+                }
+
+                // 🔄 Optionally: trigger M-PESA payment here
+                const paymentStatus = document.getElementById("paymentStatus");
+                paymentStatus.innerText = "🔄 Processando pagamento...";
+
+                try {
+                const paymentResponse = await fetch("https://your-server-or-cloud-function.com/mpesa-payment", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ phoneNumber: mpesaPhone, amount: totalAmount })
+                });
+
+                const paymentData = await paymentResponse.json();
+                if (!paymentData.success) throw new Error("Falha no pagamento");
+                paymentStatus.innerText = "✅ Pagamento confirmado!";
+                } catch (err) {
+                paymentStatus.innerText = "❌ Erro no pagamento. Tente novamente.";
+                submitButton.disabled = false;
+                submitButton.textContent = `Entrar VIP+ e Pagar ${totalAmount}MZN`;
+                return;
+                }
+            }
+
+            // Send to Google Apps Script
+            const data = new URLSearchParams({
+                firstName: form.firstName.value,
+                lastName: form.lastName.value,
+                whatsapp,
+                email,
+                birthday,
+                guestCount: guestCount.toString(),
+                ticketType,
+                mpesaPhone
+            });
+
+            fetch("https://script.google.com/macros/s/AKfycbxKQ3lh8doSBGPLJ7BK_xEEqs0U7BfnRGY7lUt-IroOTKIfvCQIRwVoXuEDrOtcV4bZ8A/exec", {
+                method: "POST",
+                mode: "no-cors",
+                body: data
+            })
+                .then(() => {
+                document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
+                form.reset();
+                submitButton.textContent = "Entrar VIP";
+                submitButton.disabled = false;
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 })
                 .catch((error) => {
-                // 🚨 We likely won't hit this due to no-cors, but fallback just in case
-                submitButton.disabled = false;
-                submitButton.textContent = "Entrar VIP";
+                console.warn("Erro:", error);
                 document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
-
-                console.warn("⚠️ Submission worked, but fetch response was blocked by CORS:", error);
+                submitButton.textContent = "Entrar VIP";
+                submitButton.disabled = false;
+                });
+            });
+          </script>     
+           
+           <script>
+            //M-PESA VIEW
+            document.addEventListener("DOMContentLoaded", function () {
+              const ticketDropdown = document.querySelector('select[name="ticketType"]');
+              const paymentSection = document.getElementById("paymentSection");
+          
+              ticketDropdown.addEventListener("change", function (e) {
+                const selected = e.target.value;
+                if (selected === "presale") {
+                  paymentSection.style.display = "block";
+                } else {
+                  paymentSection.style.display = "none";
+                }
               });
             });
-          </script>      
 
+            // //M-PESA LOGIC
+            // document.getElementById("payButton").addEventListener("click", function () {
+            // const phone = document.getElementById("mpesaPhone").value;
+            // const status = document.getElementById("paymentStatus");
+
+            // status.innerText = "🔄 Processando pagamento...";
+
+            // fetch("https://your-server-or-cloud-function.com/mpesa-payment", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ phoneNumber: phone, amount: 500 })
+            // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     if (data.success) {
+            //     status.innerText = "✅ Pagamento concluído!";
+            //     } else {
+            //     status.innerText = "❌ Falha no pagamento. Tente novamente.";
+            //     }
+            // })
+            // .catch(err => {
+            //     console.error(err);
+            //     status.innerText = "❌ Erro ao processar. Verifique a conexão.";
+            // });
+            // });
+          </script>
+          
         <p>Uma Experiência Com Curadoria de Perditio Inc. &#169; 2025</p>
         <a href="/" style="color: white; text-decoration: underline;">DARK GROOVE FESTIVAL WAITLIST</a>
     </div>
@@ -390,7 +463,34 @@
         }
     </script>
 
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const ticketTypeSelect = document.querySelector('select[name="ticketType"]');
+        const guestCountSelect = document.querySelector('select[name="guestCount"]');
+        const submitButton = document.getElementById("submitButton");
+    
+        function updateButtonText() {
+            const ticketType = ticketTypeSelect.value;
+            const guestCount = parseInt(guestCountSelect.value || "0", 10);
+            const totalTickets = 1 + guestCount;
+    
+            if (ticketType === "presale") {
+            const totalAmount = 500 * totalTickets;
+            submitButton.textContent = `Entrar VIP+ e Pagar ${totalAmount}MZN`;
+            } else {
+            submitButton.textContent = "Entrar VIP";
+            }
+        }
+    
+        // Trigger on load
+        updateButtonText();
+    
+        // Recalculate on ticket type or guest count change
+        ticketTypeSelect.addEventListener("change", updateButtonText);
+        guestCountSelect.addEventListener("change", updateButtonText);
+        });
+    </script>
+  
     <script>
         // JavaScript for the glowing globe effect
         document.addEventListener("DOMContentLoaded", () => {
