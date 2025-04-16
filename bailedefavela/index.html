@@ -64,19 +64,17 @@
               e.preventDefault();
           
               const form = e.target;
-              const data = {
+          
+              const data = new URLSearchParams({
                 firstName: form.firstName.value,
                 lastName: form.lastName.value,
                 whatsapp: form.whatsapp.value,
                 email: form.email.value
-              };
+              });
           
               fetch("https://script.google.com/macros/s/AKfycbxKQ3lh8doSBGPLJ7BK_xEEqs0U7BfnRGY7lUt-IroOTKIfvCQIRwVoXuEDrOtcV4bZ8A/exec", {
                 method: "POST",
-                body: JSON.stringify(data),
-                headers: {
-                  "Content-Type": "application/json"
-                }
+                body: data // 👈 NO headers needed
               })
               .then(response => response.json())
               .then(result => {
@@ -89,6 +87,7 @@
               });
             });
           </script>
+          
 
         <p>An Experience Curated by Perditio Inc. &#169; 2025</p>
         <a href="/" style="color: white; text-decoration: underline;">Back to Home</a>
