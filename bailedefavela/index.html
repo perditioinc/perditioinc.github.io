@@ -248,10 +248,10 @@
               <select name="birthYear" required>
                 <option value="">Ano</option>
                 <!-- JS irá preencher -->
-              </select><br>
+              </select><br><br>
             <label for="countryCode">EMAIL</label><br>
             <input type="email" name="email" required placeholder="E-mail para confirmação" /><br><br>
-            <button type="submit">Jion VIP</button>
+            <button type="submit" id="submitButton">Entrar VIP</button>
           </form>
           
           <p id="statusMessage" style="margin-top: 10px;"></p>
@@ -259,6 +259,12 @@
           <script>
             document.getElementById("vipForm").addEventListener("submit", function (e) {
               e.preventDefault();
+
+              const submitButton = document.getElementById("submitButton");
+                // Show loading
+                submitButton.disabled = true;
+                submitButton.textContent = "🔄 Processando...";
+                document.getElementById("statusMessage").innerText = "🔄 Enviando seus dados...";
           
               const form = e.target;
 
@@ -311,10 +317,14 @@
               })
               .then(response => response.json())
               .then(result => {
+                submitButton.disabled = false;
+                submitButton.textContent = "Entrar VIP";
                 document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
                 form.reset();
               })
               .catch(error => {
+                submitButton.disabled = false;
+                submitButton.textContent = "Entrar VIP";
                 document.getElementById("statusMessage").innerText = "❌ Algo deu errado. Tente novamente.";
                 console.error("Error submitting form:", error);
               });
