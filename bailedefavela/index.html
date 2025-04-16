@@ -249,6 +249,22 @@
                 <option value="">Ano</option>
                 <!-- JS irá preencher -->
               </select><br><br>
+            <label for="guestCount">ADICIONAR CONVIDADOS</label><br>
+            <select id="guestCount" name="guestCount">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select><br><br>
+            
+            <div id="guestContainer"></div>           
             <label for="countryCode">EMAIL</label><br>
             <input type="email" name="email" required placeholder="E-mail para confirmação" /><br><br>
             <button type="submit" id="submitButton">Entrar VIP</button>
@@ -302,13 +318,18 @@
                 document.getElementById("statusMessage").innerText = "❌ Por favor, selecione uma data de nascimento válida.";
                 return;
               }
-          
+
+              const guestCount = parseInt(form.guestCount.value);
+
+
+              // SEND TO GOOGLE SHEETS
               const data = new URLSearchParams({
                 firstName: form.firstName.value,
                 lastName: form.lastName.value,
                 whatsapp: fullWhatsApp,
                 email: email,
-                birthday: birthday
+                birthday: birthday,
+                guestCount: guestCount.toString()
               });
           
               fetch("https://script.google.com/macros/s/AKfycbxKQ3lh8doSBGPLJ7BK_xEEqs0U7BfnRGY7lUt-IroOTKIfvCQIRwVoXuEDrOtcV4bZ8A/exec", {
@@ -356,6 +377,7 @@
           yearSelect.appendChild(option);
         }
     </script>
+
 
     <script>
         // JavaScript for the glowing globe effect
