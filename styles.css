@@ -6,61 +6,24 @@ body {
   font-family: Helvetica, sans-serif;
   background-color: #000;
   color: white;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
-/* 🔹 NAVIGATION BAR STYLING */
-nav {
-  width: 100%; /* Full width */
-  position: fixed; /* Keeps it at the top */
-  top: 0; /* Sticks to the top */
-  left: 0; /* Aligns it to the left */
-  background: rgba(0, 0, 0, 0.9); /* Dark semi-transparent background */
-  padding: 15px 0; /* Adds vertical padding */
-  z-index: 1000; /* Ensures navbar stays above everything */
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Centers navigation links */
-  align-items: center; /* Aligns items vertically */
-}
-
-/* 🔹 NAVIGATION LINKS */
-nav a {
-  color: white; /* White text */
-  text-decoration: none; /* Remove underline */
-  font-size: 18px; /* Font size */
-  margin: 0 20px; /* Space between links */
-  padding: 12px 20px; /* Padding for button-like appearance */
-  background: #ff4500; /* Orange background */
-  border-radius: 5px; /* Rounded edges */
-  transition: background 0.3s ease-in-out; /* Smooth transition */
-  display: inline-block; /* Makes it act like a button */
-}
-
-/* 🔹 NAVIGATION HOVER EFFECT */
-nav a:hover {
-  background: #d62e00; /* Darker red when hovered */
+/* 🔹 LOGO STYLING */
+.logo {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 /* 🔹 PUSH CONTENT BELOW NAVBAR */
 .content {
-  padding-top: 80px; /* Ensures content isn't covered by navbar */
-  text-align: center; /* Centers the text */
+  padding-top: 80px;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* 🔹 CONTAINER FOR THE GLOBE */
-#globe-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  z-index: -1; /* Places it behind the content */
-  transform: translate(-50%, -50%); /* Centers the globe container */
 }
 
 /* 🔹 CANVAS STYLES */
@@ -72,12 +35,12 @@ canvas {
 
 /* 🔹 HEADER STYLING */
 h1, h2 {
-  margin: 0; /* Remove default margin */
+  margin: 0;
   text-align: center;
 }
 
 h1 {
-  font-size: 15rem; /* Adjust size */
+  font-size: 15rem;
   font-family: 'Dark Witches', sans-serif;
 }
 
@@ -87,15 +50,14 @@ h2 {
 
 /* 🔹 FORM CONTAINER */
 .form-container {
-  width: 100vw; /* Full viewport width */
-  height: 80vh; /* Take 80% of the viewport height */
+  width: 100vw;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
 }
 
-/* 🔹 GOOGLE FORM EMBED */
 .form-container iframe {
   width: 100%;
   height: 100%;
@@ -104,7 +66,7 @@ h2 {
   aspect-ratio: 1 / 1.5;
 }
 
-/* 🔹 MOBILE RESPONSIVE FIXES */
+/* 🔹 RESPONSIVE STYLES */
 @media (max-width: 768px) {
   h1 {
     font-size: 10rem;
@@ -131,5 +93,102 @@ h2 {
 
   .form-container iframe {
     min-height: 300px;
+  }
+}
+
+/* 🔹 RESET STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  background-color: #000;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* 🔹 NAVIGATION BAR */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  padding: 10px 20px;
+}
+
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🔹 LOGO */
+.logo {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 🔹 NAV LINKS */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.nav-links li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 🔹 HAMBURGER MENU ICON */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* 🔹 MOBILE RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    width: calc(100% - 40px);
+  }
+
+  .nav-links.show {
+    display: flex;
   }
 }
