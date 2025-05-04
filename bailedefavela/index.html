@@ -33,10 +33,16 @@
 <body>
     <!-- Navigation Bar -->
     <nav>
-        <a href="/">Dark Groove Festival Waitlist</a>
-        <a href="/bailedefavela">Baile de Favela 📍Maputo, MZ</a>
-        <a href="/forthebaddies">For The Baddies 📍Maputo, MZ</a>
-    </nav>
+        <div class="nav-container">
+          <div class="logo">Perditio</div>
+          <div class="hamburger" id="hamburger">&#9776;</div>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="/">Dark Groove Festival Waitlist</a></li>
+            <li><a href="/bailedefavela">Baile de Favela 📍Maputo, MZ</a></li>
+            <li><a href="/forthebaddies">For The Baddies 📍Maputo, MZ</a></li>
+          </ul>
+        </div>
+      </nav>
 
     <!-- Main Content -->
     <div id="globe-container">
@@ -133,5 +139,16 @@
             draw();
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("navLinks");
+    
+        hamburger.addEventListener("click", function () {
+            navLinks.classList.toggle("show");
+        });
+        });
+</script>
 </body>
 </html>
