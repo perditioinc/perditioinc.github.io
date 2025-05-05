@@ -44,11 +44,11 @@
         </div>
       </nav>
 
-    <!-- Main Content -->
-    <div id="globe-container">
-        <canvas id="globe"></canvas>
-    </div>
-    
+
+    <!-- EMOJI CANVAS : Layer 0-->   
+    <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
+
+    <!-- Main Content -->   
     <div class="content">
         <h1>Baile de Favela</h1>
         <h2>O Ritmo das Ruas, <br> A Energia Pulsante do Festival</h2>
@@ -63,82 +63,6 @@
         <a href="/" style="color: white; text-decoration: underline;">DARK GROOVE FESTIVAL WAITLIST</a>
     </div>
   
-    <script>
-        // JavaScript for the glowing globe effect
-        document.addEventListener("DOMContentLoaded", () => {
-            const canvas = document.getElementById('globe');
-            const ctx = canvas.getContext('2d');
-
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            const isMobile = window.innerWidth < 768;
-            const globeRadius = isMobile ? 120 : 220;
-            let globeAngle = 0;
-
-            const spheres = [];
-            const sphereCount = 40;
-
-            for (let i = 0; i < sphereCount; i++) {
-                spheres.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: 5 + Math.random() * 12,
-                    color: `hsl(${Math.random() * 360}, 100%, 60%)`,
-                    speedX: (Math.random() - 0.5) * 3,
-                    speedY: (Math.random() - 0.5) * 3
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                ctx.save();
-                ctx.translate(canvas.width / 2, canvas.height / 2);
-                ctx.rotate(globeAngle);
-
-                for (let glowRadius = globeRadius + 25; glowRadius > globeRadius - 80; glowRadius -= 6) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${0.2 - (0.2 - (glowRadius - globeRadius) / 80)})`;
-                    ctx.beginPath();
-                    ctx.arc(0, 0, glowRadius, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-
-                ctx.fillStyle = 'black';
-                ctx.beginPath();
-                ctx.arc(0, 0, globeRadius, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-
-                spheres.forEach(sphere => {
-                    ctx.fillStyle = sphere.color;
-                    ctx.beginPath();
-                    ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    sphere.x += sphere.speedX;
-                    sphere.y += sphere.speedY;
-
-                    if (sphere.x + sphere.radius > canvas.width || sphere.x - sphere.radius < 0) {
-                        sphere.speedX *= -1;
-                    }
-                    if (sphere.y + sphere.radius > canvas.height || sphere.y - sphere.radius < 0) {
-                        sphere.speedY *= -1;
-                    }
-                });
-
-                globeAngle += 0.01;
-                requestAnimationFrame(draw);
-            }
-
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-
-            draw();
-        });
-    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -149,6 +73,49 @@
             navLinks.classList.toggle("show");
         });
         });
-</script>
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("emojiCanvas");
+        const ctx = canvas.getContext("2d");
+        const emojis = ["🌞", "🖤", "🌞", "🥀", "🌞"];
+        const emojiParticles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        for (let i = 0; i < 30; i++) {
+            emojiParticles.push({
+            emoji: emojis[Math.floor(Math.random() * emojis.length)],
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: 24 + Math.random() * 18,
+            speedX: (Math.random() - 0.5) * 0.8,
+            speedY: (Math.random() - 0.5) * 0.8
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            emojiParticles.forEach(p => {
+            ctx.font = `${p.size}px sans-serif`;
+            ctx.fillText(p.emoji, p.x, p.y);
+            p.x += p.speedX;
+            p.y += p.speedY;
+
+            if (p.x < -50 || p.x > canvas.width + 50) p.speedX *= -1;
+            if (p.y < -50 || p.y > canvas.height + 50) p.speedY *= -1;
+            });
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+        });
+    </script>
 </body>
 </html>
