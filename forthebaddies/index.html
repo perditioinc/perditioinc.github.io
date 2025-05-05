@@ -208,6 +208,15 @@
             }
         }
     </style>  
+
+    <!-- Add this style in the <style> tag or external CSS -->
+    <style>
+        .ticket-select {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <!--  -->
 <!-- BODY STARTS HERE -->
@@ -795,8 +804,8 @@
                 </select><br><br>           
                 <div id="guestContainer"></div>  
                 <label for="ticketType">TIPO DE INGRESSO</label><br>
-                <select name="ticketType" required>
-                    <option value="guest" selected>Membros VIP grátis antes das 23h</option>
+                <select name="ticketType" required class="ticket-select">
+                    <option value="guest" selected>Membros VIP grátis antes das 23h 🖤🥀🖤</option>
                     <option value="presale" disabled>👑VIP+ Pré-Venda 500MZN Entrada Expedida</option>
                 </select><br><br> 
                 <div id="paymentSection" style="display: none;">
