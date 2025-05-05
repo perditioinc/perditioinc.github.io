@@ -20,6 +20,9 @@
 
     <link rel="stylesheet" href="../styles.css">
 
+    <!-- Cursive Font 43KB -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGJ03DF5Z8"></script>
     <script>
@@ -166,8 +169,45 @@
         }
     </style>
     
+    <style>
+        /* Mobile styles */
+        .event-date {
+            font-size: 5vw; /* Scales based on viewport width */
+        }
     
-      
+        /* Desktop styles (min-width 768px) */
+        @media (min-width: 768px) {
+            .event-date {
+                font-size: 2rem !important; /* Fixed size for desktop */
+            }
+        }
+    </style>  
+    <style>
+        /* Mobile styles */
+        .toxic-fomo-tagline {
+            font-size: 8vw; /* Scales based on viewport width */
+        }
+
+        /* Desktop styles (min-width 768px) */
+        @media (min-width: 768px) {
+            .toxic-fomo-tagline {
+                font-size: 3.5rem !important;/* Fixed size for desktop */
+            }
+        }
+    </style>
+    <style>
+        /* Mobile styles */
+        .event-location {
+            font-size: 5vw; /* Scales based on viewport width */
+        }
+
+        /* Desktop styles (min-width 768px) */
+        @media (min-width: 768px) {
+            .event-location {
+                font-size: 2rem !important;/* Fixed size for desktop */
+            }
+        }
+    </style>  
 </head>
 <!--  -->
 <!-- BODY STARTS HERE -->
@@ -246,31 +286,25 @@
 
         <!-- FOMO TOXIC TAGLINE -->
         <div style="display: flex; justify-content: center; margin-top: 20px;">
-            <div style="position: relative; font-family: Helvetica, sans-serif; font-size: 6vw; font-weight: bold; white-space: nowrap;">
-              <span style="position:absolute;top:0;left:0;color:#39ff14;opacity:0.7;filter:blur(0.5px);animation:glitchGreen 2s infinite;z-index:0;">
-                Nem toda beleza é inocente...
-              </span>
-              <span style="position:absolute;top:0;left:0;color:#d0e300;opacity:0.6;filter:blur(0.4px);animation:glitchYellow 2.5s infinite;z-index:0;">
-                Nem toda beleza é inocente...
-              </span>
-              <span style="position:absolute;top:0;left:0;color:#e400ff;opacity:0.5;filter:blur(0.6px);animation:glitchPink 1.8s infinite;z-index:0;">
-                Nem toda beleza é inocente...
-              </span>
-              <span style="color:white;position:relative;z-index:2;
-                text-shadow:
-                    1px 1px 0 #000,
-                -1px 1px 0 #000,
-                    1px -1px 0 #000,
-                -1px -1px 0 #000,
-                    0 1px 0 #000,
-                    0 -1px 0 #000,
-                    1px 0 0 #000,
-                -1px 0 0 #000;
-                ">
-                Nem toda beleza é inocente.
-              </span>
+            <div class="toxic-fomo-tagline" style="position: relative; font-family: 'Dancing Script', cursive; font-weight: bold; white-space: nowrap;">
+                <span class="glitch-text glitch-green" style="position:absolute; top:0; left:0; color:#39ff14; opacity:0.7; filter:blur(0.5px); animation:glitchGreen 2s infinite; z-index: 0;">
+                    Nem toda beleza é inocente...
+                </span>
+                <span class="glitch-text glitch-yellow" style="position:absolute; top:0; left:0; color:#d0e300; opacity:0.6; filter:blur(0.4px); animation:glitchYellow 2.5s infinite; z-index: 0;">
+                    Nem toda beleza é inocente...
+                </span>
+                <span class="glitch-text glitch-pink" style="position:absolute; top:0; left:0; color:#e400ff; opacity:0.5; filter:blur(0.6px); animation:glitchPink 1.8s infinite; z-index: 0;">
+                    Nem toda beleza é inocente...
+                </span>
+                <span style="color:white; position:relative; z-index:2; 
+                    text-shadow: 
+                        1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 
+                        0 1px 0 #000, 0 -1px 0 #000, 1px 0 0 #000, -1px 0 0 #000;">
+                    Nem toda beleza é inocente.
+                </span>
             </div>
         </div>
+
         <style>
             @keyframes glitchGreen {
               0% { transform: translate(0, 0); }
@@ -329,58 +363,59 @@
 
         <!-- DATE + TIME -->
         <div style="display: flex; justify-content: center; margin-top: 10px;">
-            <div style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
-            <span style="position:absolute;top:0;left:0;color:#39ff14;opacity:0.7;filter:blur(0.5px);animation:glitchGreen 2s infinite;z-index:0;">
+            <div class="event-date" style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
+                <span style="position:absolute;top:0;left:0;color:#39ff14;opacity:0.7;filter:blur(0.5px);animation:glitchGreen 2s infinite;z-index:0;">
+                    17 de Maio ⏰22h 📍Opium
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#d0e300;opacity:0.6;filter:blur(0.4px);animation:glitchYellow 2.5s infinite;z-index:0;">
+                    17 de Maio ⏰22h 📍Opium
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#e400ff;opacity:0.5;filter:blur(0.6px);animation:glitchPink 1.8s infinite;z-index:0;">
+                    17 de Maio ⏰22h 📍Opium
+                </span>
+                <span style="color:white;position:relative;z-index:2;
+                text-shadow:
+                    1px 1px 0 #000,
+                -1px 1px 0 #000,
+                    1px -1px 0 #000,
+                -1px -1px 0 #000,
+                    0 1px 0 #000,
+                    0 -1px 0 #000,
+                    1px 0 0 #000,
+                -1px 0 0 #000;
+                ">
                 17 de Maio ⏰22h 📍Opium
-            </span>
-            <span style="position:absolute;top:0;left:0;color:#d0e300;opacity:0.6;filter:blur(0.4px);animation:glitchYellow 2.5s infinite;z-index:0;">
-                17 de Maio ⏰22h 📍Opium
-            </span>
-            <span style="position:absolute;top:0;left:0;color:#e400ff;opacity:0.5;filter:blur(0.6px);animation:glitchPink 1.8s infinite;z-index:0;">
-                17 de Maio ⏰22h 📍Opium
-            </span>
-            <span style="color:white;position:relative;z-index:2;
-            text-shadow:
-                1px 1px 0 #000,
-            -1px 1px 0 #000,
-                1px -1px 0 #000,
-            -1px -1px 0 #000,
-                0 1px 0 #000,
-                0 -1px 0 #000,
-                1px 0 0 #000,
-            -1px 0 0 #000;
-            ">
-            17 de Maio ⏰22h 📍Opium
-            </span>
+                </span>
             </div>
         </div>
+
         
         <!-- DATE + TIME -->
         <div style="display: flex; justify-content: center; margin-top: 10px;">
-            <div style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
-            <span style="position:absolute;top:0;left:0;color:#39ff14;opacity:0.7;filter:blur(0.5px);animation:glitchGreen 2s infinite;z-index:0;">
-                Avenida da Marginal, Baía Mall<br>Maputo, MZ
-            </span>
-            <span style="position:absolute;top:0;left:0;color:#d0e300;opacity:0.6;filter:blur(0.4px);animation:glitchYellow 2.5s infinite;z-index:0;">
-                Avenida da Marginal, Baía Mall<br>Maputo, MZ
-            </span>
-            <span style="position:absolute;top:0;left:0;color:#e400ff;opacity:0.5;filter:blur(0.6px);animation:glitchPink 1.8s infinite;z-index:0;">
-                Avenida da Marginal, Baía Mall<br>Maputo, MZ
-            </span>
-            
-            <span style="color:white;position:relative;z-index:2;
-            text-shadow:
-                1px 1px 0 #000,
-            -1px 1px 0 #000,
-                1px -1px 0 #000,
-            -1px -1px 0 #000,
-                0 1px 0 #000,
-                0 -1px 0 #000,
-                1px 0 0 #000,
-            -1px 0 0 #000;
-            ">
-            Avenida da Marginal, Baía Mall<br>Maputo, MZ
-            </span>
+            <div class="event-location" style="position: relative; font-family: Helvetica, sans-serif; font-weight: bold; white-space: nowrap;">
+                <span class="glitch-text glitch-green" style="position:absolute;top:0;left:0;color:#39ff14;opacity:0.7;filter:blur(0.5px);animation:glitchGreen 2s infinite;z-index:0;">
+                    Avenida da Marginal, Baía Mall<br>Maputo, MZ
+                </span>
+                <span class="glitch-text glitch-yellow" style="position:absolute;top:0;left:0;color:#d0e300;opacity:0.6;filter:blur(0.4px);animation:glitchYellow 2.5s infinite;z-index:0;">
+                    Avenida da Marginal, Baía Mall<br>Maputo, MZ
+                </span>
+                <span class="glitch-text glitch-pink" style="position:absolute;top:0;left:0;color:#e400ff;opacity:0.5;filter:blur(0.6px);animation:glitchPink 1.8s infinite;z-index:0;">
+                    Avenida da Marginal, Baía Mall<br>Maputo, MZ
+                </span>
+                
+                <span style="color:white;position:relative;z-index:2;
+                    text-shadow:
+                        1px 1px 0 #000,
+                    -1px 1px 0 #000,
+                        1px -1px 0 #000,
+                    -1px -1px 0 #000,
+                        0 1px 0 #000,
+                        0 -1px 0 #000,
+                        1px 0 0 #000,
+                    -1px 0 0 #000;
+                    ">
+                    Avenida da Marginal, Baía Mall<br>Maputo, MZ
+                </span>
             </div>
         </div>
 
