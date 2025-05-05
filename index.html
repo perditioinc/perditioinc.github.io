@@ -44,11 +44,10 @@
         </div>
       </nav>
 
-    <!-- Main Content -->
-    <div id="globe-container">
-        <canvas id="globe"></canvas> <!-- Canvas element for drawing -->
-    </div>
+    <!-- EMOJI CANVAS : Layer 0-->   
+    <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
 
+    <!-- Main Content -->
     <div class="content">
         <h1>Dark Groove</h1>
         <h2>Festival World Tour</h2>
@@ -71,95 +70,6 @@
     </div>
     
     <script>
-        // JavaScript to create a colorful glowing globe and bouncing stars
-        document.addEventListener("DOMContentLoaded", () => {
-            const canvas = document.getElementById('globe'); // Get canvas element
-            const ctx = canvas.getContext('2d'); // Get 2D context
-
-            // Set canvas size
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            // Variables for globe size based on screen width
-            const isMobile = window.innerWidth < 768; // Adjust threshold for mobile
-            const globeRadius = isMobile ? 100 : 200; // Use 100 for mobile, 200 for desktop
-            let globeAngle = 0;
-
-            // Create an array for bouncing spheres (stars)
-            const spheres = [];
-            const sphereCount = 30;
-
-            for (let i = 0; i < sphereCount; i++) {
-                spheres.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: 5 + Math.random() * 10,
-                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                    speedX: (Math.random() - 0.5) * 2,
-                    speedY: (Math.random() - 0.5) * 2
-                });
-            }
-
-            // Draw the globe and bouncing spheres
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // Draw the glowing effect around the globe
-                ctx.save();
-                ctx.translate(canvas.width / 2, canvas.height / 2);
-                ctx.rotate(globeAngle);
-                
-                // Create a glowing effect by drawing multiple larger circles
-                for (let glowRadius = globeRadius + 20; glowRadius > globeRadius - 60; glowRadius -= 5) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${0.3 - (0.3 - (glowRadius - globeRadius) / 60)})`; // Gradient for glow
-                    ctx.beginPath();
-                    ctx.arc(0, 0, glowRadius, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-
-                // Draw the black globe
-                ctx.fillStyle = 'black'; // Globe color
-                ctx.beginPath();
-                ctx.arc(0, 0, globeRadius, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-
-                // Draw the bouncing spheres
-                spheres.forEach(sphere => {
-                    ctx.fillStyle = sphere.color;
-                    ctx.beginPath();
-                    ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    // Move the sphere
-                    sphere.x += sphere.speedX;
-                    sphere.y += sphere.speedY;
-
-                    // Bounce off edges
-                    if (sphere.x + sphere.radius > canvas.width || sphere.x - sphere.radius < 0) {
-                        sphere.speedX *= -1;
-                    }
-                    if (sphere.y + sphere.radius > canvas.height || sphere.y - sphere.radius < 0) {
-                        sphere.speedY *= -1;
-                    }
-                });
-
-                globeAngle += 0.01; // Increase angle for spinning effect
-                requestAnimationFrame(draw);
-            }
-
-            // Responsive design for window resizing
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-
-            // Start the drawing loop
-            draw();
-        });
-    </script>
-
-    <script>
         document.addEventListener("DOMContentLoaded", function () {
         const hamburger = document.getElementById("hamburger");
         const navLinks = document.getElementById("navLinks");
@@ -167,6 +77,49 @@
         hamburger.addEventListener("click", function () {
             navLinks.classList.toggle("show");
         });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("emojiCanvas");
+        const ctx = canvas.getContext("2d");
+        const emojis = ["🖤", "🥀"];
+        const emojiParticles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        for (let i = 0; i < 30; i++) {
+            emojiParticles.push({
+            emoji: emojis[Math.floor(Math.random() * emojis.length)],
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: 24 + Math.random() * 18,
+            speedX: (Math.random() - 0.5) * 0.8,
+            speedY: (Math.random() - 0.5) * 0.8
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            emojiParticles.forEach(p => {
+            ctx.font = `${p.size}px sans-serif`;
+            ctx.fillText(p.emoji, p.x, p.y);
+            p.x += p.speedX;
+            p.y += p.speedY;
+
+            if (p.x < -50 || p.x > canvas.width + 50) p.speedX *= -1;
+            if (p.y < -50 || p.y > canvas.height + 50) p.speedY *= -1;
+            });
+            requestAnimationFrame(draw);
+        }
+
+        draw();
         });
     </script>
 </body>
