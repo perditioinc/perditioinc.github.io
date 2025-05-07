@@ -217,6 +217,17 @@
             box-sizing: border-box;
         }
     </style>
+
+    <!-- <style>
+      #countdown {
+          text-align: center;
+          font-size: 2rem;
+          color: #ffea00;
+          font-weight: bold;
+          text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14;
+      }
+    </style> -->
+
 </head>
 <!--  -->
 <!-- BODY STARTS HERE -->
@@ -241,7 +252,7 @@
     <canvas id="emojiBlackHeartsExplosionCanvas" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; display: none;"></canvas>
     <!-- EMOJI CANVAS : Layer 0-->   
     <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
- 
+
     <!-- Main Content : Layer 1-->
     <style>
         .content {
@@ -249,7 +260,86 @@
           z-index: 1;
         }
     </style>
+
     <div class="content">
+
+    <!-- Loading Screen (visible on page load) -->
+    <div id="loadingScreen" style="
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0, 0, 0, 0.9); 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        z-index: 9999;
+        color: #ffea00; 
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14;
+        animation: toxicPulse 2.5s infinite ease-in-out;
+    ">
+        Carregando... Aguardando sua entrada VIP.
+    </div>
+
+    <!-- Countdown Timer -->
+    <div id="countdownWrapper" style="display: none; text-align: center; position: relative; z-index: 10;">
+        <!-- Spark Effect Canvas (now behind the countdown) -->
+        <canvas id="sparkEffectCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></canvas>
+
+        <!-- Countdown Numbers -->
+        <div id="countdown" style="font-family: Helvetica, sans-serif; font-size: 3rem; font-weight: bold; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; animation: toxicPulse 2.5s infinite ease-in-out, colorCycle 5s infinite;;"></div>
+
+        <!-- Countdown Text Box -->
+        <div id="countdownText" style="background: rgba(0, 0, 0, 0.7); padding: 16px; margin-top: 20px; border-radius: 12px; max-width: 600px; margin: 0 auto; font-size: 16px; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; font-weight: bold;">
+            <span id="countdownMessage">Até o encerramento da entrada VIP!<br><strong style="color:#39ff14;">VIP : </strong><strong style="color:#ffffff;">Entrada grátis até 23h.<br>Das 23h à meia-noite: 500MT.<br></strong>Não deixe para depois... ⏰</span>
+        </div>
+    </div>
+
+    <style>
+      /* Define the color cycling animation */
+      @keyframes colorCycle {
+          0% {
+              color: #39ff14; /* Baile Funk - Green */
+          }
+          16.6% {
+              color: #ff6600; /* Afrobeat - Orange */
+          }
+          33.3% {
+              color: #ff007f; /* Reggaeton - Pink */
+          }
+          50% {
+              color: #00ffff; /* Amapiano - Cyan */
+          }
+          66.6% {
+              color: #ff00ff; /* Trap Latino - Magenta */
+          }
+          83.3% {
+              color: #ffa500; /* House - Orange */
+          }
+          100% {
+              color: #39ff14; /* Baile Funk - Green (back to the start) */
+          }
+      }
+    </style>
+
+    <!-- Final Message (hidden by default) -->
+    <div id="finalMessage" style="display: none; background: rgba(0, 0, 0, 0.7); padding: 16px; margin: 0px auto; border-radius: 12px; max-width: 600px; text-align: center;">
+        <p style="
+            font-size: 20px; 
+            color: #ffea00;
+            font-weight: bold;
+            text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14;
+            animation: toxicPulse 2.5s infinite ease-in-out;
+            margin: 0;
+        ">
+            Nos vemos na pista de dança! 🖤🥀🖤
+        </p>
+    </div>
+
+
         <div class="for-the-baddies-neon-logo-container">
             <img 
               src="/images/for-the-baddies-transparent-600x600-optimized-for-mobile.png" 
@@ -260,6 +350,7 @@
               height="auto"
             />
         </div>
+
         <style>
             @keyframes forTheBaddiesNeonPulseMulti {
               0% {
@@ -445,7 +536,7 @@
             animation: toxicPulse 2.5s infinite ease-in-out;
             margin: 0;
         ">
-            Para quem não aceita uma noite comum. Música, dança, e delírios imersivos — só para quem sabe viver.
+            Para quem não aceita uma noite comum. Música, dança, e delírios imersivos, só para quem sabe viver.
         </p>
         </div>
 
@@ -1269,7 +1360,7 @@
         canvas.height = window.innerHeight;
         canvas.style.display = "block";
         
-        const emojis = ["☣️", "⚠️", "🖤", "🧪", "🥀", "🔥", "💀", "💃", "☢️"];
+        const emojis = ["☣️", "⚠️", "🖤", "🧪", "🥀", "🔥", "💀", "💃🏾", "☢️"];
         const particles = [];
         
         // Position origin from "Entrar VIP" button
@@ -1376,6 +1467,90 @@
         }, 500); // Adjust this time to match the explosion duration
         });
   </script>
+
+  <script>
+    // Countdown Timer Script
+    function updateCountdown() {
+        const targetDate = new Date('May 17, 2025 12:01:00 GMT-0700'); // Target time for San Francisco
+        const currentDate = new Date();
+        const remainingTime = targetDate - currentDate;
+
+        if (remainingTime <= 0) {
+            document.getElementById('countdownWrapper').style.display = 'none'; // Hide countdown timer
+            document.getElementById('finalMessage').style.display = 'block'; // Show final message
+            return;
+        }
+
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('countdownMessage').innerHTML = `Até o encerramento da entrada VIP!<br><strong style="color:#39ff14;">VIP : </strong><strong style="color:#ffffff;">Entrada grátis até 23h.<br>Das 23h à meia-noite: 500MT.<br></strong>Não deixe para depois... ⏰`;
+    }
+
+    setInterval(updateCountdown, 1000); // Update every second
+
+    // Hide loading screen once the page content is ready
+    window.addEventListener('load', () => {
+        document.getElementById('loadingScreen').style.display = 'none';  // Hide the loading screen
+        document.getElementById('countdownWrapper').style.display = 'block';     // Show countdown timer
+    });
+
+    // Spark Effect (creates constant spark-like animation behind the countdown)
+    document.addEventListener("DOMContentLoaded", function () {
+        const canvas = document.getElementById("sparkEffectCanvas");
+        const ctx = canvas.getContext("2d");
+        const particles = [];
+
+        // Create a responsive canvas to cover the entire page
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        // Create spark particles that originate from the countdown
+        for (let i = 0; i < 100; i++) { // More particles for continuous effect
+            particles.push({
+                x: window.innerWidth / 2, // Originating from center of the countdown
+                y: window.innerHeight / 2,
+                size: 5 + Math.random() * 5,
+                speedX: (Math.random() - 0.5) * 4, // Speed of movement
+                speedY: (Math.random() - 0.5) * 4,
+                life: 50 + Math.random() * 50 // Life span of each particle
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                ctx.fillStyle = "#39ff14"; // Spark color
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.life -= 1;
+
+                // Reset particle when its life ends and move it back to the countdown center
+                if (p.life <= 0) {
+                    p.x = window.innerWidth / 2;
+                    p.y = window.innerHeight / 2;
+                    p.life = 100 + Math.random() * 100; // Reset life
+                }
+            });
+
+            requestAnimationFrame(draw); // Keep animating
+        }
+
+        draw();
+    });
+  </script>
+
   
 </body>
 </html>
