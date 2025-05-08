@@ -257,36 +257,33 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxzK7g1GwzaOOH8deiodT6nObFGOYcVCjJtfk90tt0boJhGiEqr6YkklqLOGljQAj3s/exec";
       
         function updateVipNames() {
-          const vipCount = document.getElementById("vip-count");
-          const vipNameSpan = document.getElementById("vip-name-span");
-      
-          fetch(GOOGLE_SCRIPT_URL + '?t=' + Date.now()) // Prevent cache issues
-            .then(res => res.json())
-            .then(data => {
-              if (!vipCount || !vipNameSpan) return;
-      
-              vipCount.textContent = `VIP MEMBROS : ${data.totalCount}`;
-              const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
-              const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
-      
-              // Force repaint (important for Safari)
-              void vipNameSpan.offsetWidth;
-      
-              // Update just the span, not the marquee container
-            //   vipNameSpan.textContent = `${nameList} • ${fomoLine}`;
+            const vipCount = document.getElementById("vip-count");
+            const vipNameSpan = document.getElementById("vip-name-span");
+            const marquee = vipNameSpan.parentElement;
 
-            setTimeout(() => {
-            vipNameSpan.textContent = `${nameList} • ${fomoLine}`;
-            }, 300); // Delay by 300ms to let animation stabilize
+            fetch(GOOGLE_SCRIPT_URL + '?t=' + Date.now())
+                .then(res => res.json())
+                .then(data => {
+                if (!vipCount || !vipNameSpan) return;
 
-            })
-            .catch(err => {
-              console.error("Erro ao buscar nomes VIP:", err);
-              const vipNameSpan = document.getElementById("vip-name-span");
-              if (vipNameSpan) vipNameSpan.textContent = "Erro ao carregar nomes VIP.";
-            });
-        }
-      
+                vipCount.textContent = `VIP MEMBROS : ${data.totalCount}`;
+                const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
+                const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
+
+                // Inject text first
+                vipNameSpan.textContent = `${nameList} • ${fomoLine}`;
+
+                // Reset + restart animation
+                marquee.classList.remove("start-marquee");
+                void marquee.offsetWidth; // Force reflow
+                marquee.classList.add("start-marquee");
+                })
+                .catch(err => {
+                console.error("Erro ao buscar nomes VIP:", err);
+                vipNameSpan.textContent = "Erro ao carregar nomes VIP.";
+                });
+            }
+     
         // ⏱ Load once DOM is ready
         document.addEventListener("DOMContentLoaded", updateVipNames);
       </script>
@@ -300,18 +297,18 @@
         }
     </style>
 
-<!-- CONTENT MAIN -->
-    <div class="content">
+    <!-- CONTENT MAIN -->
+        <div class="content">
 
-<!-- ✅ VIP Count Display -->
-<div id="vip-count" style="font-weight:bold; font-size: 1.2rem; color: white; margin-bottom: 8px;"></div>
+    <!-- ✅ VIP Count Display -->
+    <div id="vip-count" style="font-weight:bold; font-size: 1.2rem; color: white; margin-bottom: 8px;"></div>
 
-<!-- ✅ Marquee Container -->
-<div class="vip-marquee-wrapper">
-    <div class="vip-marquee-content" id="vip-names">
-      <span id="vip-name-span">Carregando VIPs...</span>
+    <!-- ✅ Marquee Container -->
+    <div class="vip-marquee-wrapper">
+        <div class="vip-marquee-content" id="vip-names">
+        <span id="vip-name-span">Carregando VIPs...</span>
+        </div>
     </div>
-  </div>
   
 
   <style>
@@ -326,15 +323,20 @@
     }
   
     .vip-marquee-content {
-      display: inline-block;
-      padding-left: 100%;
-      animation: vipScroll 90s linear infinite;
-      color: #ffea00;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.25rem;
-      letter-spacing: 0.05em;
-      text-shadow: 0 0 6px #ffea00, 0 0 12px #39ff14;
-    }
+  display: inline-block;
+  padding-left: 100%;
+  /* animation removed here */
+  color: #ffea00;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 6px #ffea00, 0 0 12px #39ff14;
+}
+
+.start-marquee {
+  animation: vipScroll 90s linear infinite;
+}
+
   
     @keyframes vipScroll {
       0%   { transform: translateX(0); }
