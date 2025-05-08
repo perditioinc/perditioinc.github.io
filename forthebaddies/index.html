@@ -273,7 +273,12 @@
               void vipNameSpan.offsetWidth;
       
               // Update just the span, not the marquee container
-              vipNameSpan.textContent = `${nameList} • ${fomoLine}`;
+            //   vipNameSpan.textContent = `${nameList} • ${fomoLine}`;
+
+            setTimeout(() => {
+            vipNameSpan.textContent = `${nameList} • ${fomoLine}`;
+            }, 300); // Delay by 300ms to let animation stabilize
+
             })
             .catch(err => {
               console.error("Erro ao buscar nomes VIP:", err);
@@ -1096,7 +1101,7 @@
                 // Trigger the emoji explosion
                 triggerEmojiExplosion();
 
-                // updateVipNames(); // ✅ Only re-fetch once, using your function
+                updateVipNames(); // ✅ Only re-fetch once, using your function
 
                 })
                 .catch((error) => {
