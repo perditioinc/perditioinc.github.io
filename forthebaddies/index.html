@@ -253,6 +253,10 @@
     <!-- EMOJI CANVAS : Layer 0-->   
     <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
 
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxzK7g1GwzaOOH8deiodT6nObFGOYcVCjJtfk90tt0boJhGiEqr6YkklqLOGljQAj3s/exec";
+    </script>
+
     <!-- Main Content : Layer 1-->
     <style>
         .content {
@@ -261,7 +265,45 @@
         }
     </style>
 
+<!-- CONTENT MAIN -->
     <div class="content">
+
+<!-- ✅ VIP Count Display -->
+<div id="vip-count" style="font-weight:bold; font-size: 1.2rem; color: white; margin-bottom: 8px;"></div>
+
+<!-- ✅ Marquee Container -->
+<div class="vip-marquee-wrapper">
+    <div class="vip-marquee-content" id="vip-names">Carregando VIPs...</div>
+  </div>
+
+  <style>
+    .vip-marquee-wrapper {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 2px solid #39ff14;
+      border-bottom: 2px solid #39ff14;
+      background: #000;
+      padding: 8px 0;
+    }
+  
+    .vip-marquee-content {
+      display: inline-block;
+      padding-left: 100%;
+      animation: vipScroll 90s linear infinite;
+      color: #ffea00;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 6px #ffea00, 0 0 12px #39ff14;
+    }
+  
+    @keyframes vipScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+
 
     <!-- Loading Screen (visible on page load) -->
     <div id="loadingScreen" style="
@@ -1004,7 +1046,7 @@
                 mpesaPhone
             });
 
-            fetch("https://script.google.com/macros/s/AKfycbwEsWPDHeOo1992SfGxc57jj3Dlzh95SID6x_A0s8bAqOq1NIMApTh4qaE9DvOmtn6q/exec", {
+            fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors",
                 body: data
@@ -1021,8 +1063,18 @@
                 // Trigger the emoji explosion
                 triggerEmojiExplosion();
 
-                // Skip scroll-to-top
-                // window.scrollTo({ top: 0, behavior: "smooth" });
+                    // ✅ Re-fetch VIP count + names
+                    fetch(GOOGLE_SCRIPT_URL)
+                        .then(res => res.json())
+                        .then(data => {
+                        document.getElementById("vip-count").innerText = `VIP MEMBROS : ${data.totalCount}`;
+                        const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
+                        // Add FOMO message at the end
+                        const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
+                        
+                        document.getElementById("vip-names").innerText = `${nameList} • ${fomoLine}`;
+                    });
+
                 })
                 .catch((error) => {
                 console.warn("Erro:", error);
@@ -1031,7 +1083,24 @@
                 submitButton.disabled = false;
                 });
             });
-          </script>     
+
+            fetch(GOOGLE_SCRIPT_URL)
+              .then(response => response.json())
+              .then(data => {
+                // VIP count text
+                document.getElementById("vip-count").innerText = `VIP MEMBROS : ${data.totalCount}`;
+          
+                // Marquee name list
+                const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
+                const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
+                document.getElementById("vip-names").innerText = `${nameList} • ${fomoLine}`;
+              })
+              .catch(err => {
+                document.getElementById("vip-names").innerText = "Erro ao carregar nomes VIP.";
+                console.error(err);
+              });
+          </script>
+          
            
            <script>
             //M-PESA VIEW
@@ -1550,7 +1619,7 @@
         draw();
     });
   </script>
-
+  
   
 </body>
 </html>
