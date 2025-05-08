@@ -1111,15 +1111,6 @@
                 });
             });
 
-            fetch(GOOGLE_SCRIPT_URL)
-              .then(response => response.json())
-              .then(data => {
-                updateVipNames();
-              })
-              .catch(err => {
-                document.getElementById("vip-names").innerText = "Erro ao carregar nomes VIP.";
-                console.error(err);
-              });
           </script>
           
            
