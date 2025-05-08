@@ -255,6 +255,43 @@
 
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxzK7g1GwzaOOH8deiodT6nObFGOYcVCjJtfk90tt0boJhGiEqr6YkklqLOGljQAj3s/exec";
+
+        function updateVipNames() {
+            const vipCount = document.getElementById("vip-count");
+            const vipNames = document.getElementById("vip-names");
+
+            // Show loading state while fetching
+            if (vipNames) vipNames.innerText = "Carregando VIPs...";
+
+            fetch(GOOGLE_SCRIPT_URL + '?t=' + Date.now()) // Prevent cache issues
+                .then(res => res.json())
+                .then(data => {
+                    const vipCount = document.getElementById("vip-count");
+                    const vipNames = document.getElementById("vip-names");
+                    if (!vipCount || !vipNames) return;
+
+                    // Fade out first for smooth transition (optional)
+                    vipNames.style.opacity = 0;
+
+                    // Update content
+                    vipCount.innerText = `VIP MEMBROS : ${data.totalCount}`;
+                    const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
+                    const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
+
+                    // Delay slight fade-in to avoid layout jump
+                    setTimeout(() => {
+                    vipNames.innerText = `${nameList} • ${fomoLine}`;
+                    vipNames.style.opacity = 1;
+                    }, 100);
+                })
+                .catch(err => {
+                    console.error("Erro ao buscar nomes VIP:", err);
+                    const vipNames = document.getElementById("vip-names");
+                    if (vipNames) vipNames.innerText = "Erro ao carregar nomes VIP.";
+                });
+        }
+          // ⏱ INITIAL LOAD
+        document.addEventListener("DOMContentLoaded", updateVipNames);
     </script>
 
     <!-- Main Content : Layer 1-->
@@ -1051,7 +1088,7 @@
                 mode: "no-cors",
                 body: data
             })
-                .then(() => {
+            .then(() => {
                 document.getElementById("statusMessage").innerText = "✅ Agora você é um membro VIP!";
                 form.reset();
                 submitButton.textContent = "Entrar VIP";
@@ -1063,17 +1100,7 @@
                 // Trigger the emoji explosion
                 triggerEmojiExplosion();
 
-                    // ✅ Re-fetch VIP count + names
-                    fetch(GOOGLE_SCRIPT_URL)
-                        .then(res => res.json())
-                        .then(data => {
-                        document.getElementById("vip-count").innerText = `VIP MEMBROS : ${data.totalCount}`;
-                        const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
-                        // Add FOMO message at the end
-                        const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
-                        
-                        document.getElementById("vip-names").innerText = `${nameList} • ${fomoLine}`;
-                    });
+                updateVipNames(); // ✅ Only re-fetch once, using your function
 
                 })
                 .catch((error) => {
@@ -1087,13 +1114,7 @@
             fetch(GOOGLE_SCRIPT_URL)
               .then(response => response.json())
               .then(data => {
-                // VIP count text
-                document.getElementById("vip-count").innerText = `VIP MEMBROS : ${data.totalCount}`;
-          
-                // Marquee name list
-                const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
-                const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
-                document.getElementById("vip-names").innerText = `${nameList} • ${fomoLine}`;
+                updateVipNames();
               })
               .catch(err => {
                 document.getElementById("vip-names").innerText = "Erro ao carregar nomes VIP.";
