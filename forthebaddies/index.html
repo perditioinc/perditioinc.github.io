@@ -255,44 +255,37 @@
 
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxzK7g1GwzaOOH8deiodT6nObFGOYcVCjJtfk90tt0boJhGiEqr6YkklqLOGljQAj3s/exec";
-
+      
         function updateVipNames() {
-            const vipCount = document.getElementById("vip-count");
-            const vipNames = document.getElementById("vip-names");
-
-            // Show loading state while fetching
-            if (vipNames) vipNames.innerText = "Carregando VIPs...";
-
-            fetch(GOOGLE_SCRIPT_URL + '?t=' + Date.now()) // Prevent cache issues
-                .then(res => res.json())
-                .then(data => {
-                    const vipCount = document.getElementById("vip-count");
-                    const vipNames = document.getElementById("vip-names");
-                    if (!vipCount || !vipNames) return;
-
-                    // Fade out first for smooth transition (optional)
-                    vipNames.style.opacity = 0;
-
-                    // Update content
-                    vipCount.innerText = `VIP MEMBROS : ${data.totalCount}`;
-                    const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
-                    const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
-
-                    // Delay slight fade-in to avoid layout jump
-                    setTimeout(() => {
-                    vipNames.innerText = `${nameList} • ${fomoLine}`;
-                    vipNames.style.opacity = 1;
-                    }, 100);
-                })
-                .catch(err => {
-                    console.error("Erro ao buscar nomes VIP:", err);
-                    const vipNames = document.getElementById("vip-names");
-                    if (vipNames) vipNames.innerText = "Erro ao carregar nomes VIP.";
-                });
+          const vipCount = document.getElementById("vip-count");
+          const vipNameSpan = document.getElementById("vip-name-span");
+      
+          fetch(GOOGLE_SCRIPT_URL + '?t=' + Date.now()) // Prevent cache issues
+            .then(res => res.json())
+            .then(data => {
+              if (!vipCount || !vipNameSpan) return;
+      
+              vipCount.textContent = `VIP MEMBROS : ${data.totalCount}`;
+              const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
+              const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
+      
+              // Force repaint (important for Safari)
+              void vipNameSpan.offsetWidth;
+      
+              // Update just the span, not the marquee container
+              vipNameSpan.textContent = `${nameList} • ${fomoLine}`;
+            })
+            .catch(err => {
+              console.error("Erro ao buscar nomes VIP:", err);
+              const vipNameSpan = document.getElementById("vip-name-span");
+              if (vipNameSpan) vipNameSpan.textContent = "Erro ao carregar nomes VIP.";
+            });
         }
-          // ⏱ INITIAL LOAD
+      
+        // ⏱ Load once DOM is ready
         document.addEventListener("DOMContentLoaded", updateVipNames);
-    </script>
+      </script>
+      
 
     <!-- Main Content : Layer 1-->
     <style>
@@ -310,8 +303,11 @@
 
 <!-- ✅ Marquee Container -->
 <div class="vip-marquee-wrapper">
-    <div class="vip-marquee-content" id="vip-names">Carregando VIPs...</div>
+    <div class="vip-marquee-content" id="vip-names">
+      <span id="vip-name-span">Carregando VIPs...</span>
+    </div>
   </div>
+  
 
   <style>
     .vip-marquee-wrapper {
