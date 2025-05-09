@@ -1777,6 +1777,54 @@
     });
   </script>
   
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const trackOnce = (selector, eventName, label) => {
+        const el = document.querySelector(selector);
+        if (el) {
+          el.addEventListener("input", () => {
+            gtag('event', eventName, {
+              event_category: 'form_input',
+              event_label: label,
+              value: 1
+            });
+          }, { once: true });
+        }
+      };
+  
+      // Text inputs
+      trackOnce('input[name="firstName"]', 'typed_first_name', 'first_name');
+      trackOnce('input[name="lastName"]', 'typed_last_name', 'last_name');
+      trackOnce('input[name="whatsappNumber"]', 'typed_whatsapp', 'whatsapp_number');
+      trackOnce('input[name="email"]', 'typed_email', 'email_address');
+      trackOnce('#mpesaPhone', 'typed_mpesa_number', 'mpesa_number'); // optional field
+  
+      // Select dropdowns
+      trackOnce('select[name="countryCode"]', 'selected_country_code', 'country_code');
+      trackOnce('select[name="birthDay"]', 'selected_birth_day', 'birth_day');
+      trackOnce('select[name="birthMonth"]', 'selected_birth_month', 'birth_month');
+      trackOnce('select[name="birthYear"]', 'selected_birth_year', 'birth_year');
+      trackOnce('select[name="guestCount"]', 'selected_guest_count', 'guest_count');
+      trackOnce('select[name="ticketType"]', 'selected_ticket_type', 'ticket_type');
+    });
+  </script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener("click", function () {
+          const href = link.getAttribute("href");
+          const label = link.innerText.trim() || href;
+  
+          gtag('event', 'link_click', {
+            event_category: 'navigation',
+            event_label: label,
+            value: 1
+          });
+        });
+      });
+    });
+  </script>  
   
 </body>
 </html>
