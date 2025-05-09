@@ -228,6 +228,27 @@
       }
     </style> -->
 
+
+    <style>
+
+    #stickyCTAButton {
+    display: none; /* hidden by default */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffea00;
+    color: black;
+    font-weight: bold;
+    padding: 14px 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #ffea00, 0 0 24px #39ff14;
+    z-index: 9999;
+    text-decoration: none;
+    animation: buttonPulse 2s infinite ease-in-out;
+    }
+
+    </style>
+
 </head>
 <!--  -->
 <!-- BODY STARTS HERE -->
@@ -358,7 +379,7 @@
             </div>
         </div>
 
-
+    <div id="vipFormAnchor" style="position: relative; top: -80px;"></div>
     <!-- ✅ Marquee Container -->
     <div class="vip-marquee-wrapper">
         <div class="vip-marquee-content" id="vip-names">
@@ -478,7 +499,6 @@
             Nos vemos na pista de dança! 🖤🥀🖤
         </p>
     </div>
-
 
  <!-- FORM        -->
  <div style="
@@ -1054,6 +1074,32 @@
         </div> 
   
         <!-- OLD FORM LOCATION -->
+        <a href="#vipFormAnchor" id="stickyCTAButton">⬆️</a>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const form = document.getElementById("vipForm");
+              const ctaButton = document.getElementById("stickyCTAButton");
+          
+              // Show button only when form is out of view
+              window.addEventListener("scroll", function () {
+                const rect = form.getBoundingClientRect();
+                const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                ctaButton.style.display = isVisible ? "none" : "block";
+              });
+          
+              // Smooth scroll to top of form with offset
+              ctaButton.addEventListener("click", function () {
+                const offset = -100; // scroll higher so form is visible
+                const top = form.getBoundingClientRect().top + window.scrollY + offset;
+                window.scrollTo({ top, behavior: "smooth" });
+              });
+            });
+          </script>
+          
+          
+
           
           <script>
             document.getElementById("vipForm").addEventListener("submit", async function (e) {
