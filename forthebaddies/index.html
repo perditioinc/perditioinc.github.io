@@ -1205,6 +1205,13 @@
                 submitButton.textContent = "Entrar VIP";
                 submitButton.disabled = false;
 
+                // 🔥 Send custom GA4 event
+                gtag('event', 'vip_signup', {
+                    event_category: 'engagement',
+                    event_label: 'toxic_form',
+                    value: 1
+                });
+
                 // Unhide the Instagram share image
                 document.getElementById("vipConfirmationImage").style.display = "block";
 
@@ -1740,6 +1747,33 @@
         }
 
         draw();
+    });
+  </script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Track all form submissions
+      document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", function () {
+          gtag('event', 'form_submission', {
+            event_category: 'form',
+            event_label: form.id || 'unnamed_form',
+            value: 1
+          });
+        });
+      });
+  
+      // Track all button clicks
+      document.querySelectorAll("button, a[role='button'], a.button").forEach(button => {
+        button.addEventListener("click", function () {
+          const label = button.innerText?.trim() || button.id || 'unnamed_button';
+          gtag('event', 'button_click', {
+            event_category: 'interaction',
+            event_label: label,
+            value: 1
+          });
+        });
+      });
     });
   </script>
   
