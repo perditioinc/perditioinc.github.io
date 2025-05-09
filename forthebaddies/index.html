@@ -266,7 +266,8 @@
                 .then(data => {
                 if (!vipCount || !vipNameSpan) return;
 
-                vipCount.textContent = `VIP MEMBROS : ${data.totalCount}`;
+                vipCount.innerHTML = `VIP MEMBROS : ${data.totalCount}`;
+
                 const nameList = data.names.map(name => `👑 ${name}`).join(' • ');
                 const fomoLine = "🚨 Junta-te antes que feche a lista VIP! 🚨";
 
@@ -300,8 +301,63 @@
     <!-- CONTENT MAIN -->
         <div class="content">
 
-    <!-- ✅ VIP Count Display -->
-    <div id="vip-count" style="font-weight:bold; font-size: 1.2rem; color: white; margin-bottom: 8px;"></div>
+        <!-- DATE + TIME -->
+        <div style="display: flex; justify-content: center; margin-top: 0px;">
+            <div class="event-date" style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
+                <span style="position:absolute;top:0;left:0;color:#39ff14;opacity:0.7;filter:blur(0.5px);animation:glitchGreen 2s infinite;z-index:0;">
+                    <b>FOR THE BADDIES : TOXIC</b><br> 17 de Maio ⏰22h 📍Opium
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#d0e300;opacity:0.6;filter:blur(0.4px);animation:glitchYellow 2.5s infinite;z-index:0;">
+                    <b>FOR THE BADDIES : TOXIC</b><br> 17 de Maio ⏰22h 📍Opium
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#e400ff;opacity:0.5;filter:blur(0.6px);animation:glitchPink 1.8s infinite;z-index:0;">
+                    <b>FOR THE BADDIES : TOXIC</b><br> 17 de Maio ⏰22h 📍Opium
+                </span>
+                <span style="color:white;position:relative;z-index:2;
+                text-shadow:
+                    1px 1px 0 #000,
+                -1px 1px 0 #000,
+                    1px -1px 0 #000,
+                -1px -1px 0 #000,
+                    0 1px 0 #000,
+                    0 -1px 0 #000,
+                    1px 0 0 #000,
+                -1px 0 0 #000;
+                ">
+                <b>FOR THE BADDIES : TOXIC</b><br> 17 de Maio ⏰22h 📍Opium
+                </span>
+            </div>
+        </div>
+
+        <!-- LOCATION -->
+        <div style="display: flex; justify-content: center; margin-top: 0px;">
+            <div class="event-location" style="position: relative; font-family: Helvetica, sans-serif; font-size: 3vw; font-weight: bold; white-space: nowrap;">
+                <span class="glitch-text glitch-green" style="position:absolute;top:0;left:0;color:#39ff14;opacity:0.7;filter:blur(0.5px);animation:glitchGreen 2s infinite;z-index:0;">
+                    Avenida da Marginal, Baía Mall, Maputo, MZ
+                </span>
+                <span class="glitch-text glitch-yellow" style="position:absolute;top:0;left:0;color:#d0e300;opacity:0.6;filter:blur(0.4px);animation:glitchYellow 2.5s infinite;z-index:0;">
+                    Avenida da Marginal, Baía Mall, Maputo, MZ
+                </span>
+                <span class="glitch-text glitch-pink" style="position:absolute;top:0;left:0;color:#e400ff;opacity:0.5;filter:blur(0.6px);animation:glitchPink 1.8s infinite;z-index:0;">
+                    Avenida da Marginal, Baía Mall, Maputo, MZ
+                </span>
+                
+                <span style="color:white;position:relative;z-index:2;
+                    text-shadow:
+                        1px 1px 0 #000,
+                    -1px 1px 0 #000,
+                        1px -1px 0 #000,
+                    -1px -1px 0 #000,
+                        0 1px 0 #000,
+                        0 -1px 0 #000,
+                        1px 0 0 #000,
+                    -1px 0 0 #000;
+                    ">
+                    Avenida da Marginal, Baía Mall, Maputo, MZ
+                </span>
+            </div>
+        </div>
+
 
     <!-- ✅ Marquee Container -->
     <div class="vip-marquee-wrapper">
@@ -310,6 +366,8 @@
         </div>
     </div>
   
+    <!-- ✅ VIP Count Display -->
+    <div id="vip-count" style="font-weight:bold; font-size: 1.2rem; color: white; margin-bottom: 0px;"></div>
 
   <style>
     .vip-marquee-wrapper {
@@ -375,8 +433,8 @@
         <div id="countdown" style="font-family: Helvetica, sans-serif; font-size: 3rem; font-weight: bold; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; animation: toxicPulse 2.5s infinite ease-in-out, colorCycle 5s infinite;;"></div>
 
         <!-- Countdown Text Box -->
-        <div id="countdownText" style="background: rgba(0, 0, 0, 0.7); padding: 16px; margin-top: 20px; border-radius: 12px; max-width: 600px; margin: 0 auto; font-size: 16px; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; font-weight: bold;">
-            <span id="countdownMessage">Até o encerramento da entrada VIP!<br><strong style="color:#39ff14;">VIP : </strong><strong style="color:#ffffff;">Entrada grátis até 23h.<br>Das 23h à meia-noite: 500MT.<br></strong>Não deixe para depois... ⏰</span>
+        <div id="countdownText" style="background: rgba(0, 0, 0, 0.7); padding: 0px; margin-top: 0px; border-radius: 10px; max-width: 600px; margin: 0 auto; font-size: 12px; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; font-weight: bold;">
+            <span id="countdownMessage">Até o encerramento da entrada VIP!<br></strong>Não deixe para depois... ⏰</span>
         </div>
     </div>
 
@@ -446,9 +504,9 @@
  ">Torne-se um Membro VIP</h2>
 
 
- <h4 style="text-align:center; font-weight: normal; font-style: italic; color: #ccc;">
+ <!-- <h4 style="text-align:center; font-weight: normal; font-style: italic; color: #ccc;">
  Pré-venda VIP+ disponível em breve.
- </h4>
+ </h4> -->
  <br>
  <form id="vipForm">
      <label for="countryCode">PRIMEIRO NOME</label><br>
@@ -1575,7 +1633,7 @@
         const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
 
         document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        document.getElementById('countdownMessage').innerHTML = `17 de Maio ⏰22h 📍Opium<br><strong style="color:#39ff14;">VIP : </strong><strong style="color:#ffffff;">Entrada grátis até 23h.<br>Das 23h à meia-noite: 500MT.<br></strong>Não deixe para depois... ⏰`;
+        document.getElementById('countdownMessage').innerHTML = `Até o encerramento da entrada VIP! Não deixe para depois... ⏰`;
     }
 
     setInterval(updateCountdown, 1000); // Update every second
