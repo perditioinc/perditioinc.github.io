@@ -367,7 +367,7 @@
     </div>
   
     <!-- ✅ VIP Count Display -->
-    <div id="vip-count" style="font-weight:bold; font-size: 1.2rem; color: white; margin-bottom: 0px;"></div>
+    <div id="vip-count" style="font-weight:bold; font-size: .75rem; color: white; margin-bottom: 0px;"></div>
 
   <style>
     .vip-marquee-wrapper {
@@ -430,7 +430,7 @@
         <canvas id="sparkEffectCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></canvas>
 
         <!-- Countdown Numbers -->
-        <div id="countdown" style="font-family: Helvetica, sans-serif; font-size: 3rem; font-weight: bold; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; animation: toxicPulse 2.5s infinite ease-in-out, colorCycle 5s infinite;;"></div>
+        <div id="countdown" style="font-family: Helvetica, sans-serif; font-size: 1.5rem; font-weight: bold; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; animation: toxicPulse 2.5s infinite ease-in-out, colorCycle 5s infinite;;"></div>
 
         <!-- Countdown Text Box -->
         <div id="countdownText" style="background: rgba(0, 0, 0, 0.7); padding: 0px; margin-top: 0px; border-radius: 10px; max-width: 600px; margin: 0 auto; font-size: 12px; color: #ffea00; text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14; font-weight: bold;">
@@ -485,34 +485,34 @@
  background-color: rgba(0, 0, 0, 0.85);
  border: 1px solid #ffea00;
  border-radius: 20px;
- padding: 16px;
+ padding: 10px;
  width: 90%;
  max-width: 480px;
- margin: 32px auto;
+ margin: 0px auto;
  box-shadow: 0 0 15px #ffea00;
  font-family: Helvetica, sans-serif;
  color: white;
  ">
  <h2 style="
  text-align:center;
- font-size: 28px;
+ font-size: 20px;
  color: #ffea00;
  font-weight: bold;
  text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14;
  animation: toxicPulse 2.5s infinite ease-in-out;
- margin-bottom: 10px;
+ margin-bottom: 0px;
  ">Torne-se um Membro VIP</h2>
 
 
  <!-- <h4 style="text-align:center; font-weight: normal; font-style: italic; color: #ccc;">
  Pré-venda VIP+ disponível em breve.
  </h4> -->
- <br>
+ 
  <form id="vipForm">
      <label for="countryCode">PRIMEIRO NOME</label><br>
-     <input type="text" name="firstName" required placeholder="Primeiro nome" /><br><br>
+     <input type="text" name="firstName" required placeholder="Primeiro nome" /><br>
      <label for="countryCode">SOBRENOME</label><br>
-     <input type="text" name="lastName" required placeholder="Sobrenome" /><br><br>
+     <input type="text" name="lastName" required placeholder="Sobrenome" /><br>
      <label for="countryCode">NÚMERO DO WHATSAPP</label><br>
          <select id="countryCode" name="countryCode" required>
          <option value="+93">Afghanistan (+93)</option>
@@ -680,7 +680,7 @@
          <option value="+260">Zambia (+260)</option>
          <option value="+263">Zimbabwe (+263)</option>
      </select>
-     <input type="text" name="whatsappNumber" required placeholder="WhatsApp (sem espaços)" /><br><br>
+     <input type="text" name="whatsappNumber" required placeholder="WhatsApp (sem espaços)" /><br>
      <label for="birthday">DATA DE NASCIMENTO</label><br>
      <select name="birthDay" required>
          <option value="">Dia</option>
@@ -707,7 +707,7 @@
      <select name="birthYear" required>
          <option value="">Ano</option>
          <!-- JS irá preencher -->
-     </select><br><br>
+     </select><br>
      <label for="guestCount">ADICIONAR CONVIDADOS</label><br>
      <select id="guestCount" name="guestCount">
      <option value="0" selected>0</option>
@@ -721,13 +721,13 @@
      <option value="8">8</option>
      <option value="9">9</option>
      <option value="10">10</option>
-     </select><br><br>           
+     </select>           
      <div id="guestContainer"></div>  
      <label for="ticketType">TIPO DE INGRESSO</label><br>
      <select name="ticketType" required class="ticket-select">
          <option value="guest" selected>Membros VIP grátis antes das 23h 🖤🥀🖤</option>
          <option value="presale" disabled>👑VIP+ Pré-Venda 500MZN Entrada Expedida</option>
-     </select><br><br> 
+     </select>
      <div id="paymentSection" style="display: none;">
          <label for="mpesaPhone">Número M-PESA:</label><br>
          <input type="text" name="mpesaPhone" id="mpesaPhone" placeholder="Número M-PESA" /><br><br>
