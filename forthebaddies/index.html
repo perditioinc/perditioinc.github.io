@@ -276,7 +276,7 @@
     <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
 
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb-90Niqj2tBlmTwFSJECV965zA__iuw6gAaQ1ruQwBt86XPDAKc9CqcEB4A2OAHLi/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS9nYb-9CyAF7WT-7-vK_zuj-NvrTa9ZsVFrubKxnFs_CxXSUfQz0sKvk106KyK4sl/exec";
       
         function updateVipNames() {
             const vipCount = document.getElementById("vip-count");
@@ -530,6 +530,14 @@
  </h4> -->
  
  <form id="vipForm">
+    <!-- META ADs TRACKER -->
+    <input type="hidden" name="utm_source" />
+    <input type="hidden" name="utm_medium" />
+    <input type="hidden" name="utm_campaign" />
+    <input type="hidden" name="ad_id" />
+    <input type="hidden" name="adset_id" />
+    <input type="hidden" name="campaign_id" />
+    <!-- FORM STARTS HERE -->
      <label for="countryCode">PRIMEIRO NOME</label><br>
      <input type="text" name="firstName" required placeholder="Primeiro nome" /><br>
      <label for="countryCode">SOBRENOME</label><br>
@@ -1192,7 +1200,14 @@
                 birthday,
                 guestCount: guestCount.toString(),
                 ticketType,
-                mpesaPhone
+                mpesaPhone,
+                // Meta ADs tracking
+                utm_source: form.utm_source.value,
+                utm_medium: form.utm_medium.value,
+                utm_campaign: form.utm_campaign.value,
+                ad_id: form.ad_id.value,
+                adset_id: form.adset_id.value,
+                campaign_id: form.campaign_id.value
             });
 
             fetch(GOOGLE_SCRIPT_URL, {
@@ -1826,6 +1841,30 @@
       });
     });
   </script>  
+
+    <!-- FILL HIDDEN INPUTS FOR DATA TRACKING -->
+    <script>
+        function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+        utm_source: params.get("utm_source") || "direct",
+        utm_medium: params.get("utm_medium") || "none",
+        utm_campaign: params.get("utm_campaign") || "none",
+        ad_id: params.get("ad_id") || "",
+        adset_id: params.get("adset_id") || "",
+        campaign_id: params.get("campaign_id") || ""
+        };
+        }
+    
+        document.addEventListener("DOMContentLoaded", function () {
+        const trackingParams = getUrlParams();
+        for (const key in trackingParams) {
+            const input = document.querySelector(`input[name="${key}"]`);
+            if (input) input.value = trackingParams[key];
+        }
+        });
+    </script>
+  
   
 </body>
 </html>
