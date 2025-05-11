@@ -33,6 +33,32 @@
       gtag('config', 'G-LGJ03DF5Z8');
     </script>
 
+    <!-- Auto-populate UTM Fields -->
+    <script>
+        function populateUTMFields() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const utmFields = [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_content",
+            "ad_id",
+            "adset_id",
+            "campaign_id"
+          ];
+      
+          utmFields.forEach(param => {
+            const field = document.querySelector(`input[name="${param}"]`);
+            if (field && urlParams.has(param)) {
+              field.value = urlParams.get(param);
+            }
+          });
+        }
+      
+        document.addEventListener("DOMContentLoaded", populateUTMFields);
+    </script>
+      
+
     <style>
         @keyframes highlightFlash {
         0% {
@@ -276,7 +302,7 @@
     <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
 
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS9nYb-9CyAF7WT-7-vK_zuj-NvrTa9ZsVFrubKxnFs_CxXSUfQz0sKvk106KyK4sl/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnVMbADitYNASF0GbcGNieTyUeFWzUO88d3VPwxOelr067zZOGobgpmlE-NgvhLz4a/exec";
       
         function updateVipNames() {
             const vipCount = document.getElementById("vip-count");
@@ -537,6 +563,8 @@
     <input type="hidden" name="ad_id" />
     <input type="hidden" name="adset_id" />
     <input type="hidden" name="campaign_id" />
+    <!-- STREET TEAM -->
+    <input type="hidden" name="utm_content" />
     <!-- FORM STARTS HERE -->
      <label for="countryCode">PRIMEIRO NOME</label><br>
      <input type="text" name="firstName" required placeholder="Primeiro nome" /><br>
@@ -1207,7 +1235,9 @@
                 utm_campaign: form.utm_campaign.value,
                 ad_id: form.ad_id.value,
                 adset_id: form.adset_id.value,
-                campaign_id: form.campaign_id.value
+                campaign_id: form.campaign_id.value,
+                // Street Team Tracking
+                utm_content: form.utm_content.value,
             });
 
             fetch(GOOGLE_SCRIPT_URL, {
