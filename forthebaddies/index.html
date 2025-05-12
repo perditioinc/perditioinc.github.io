@@ -51,12 +51,6 @@
         />
     </noscript>
     <!-- End Meta Pixel Code -->
-    <script>
-        fbq('track', 'Lead');
-    </script>
-    <script>
-        fbq('track', 'ViewContent');
-    </script>
 
     <!-- Auto-populate UTM Fields -->
     <script>
@@ -1282,6 +1276,9 @@
                     event_label: 'toxic_form',
                     value: 1
                 });
+
+                // ✅ Meta Lead Event
+                fbq('track', 'Lead');
 
                 // Unhide the Instagram share image
                 document.getElementById("vipConfirmationImage").style.display = "block";
