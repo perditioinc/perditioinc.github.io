@@ -63,7 +63,9 @@
             "utm_content",
             "ad_id",
             "adset_id",
-            "campaign_id"
+            "campaign_id",
+            "ad_name", 
+            "adset_name"
           ];
       
           utmFields.forEach(param => {
@@ -321,7 +323,7 @@
     <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
 
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxnVMbADitYNASF0GbcGNieTyUeFWzUO88d3VPwxOelr067zZOGobgpmlE-NgvhLz4a/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzldcJfrRGZ9PadFehzBol4t9AH4cZrOFRL0Xbd8sZY8XAb49WLXe_bLhpNDgw5h_Ry/exec";
       
         function updateVipNames() {
             const vipCount = document.getElementById("vip-count");
@@ -582,6 +584,8 @@
     <input type="hidden" name="ad_id" />
     <input type="hidden" name="adset_id" />
     <input type="hidden" name="campaign_id" />
+    <input type="hidden" name="ad_name" />      
+    <input type="hidden" name="adset_name" /> 
     <!-- STREET TEAM -->
     <input type="hidden" name="utm_content" />
     <!-- FORM STARTS HERE -->
@@ -1255,6 +1259,8 @@
                 ad_id: form.ad_id.value,
                 adset_id: form.adset_id.value,
                 campaign_id: form.campaign_id.value,
+                ad_name: form.ad_name.value,
+                adset_name: form.adset_name.value,
                 // Street Team Tracking
                 utm_content: form.utm_content.value,
             });
@@ -1899,13 +1905,15 @@
         function getUrlParams() {
         const params = new URLSearchParams(window.location.search);
         return {
-        utm_source: params.get("utm_source") || "direct",
-        utm_medium: params.get("utm_medium") || "none",
-        utm_campaign: params.get("utm_campaign") || "none",
-        ad_id: params.get("ad_id") || "",
-        adset_id: params.get("adset_id") || "",
-        campaign_id: params.get("campaign_id") || ""
-        };
+            utm_source: params.get("utm_source") || "direct",
+            utm_medium: params.get("utm_medium") || "none",
+            utm_campaign: params.get("utm_campaign") || "none",
+            ad_id: params.get("ad_id") || "",
+            adset_id: params.get("adset_id") || "",
+            campaign_id: params.get("campaign_id") || "",
+            ad_name: params.get("ad_name") || "",
+            adset_name: params.get("adset_name") || ""
+            };
         }
     
         document.addEventListener("DOMContentLoaded", function () {
