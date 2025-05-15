@@ -1744,13 +1744,14 @@
   <script>
     // Countdown Timer Script
     function updateCountdown() {
-        const targetDate = new Date('2025-05-17T07:01:00Z');  // Z = UTC
+        const targetDate = new Date('2025-05-17T19:00:00Z');  // 9:00 PM Maputo time
         const currentDate = new Date();
         const remainingTime = targetDate - currentDate;
 
         if (remainingTime <= 0) {
             document.getElementById('countdownWrapper').style.display = 'none'; // Hide countdown timer
             document.getElementById('finalMessage').style.display = 'block'; // Show final message
+            document.getElementById('vipForm').style.display = 'none'; // Hide VIP form
             return;
         }
 
