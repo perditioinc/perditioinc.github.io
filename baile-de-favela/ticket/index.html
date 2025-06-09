@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baile de Favela</title>
+    <link rel="icon" href="/assets/images/baile-de-favela-favicon.ico" type="../assets/image/x-icon">
+
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Baile de Favela - Uma fusão eletrizante de música, dança e cultura, com a energia da Perditio.">
+    <meta name="keywords" content="Baile de Favela, Perditio, music festival, dance, electronic music, immersive experience">
+    <meta name="author" content="Perditio">
+
+    <!-- Open Graph / Social Media Integration -->
+    <meta property="og:title" content="Baile de Favela by Perditio" />
+    <meta property="og:description" content="Baile de Favela GUEST LIST confirmado!." />
+    <meta property="og:image" content="https://perditio.com/assets/images/baile-de-favela-website-preview-icon.jpg" />
+    <meta property="og:url" content="https://perditio.com/baile-de-favela" />
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+
+    <!-- Cursive Font 43KB -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LGJ03DF5Z8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());    
+      gtag('config', 'G-LGJ03DF5Z8');
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '4130123170642848');
+        fbq('track', 'PageView');
+    </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=4130123170642848&ev=PageView&noscript=1"
+        />
+    </noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Auto-populate UTM Fields -->
+    <script>
+        function populateUTMFields() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const utmFields = [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_content",
+            "ad_id",
+            "adset_id",
+            "campaign_id",
+            "ad_name", 
+            "adset_name"
+          ];
+      
+          utmFields.forEach(param => {
+            const field = document.querySelector(`input[name="${param}"]`);
+            if (field && urlParams.has(param)) {
+              field.value = urlParams.get(param);
+            }
+          });
+        }
+      
+        document.addEventListener("DOMContentLoaded", populateUTMFields);
+    </script>
+
+    <style>
+        body {
+            background-color: #012169;
+        }
+    </style>
+
+
+<style>
+        @keyframes highlightFlash {
+        0% {
+            background-color: #fedd00;
+            box-shadow: 0 0 15px #fedd00, 0 0 30px #fedd00;
+            color: black;
+        }
+        100% {
+            background-color: transparent;
+            box-shadow: none;
+            color: inherit;
+        }
+        }
+        
+        .highlight-select {
+        animation: highlightFlash 1s ease-in-out;
+        transition: background-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+        outline: none;
+        box-shadow: 0 0 12px #fedd00, 0 0 20px #fedd00;
+        border-color: #fedd00;
+        }
+    </style>
+
+    <style>
+        select {
+        background-color: #012169;
+        color: #fedd00;
+        border: 1px solid #fedd00;
+        border-radius: 8px;
+        padding: 6px;
+        font-size: 16px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        }
+    </style>
+    
+    <style>
+        label {
+          font-size: 14px;
+          color: #fedd00;
+          font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 6px;
+          display: inline-block;
+        }
+      </style>
+      <style>
+        @keyframes buttonPulse {
+          0% {
+            background-color: #fedd00;
+            color: #012169;
+            box-shadow: 0 0 12px #fedd00, 0 0 24px #fedd00;
+            transform: scale(1);
+          }
+          50% {
+            background-color: #009739;
+            color:#012169;
+            box-shadow: 0 0 20px #009739, 0 0 40px #009739;
+            transform: scale(1.05);
+          }
+          100% {
+            background-color: #fedd00;
+            color: #012169;
+            box-shadow: 0 0 12px #fedd00, 0 0 24px #fedd00;
+            transform: scale(1);
+          }
+        }
+      
+        #submitButton {
+          background-color: #fedd00;
+          color: #012169;
+          border: none;
+          padding: 14px 24px;
+          font-size: 18px;
+          font-weight: bold;
+          border-radius: 12px;
+          cursor: pointer;
+          animation: buttonPulse 2.2s infinite ease-in-out;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+      
+        #submitButton:hover {
+          transform: scale(1.08);
+          box-shadow: 0 0 24px #fedd00, 0 0 48px #009739;
+        }
+
+        #downloadButton {
+          background-color: #fedd00;
+          color: #012169;
+          border: none;
+          padding: 14px 24px;
+          font-size: 18px;
+          font-weight: bold;
+          border-radius: 12px;
+          cursor: pointer;
+          animation: buttonPulse 2.2s infinite ease-in-out;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+      
+        #downloadButton:hover {
+          transform: scale(1.08);
+          box-shadow: 0 0 24px #fedd00, 0 0 48px #009739;
+        }
+      </style>
+
+    <style>
+        .genre {
+        font-weight: bold;
+        text-shadow: 0 0 8px currentColor;
+        display: inline-block;
+        transform: scale(1);
+        transition: transform 0.3s ease-in-out;
+        }
+        
+        .genre1, .genre2, .genre3, .genre4, .genre5, .genre6 {
+        animation: genrePulse 6s infinite ease-in-out;
+        }
+        
+        .genre1 { animation-delay: 0s; }
+        .genre2 { animation-delay: 1s; }
+        .genre3 { animation-delay: 2s; }
+        .genre4 { animation-delay: 3s; }
+        .genre5 { animation-delay: 4s; }
+        .genre6 { animation-delay: 5s; }
+        
+        @keyframes genrePulse {
+        0%, 100% { transform: scale(1); }
+        10% { transform: scale(1.35); text-shadow: 0 0 12px currentColor, 0 0 20px currentColor; }
+        20% { transform: scale(1); }
+        }
+    </style>
+    
+    <style>
+        /* Mobile styles */
+        .event-date {
+            font-size: 5vw; /* Scales based on viewport width */
+        }
+    
+        /* Desktop styles (min-width 768px) */
+        @media (min-width: 768px) {
+            .event-date {
+                font-size: 2rem !important; /* Fixed size for desktop */
+            }
+        }
+    </style>  
+
+    <style>
+        /* Mobile styles */
+        .event-location {
+            font-size: 5vw; /* Scales based on viewport width */
+        }
+
+        /* Desktop styles (min-width 768px) */
+        @media (min-width: 768px) {
+            .event-location {
+                font-size: 2rem !important;/* Fixed size for desktop */
+            }
+        }
+    </style>  
+
+    <!-- Add this style in the <style> tag or external CSS -->
+    <style>
+        .ticket-select {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+
+    <style>
+        #stickyCTAButton {
+        display: none; /* hidden by default */
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #fedd00;
+        color: black;
+        font-weight: bold;
+        padding: 14px 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px #fedd00, 0 0 24px #009739;
+        z-index: 9999;
+        text-decoration: none;
+        animation: buttonPulse 2s infinite ease-in-out;
+        }
+    </style>
+
+
+    <style>
+        /* Mobile styles */
+        .baile-fomo-tagline {
+            font-size: 8vw; /* Scales based on viewport width */
+        }
+
+        /* Desktop styles (min-width 768px) */
+        @media (min-width: 768px) {
+            .baile-fomo-tagline {
+                font-size: 3.5rem !important;/* Fixed size for desktop */
+            }
+        }
+    </style>
+
+    <style>
+        .ticket {
+            background: #222;
+            border: 2px solid #ff0080;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px auto;
+            max-width: 320px;
+            box-shadow: 0 0 12px #ff0080;
+        }
+        .qr {
+            border: 2px solid #ffea00;
+            border-radius: 12px;
+            width: 200px;
+            margin: 10px auto;
+        }
+    </style>
+
+</head>
+<!--  -->
+<!-- BODY STARTS HERE -->
+<!--  -->
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+          <div class="logo">Perditio 🖤🥀🖤</div>
+          <div class="hamburger" id="hamburger">&#9776;</div>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="/">🏠</a></li>
+            <li><a href="/baile-de-favela">Baile de Favela</a></li>
+            <li><a href="/for-the-baddies">For The Baddies</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    <!-- EMOJI CANVAS : TOP Layer -->   
+    <canvas id="emojiExplosionCanvas" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; display: none;"></canvas>
+    <!-- EMOJI CANVAS : TOP Layer -->   
+    <canvas id="emojiBlackHeartsExplosionCanvas" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; display: none;"></canvas>
+    <!-- EMOJI CANVAS : Layer 0-->   
+    <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
+
+    <!-- Main Content : Layer 1-->
+    <style>
+        .content {
+          position: relative;
+          z-index: 1;
+        }
+    </style>
+
+    <!-- CONTENT MAIN -->
+        <div class="content">
+
+        <h2>🎉 Olá, <span id="guestName">Convidado</span>!</h2>
+        <p><b>AQUI ESTÃO SEUS INGRESSOS PARA A<br>BAILE DE FAVELA GUEST LIST</b></p>
+        <br>
+        <div id="guestQrContainer"></div>
+        <p>Link exclusivo. Não compartilhe fora do seu grupo.</p>
+        <br><br><br>
+
+        <!-- DATE + TIME -->
+        <div style="display: flex; justify-content: center; margin-top: -20px;">
+            <div class="event-date" style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
+                <span style="position:absolute;top:0;left:0;color:#fedd00;opacity:0.7;filter:blur(0.5px);animation:glitchYellow 2s infinite;z-index:0;">
+                    <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#009739;opacity:0.6;filter:blur(0.4px);animation:glitchGreen 2.5s infinite;z-index:0;">
+                    <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#012169;opacity:0.5;filter:blur(0.6px);animation:glitchBlue 1.8s infinite;z-index:0;">
+                    <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                </span>
+                <span style="color:white;position:relative;z-index:2;
+                text-shadow:
+                    1px 1px 0 #000,
+                -1px 1px 0 #000,
+                    1px -1px 0 #000,
+                -1px -1px 0 #000,
+                    0 1px 0 #000,
+                    0 -1px 0 #000,
+                    1px 0 0 #000,
+                -1px 0 0 #000;
+                ">
+                <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                </span>
+            </div>
+        </div>
+
+        <!-- LOCATION -->
+        <div style="display: flex; justify-content: center; margin-top: 0px;">
+            <div class="event-location" style="position: relative; font-family: Helvetica, sans-serif; font-size: 3vw; font-weight: bold; white-space: nowrap;">
+                <span class="glitch-text glitch-green" style="position:absolute;top:0;left:0;color:#fedd00;opacity:0.7;filter:blur(0.5px);animation:glitchYellow 2s infinite;z-index:0;">
+                    Avenida da Marginal nº 4272, Maputo MZ
+                </span>
+                <span class="glitch-text glitch-yellow" style="position:absolute;top:0;left:0;color:#009739;opacity:0.6;filter:blur(0.4px);animation:glitchGreen 2.5s infinite;z-index:0;">
+                    Avenida da Marginal nº 4272, Maputo MZ
+                </span>
+                <span class="glitch-text glitch-pink" style="position:absolute;top:0;left:0;color:#012169;opacity:0.5;filter:blur(0.6px);animation:glitchBlue 1.8s infinite;z-index:0;">
+                    Avenida da Marginal nº 4272, Maputo MZ
+                </span>
+                
+                <span style="color:white;position:relative;z-index:2;
+                    text-shadow:
+                        1px 1px 0 #000,
+                    -1px 1px 0 #000,
+                        1px -1px 0 #000,
+                    -1px -1px 0 #000,
+                        0 1px 0 #000,
+                        0 -1px 0 #000,
+                        1px 0 0 #000,
+                    -1px 0 0 #000;
+                    ">
+                    Avenida da Marginal nº 4272, Maputo MZ
+                </span>
+            </div>
+        </div>
+
+
+    <style>
+      /* Define the color cycling animation */
+      @keyframes colorCycle {
+          0% {
+              color: #39ff14; /* Baile Funk - Green */
+          }
+          16.6% {
+              color: #ff6600; /* Afrobeat - Orange */
+          }
+          33.3% {
+              color: #ff007f; /* Reggaeton - Pink */
+          }
+          50% {
+              color: #00ffff; /* Amapiano - Cyan */
+          }
+          66.6% {
+              color: #ff00ff; /* Trap Latino - Magenta */
+          }
+          83.3% {
+              color: #ffa500; /* House - Orange */
+          }
+          100% {
+              color: #39ff14; /* Baile Funk - Green (back to the start) */
+          }
+      }
+    </style>
+
+
+    <br>
+
+    <div class="perditio-text-neon-logo-container">
+        <img 
+              src="/assets/images/perditio-text.svg" 
+              alt="PERDITIO TEXT Logo" 
+              class="perditio-text-neon-logo" 
+              loading="lazy" 
+              width="300"
+              height="auto"
+        />
+    </div>
+
+        <style>
+            @keyframes baileDeFavelaNeonPulseMulti {
+              0% {
+                filter: drop-shadow(0 0 8px #fedd00) drop-shadow(0 0 16px #fedd00); /* yellow */
+              }
+              33% {
+                filter: drop-shadow(0 0 10px #009739) drop-shadow(0 0 20px #009739); /* green */
+              }
+              66% {
+                filter: drop-shadow(0 0 12px #012169) drop-shadow(0 0 24px #012169); /* blue */
+              }
+              100% {
+                filter: drop-shadow(0 0 8px #fedd00) drop-shadow(0 0 16px #fedd00); /* back to yellow */
+              }
+            }
+          
+            .perditio-text-neon-logo {
+              animation: baileDeFavelaNeonPulseMulti 3s infinite ease-in-out;
+            }
+        </style>
+
+        <h3 style="
+            font-size: 22px;
+            color: #ffea00;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 0 8px #ffea00, 0 0 16px #39ff14, 0 0 24px #39ff14;
+            animation: toxicPulse 2.5s infinite ease-in-out;
+            margin: 0px 0;
+        ">
+            apresenta
+        </h3>
+
+        <!-- FOMO BAILE TAGLINE -->
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <div class="baile-fomo-tagline" style="position: relative; font-family: 'Dancing Script', cursive; font-weight: bold; white-space: nowrap;">
+                <span class="glitch-text glitch-yellow" style="position:absolute; top:0; left:0; color: #fedd00; opacity:0.7; filter:blur(0.5px); animation:glitchGreen 2s infinite; z-index: 0;">
+                    O Ritmo das Ruas
+                </span>
+                <span class="glitch-text glitch-green" style="position:absolute; top:0; left:0; color:#009739; opacity:0.6; filter:blur(0.4px); animation:glitchYellow 2.5s infinite; z-index: 0;">
+                    O Ritmo das Ruas
+                </span>
+                <span class="glitch-text glitch-blue" style="position:absolute; top:0; left:0; color:#012169; opacity:0.5; filter:blur(0.6px); animation:glitchPink 1.8s infinite; z-index: 0;">
+                    O Ritmo das Ruas
+                </span>
+                <span style="color:white; position:relative; z-index:2; 
+                    text-shadow: 
+                        1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 
+                        0 1px 0 #000, 0 -1px 0 #000, 1px 0 0 #000, -1px 0 0 #000;">
+                    O Ritmo das Ruas
+                </span>
+            </div>
+        </div>
+
+        <style>
+            @keyframes glitchYellow {
+              0% { transform: translate(0, 0); }
+              25% { transform: translate(-2px, 1px); }
+              50% { transform: translate(2px, -1px); }
+              75% { transform: translate(-1px, 2px); }
+              100% { transform: translate(0, 0); }
+            }
+            @keyframes glitchGreen {
+              0% { transform: translate(0, 0); }
+              20% { transform: translate(2px, -1px); }
+              50% { transform: translate(-3px, 1px); }
+              80% { transform: translate(2px, 2px); }
+              100% { transform: translate(0, 0); }
+            }
+            @keyframes glitchBlue {
+              0% { transform: translate(0, 0); }
+              15% { transform: translate(-2px, 2px); }
+              45% { transform: translate(2px, -2px); }
+              75% { transform: translate(1px, 1px); }
+              100% { transform: translate(0, 0); }
+            }
+        </style>
+                             
+        <br>
+        <div class="baile-de-favela-neon-logo-container">
+            <img 
+              src="/assets/images/baile-de-favela-transparent-600x600-optimized-for-mobile.png" 
+              alt="BAILE DE FAVELA Logo" 
+              class="baile-de-favela-neon-logo" 
+              loading="lazy" 
+              width="300"
+              height="auto"
+            />
+        </div>
+
+        <style>
+            @keyframes baileDeFavelaNeonPulseMulti {
+              0% {
+                filter: drop-shadow(0 0 8px #fedd00) drop-shadow(0 0 16px #fedd00); /* yellow */
+              }
+              33% {
+                filter: drop-shadow(0 0 10px #009739) drop-shadow(0 0 20px #009739); /* green */
+              }
+              66% {
+                filter: drop-shadow(0 0 12px #012169) drop-shadow(0 0 24px #012169); /* blue */
+              }
+              100% {
+                filter: drop-shadow(0 0 8px #fedd00) drop-shadow(0 0 16px #fedd00); /* back to yellow */
+              }
+            }
+          
+            .baile-de-favela-neon-logo {
+              animation: baileDeFavelaNeonPulseMulti 3s infinite ease-in-out;
+            }
+        </style>
+
+        <!-- DATE + TIME -->
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <div class="event-date" style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
+                <span style="position:absolute;top:0;left:0;color:#fedd00;opacity:0.7;filter:blur(0.5px);animation:glitchYellow 2s infinite;z-index:0;">
+                    20 de Junho ⏰22h 📍South Beach
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#009739;opacity:0.6;filter:blur(0.4px);animation:glitchGreen 2.5s infinite;z-index:0;">
+                    20 de Junho ⏰22h 📍South Beach
+                </span>
+                <span style="position:absolute;top:0;left:0;color:#012169;opacity:0.5;filter:blur(0.6px);animation:glitchBlue 1.8s infinite;z-index:0;">
+                    20 de Junho ⏰22h 📍South Beach
+                </span>
+                <span style="color:white;position:relative;z-index:2;
+                text-shadow:
+                    1px 1px 0 #000,
+                -1px 1px 0 #000,
+                    1px -1px 0 #000,
+                -1px -1px 0 #000,
+                    0 1px 0 #000,
+                    0 -1px 0 #000,
+                    1px 0 0 #000,
+                -1px 0 0 #000;
+                ">
+                20 de Junho ⏰22h 📍South Beach
+                </span>
+            </div>
+        </div>
+
+        
+        <!-- DATE + TIME -->
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <div class="event-location" style="position: relative; font-family: Helvetica, sans-serif; font-weight: bold; white-space: nowrap;">
+                <span class="glitch-text glitch-green" style="position:absolute;top:0;left:0;color:#fedd00;opacity:0.7;filter:blur(0.5px);animation:glitchYellow 2s infinite;z-index:0;">
+                    Avenida da Marginal nº 4272<br>Maputo, MZ
+                </span>
+                <span class="glitch-text glitch-yellow" style="position:absolute;top:0;left:0;color:#009739;opacity:0.6;filter:blur(0.4px);animation:glitchGreen 2.5s infinite;z-index:0;">
+                    Avenida da Marginal nº 4272<br>Maputo, MZ
+                </span>
+                <span class="glitch-text glitch-pink" style="position:absolute;top:0;left:0;color:#012169;opacity:0.5;filter:blur(0.6px);animation:glitchBlue 1.8s infinite;z-index:0;">
+                    Avenida da Marginal nº 4272<br>Maputo, MZ
+                </span>
+                
+                <span style="color:white;position:relative;z-index:2;
+                    text-shadow:
+                        1px 1px 0 #000,
+                    -1px 1px 0 #000,
+                        1px -1px 0 #000,
+                    -1px -1px 0 #000,
+                        0 1px 0 #000,
+                        0 -1px 0 #000,
+                        1px 0 0 #000,
+                    -1px 0 0 #000;
+                    ">
+                    Avenida da Marginal nº 4272<br>Maputo, MZ
+                </span>
+            </div>
+        </div>
+
+        <!-- FOMO Caption Box -->
+        <div style="
+        background: rgba(0, 0, 0, 0.5);
+        padding: 16px;
+        margin: 0px auto;
+        border-radius: 12px;
+        max-width: 600px;
+        text-align: center;
+        ">
+        <p style="
+            font-size: 18px;
+            color: #fedd00;
+            font-weight: bold;
+            text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #009739;
+            animation: toxicPulse 2.5s infinite ease-in-out;
+            margin: 0;
+        ">
+            Para quem não aceita uma noite comum. Música, dança, e delírios imersivos, só para quem sabe viver.
+        </p>
+        </div>
+
+        <!-- Genre Strip Box -->
+        <div style="
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0px;
+            margin: 20px auto;
+            border-radius: 12px;
+            max-width: 600px;
+            text-align: center;
+            ">
+            <p style="font-size:18px; color:#fff; margin: 0; text-align: center;">
+                <span class="genre genre1" style="color:#39FF14;">Baile Funk</span>,        <!-- Neon Green -->
+                <span class="genre genre2" style="color:#FF3131;">Afrobeat</span>,         <!-- Neon Red -->
+                <span class="genre genre3" style="color:#FF00FF;">Reggaeton</span>,        <!-- Neon Magenta --><br>
+                <span class="genre genre4" style="color:#00FFFF;">Amapiano</span>,         <!-- Neon Cyan -->
+                <span class="genre genre5" style="color:#FFFF33;">Trap Latino</span>,      <!-- Neon Yellow -->
+                <span class="genre genre6" style="color:#FF6EC7;">House</span>,            <!-- Neon Pink --><br>
+                <span class="genre genre7" style="color:#FF8C00;">Semba</span>,            <!-- Neon Orange -->
+                <span class="genre genre8" style="color:#00FF66;">Kizomba</span>,          <!-- Neon Mint -->
+                <span class="genre genre9" style="color:#9D00FF;">Brazilian Beats</span>   <!-- Neon Purple -->
+            </p>
+        </div>
+
+        <!-- Toxic Animated Line Box -->
+        <div style="
+        background: rgba(0, 0, 0, 0.5);
+        padding: 0px;
+        margin: 20px auto;
+        border-radius: 12px;
+        max-width: 600px;
+        text-align: center;
+        ">
+        <p style="
+            font-size: 20px;
+            color: #fedd00;
+            font-weight: bold;
+            text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #009739;
+            animation: toxicPulse 2.5s infinite ease-in-out;
+            margin: 0;
+        ">
+            e surpresas quentes pela madrugada.
+        </p>
+        </div>
+
+        <style>
+            @keyframes toxicPulse {
+              0% {
+                transform: scale(1);
+                text-shadow:
+                  1px 1px 1px #000,
+                  0 0 8px #fedd00,
+                  0 0 16px #009739,
+                  2px 2px 2px #000;
+              }
+              50% {
+                transform: scale(1.05);
+                text-shadow:
+                  2px 2px 2px #000,
+                  0 0 16px #fedd00,
+                  0 0 32px #009739,
+                  3px 3px 3px #000;
+              }
+              100% {
+                transform: scale(1);
+                text-shadow:
+                  1px 1px 1px #000,
+                  0 0 8px #fedd00,
+                  0 0 16px #009739,
+                  2px 2px 2px #000;
+              }
+            }
+            
+            .glowText {
+              font-size: 18px;
+              color: #fedd00;
+              font-weight: bold;
+              text-align: center;
+              -webkit-text-stroke: 0.4px black;
+              animation: toxicPulse 2.5s infinite ease-in-out;
+              margin: 0;
+              line-height: 1.4;
+            }
+        </style>
+            
+
+        <div style="background-color: rgba(0, 0, 0, 0.5); color:#fff; border:2px solid #39ff14; padding:16px; margin:20px auto; max-width:400px; font-size:16px; border-radius:12px; box-shadow:0 0 10px #39ff14; text-align:center; line-height:1.6;">
+            <p><strong style="color:#fedd00;">GUEST LIST:</strong> Entrada grátis até 23h.<br>Das 23h à meia-noite: 500MT.</p>
+            <p><strong style="color:#fedd00;">Pré-venda:</strong> 500MT com entrada rápida.</p>
+            <p><strong style="color:#fedd00;">Sem cadastro:</strong> 1000MT a noite toda.</p>
+        </div>  
+
+        <div style="
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 2px solid #009739;
+        border-radius: 12px;
+        padding: 16px;
+        max-width: 400px;
+        margin: 20px auto;
+        text-align: center;
+        color: #ffffff;
+        font-size: 16px;
+        box-shadow: 0 0 10px #009739;
+        line-height: 1.6;">
+      
+        GUEST LIST entrada gratuita com QR Code até às 23h para você e seus convidados.<br>
+
+        <strong style="color: #fedd00;">
+        Vagas limitadas.</strong>
+        <br>
+        Cadastre-se agora para receber seu
+        <br>
+        QR Code por e-mail <strong>e também por WhatsApp</strong>.
+        <br>
+        <span style="font-size: 14px; color: #aaa;">O e-mail será enviado por <strong>team@perditio.com</strong>.
+        <br>
+        Se não receber, verifique sua caixa de spam ou entre em contato com 
+        <b><a href="https://www.instagram.com/carteblanche_music/" target="_blank">@carteblanche_music</a></b> no Instagram, 
+        ou nos envie uma mensagem no 
+        <b><a href="https://wa.me/258852828284" target="_blank">WhatsApp</a></b>.
+        </span> 
+        </div> 
+  
+
+          
+
+        <div style="position: relative; font-size: 16px; text-align: center; margin: 30px auto 20px;">
+
+            <!-- Glitch Layer 1 -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; color: #fedd00; opacity: 0.7; filter: blur(0.5px); animation: glitchGreen 2s infinite; z-index: 0;">
+              <img src="/assets/images/south-beach-logo-359.png" width="200" />
+              <p>Avenida Marginal nº 4272<br>Maputo, Moçambique</p>
+            </div>
+          
+            <!-- Glitch Layer 2 -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; color: #009739; opacity: 0.6; filter: blur(0.4px); animation: glitchYellow 2.5s infinite; z-index: 0;">
+              <img src="/assets/images/south-beach-logo-359.png" width="200" />
+              <p>Avenida Marginal nº 4272<br>Maputo, Moçambique</p>
+            </div>
+          
+            <!-- Glitch Layer 3 -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; color: #012169; opacity: 0.5; filter: blur(0.6px); animation: glitchPink 1.8s infinite; z-index: 0;">
+              <img src="/assets/images/south-beach-logo-359.png" width="200" />
+              <p>Avenida Marginal nº 4272<br>Maputo, Moçambique</p>
+            </div>
+          
+            <!-- Main Content (top layer) -->
+            <div style="position: relative; z-index: 2; color: white; text-shadow:
+                1px 1px 0 #000,
+              -1px 1px 0 #000,
+                1px -1px 0 #000,
+              -1px -1px 0 #000,
+                0 1px 0 #000,
+                0 -1px 0 #000,
+                1px 0 0 #000,
+              -1px 0 0 #000;">
+              <img src="/assets/images/south-beach-logo-359.png" width="200" />
+               <p>Avenida da Marginal nº 4272<br>Maputo, Moçambique</p>
+              <br>
+              <a href="https://maps.app.goo.gl/mj1V5RNgMdJbH9Ec8"
+                target="_blank"
+                style="color:#009739; font-weight:bold; text-decoration:underline;">
+                Abrir no Google Maps
+              </a>
+            </div>         
+        </div>
+          
+
+        <div style="text-align: center; margin: 40px auto;">
+            <div class="baile-de-favela-neon-logo-container">
+                <img 
+                src="/assets/images/baile-de-favela-transparent-600x600-optimized-for-mobile.png" 
+                alt="BAILE DE FAVELA Logo" 
+                class="baile-de-favela-neon-logo" 
+                loading="lazy" 
+                width="300"
+                height="auto"
+                />
+            </div>
+
+            <br>
+            <h2 style="
+                text-align: center;
+                font-size: 26px;
+                color: #fedd00;
+                font-weight: bold;
+                text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #009739;
+                animation: toxicPulse 2.5s infinite ease-in-out;
+                margin-top: 20px;
+                ">
+            PRODUÇÃO
+            </h2>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 0px;">
+                <img src="/assets/images/perditio-text.svg" width="175" height="175" />
+                <img src="/assets/images/perditio-logo.svg" width="175" height="175" />
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 0px;">
+                <img src="/assets/images/south-beach-logo-white.svg" width="200" height="200" />
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 0px;">
+                <img src="/assets/images/the-incubator-logo.svg" width="200" height="200" />
+            </div>
+            <p>Uma Experiência Com Curadoria de<br>Perditio Inc. &#169; 2025</p>
+            <div class="perditio-neon-logo-container">
+                <img 
+                src="/assets/images/perditio-baile-de-favela-transparent-600x600-optimized-for-mobile.png" 
+                alt="PERDITIO For The Baddies Logo" 
+                class="perditio-baile-de-favela-neon-logo" 
+                loading="lazy" 
+                width="300"
+                height="auto"
+                />
+            </div>
+        <style>
+            @keyframes perditioNeonPulseMulti {
+              0% {
+                filter: drop-shadow(0 0 8px fedd00) drop-shadow(0 0 16px #fedd00); /* yellow */
+              }
+              33% {
+                filter: drop-shadow(0 0 10px #009739) drop-shadow(0 0 20px #009739); /* green */
+              }
+              66% {
+                filter: drop-shadow(0 0 12px #012169) drop-shadow(0 0 24px#012169); /* blue */
+              }
+              100% {
+                filter: drop-shadow(0 0 8px #fedd00) drop-shadow(0 0 16px #fedd00); /* back to yellow */
+              }
+            }
+          
+            .perditio-baile-de-favela-neon-logo {
+              animation: perditioNeonPulseMulti 3s infinite ease-in-out;
+            }
+        </style>
+        <!-- <a href="/" style="color: white; text-decoration: underline;">DARK GROOVE FESTIVAL WAITLIST</a> -->
+        <br><br><br>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("emojiCanvas");
+        const ctx = canvas.getContext("2d");
+        const emojis = ["🌞", "🖤", "🌞", "🥀", "🌞"];
+        const emojiParticles = [];
+    
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+    
+        for (let i = 0; i < 30; i++) {
+            emojiParticles.push({
+            emoji: emojis[Math.floor(Math.random() * emojis.length)],
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: 24 + Math.random() * 18,
+            speedX: (Math.random() - 0.5) * 0.8,
+            speedY: (Math.random() - 0.5) * 0.8
+            });
+        }
+    
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            emojiParticles.forEach(p => {
+            ctx.font = `${p.size}px sans-serif`;
+            ctx.fillText(p.emoji, p.x, p.y);
+            p.x += p.speedX;
+            p.y += p.speedY;
+    
+            if (p.x < -50 || p.x > canvas.width + 50) p.speedX *= -1;
+            if (p.y < -50 || p.y > canvas.height + 50) p.speedY *= -1;
+            });
+            requestAnimationFrame(draw);
+        }
+    
+        draw();
+        });
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const hamburger = document.getElementById("hamburger");
+          const navLinks = document.getElementById("navLinks");
+      
+          hamburger.addEventListener("click", function () {
+            navLinks.classList.toggle("show");
+          });
+        });
+    </script>
+
+    <script>
+        function triggerEmojiExplosion() {
+            const canvas = document.getElementById("emojiExplosionCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.display = "block";
+            
+            const emojis = ["🌞", "🖤", "🌴", "🥀", "🔥", "😎", "💃🏾", "🌞"];
+            const particles = [];
+            
+            // Position origin from "Entrar GUEST LIST" button
+            const button = document.getElementById("submitButton");
+            const rect = button.getBoundingClientRect();
+            const originX = rect.left + rect.width / 2;
+            const originY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                emoji: emojis[Math.floor(Math.random() * emojis.length)],
+                x: originX,
+                y: originY,
+                size: 26 + Math.random() * 24,
+                speedX: (Math.random() - 0.5) * 6,
+                speedY: (Math.random() - 0.5) * 6,
+                life: 120 + Math.random() * 100 // ≈ 5 seconds
+                });
+            }
+            
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p) => {
+                ctx.font = `${p.size}px sans-serif`;
+                ctx.fillText(p.emoji, p.x, p.y);
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.life -= 1;
+                });
+            
+                const stillAlive = particles.filter(p => p.life > 0);
+                if (stillAlive.length > 0) {
+                requestAnimationFrame(draw);
+                } else {
+                canvas.style.display = "none"; // Hide after 5s explosion
+                }
+            }
+            
+            draw();
+        }
+    </script>
+
+    <script>
+            // Function to trigger black heart emoji explosion
+            function triggerBlackHeartEmojiExplosion(button) {
+            const canvas = document.getElementById("emojiBlackHeartsExplosionCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.display = "block"; // Show canvas
+        
+            const emojis = ["🖤", "🥀", "🥀", "🔥", "🖤", "🖤", "🖤"];
+            const particles = [];
+        
+            // Get the position of the button that triggered the explosion
+            const rect = button.getBoundingClientRect();
+            const originX = rect.left + rect.width / 2;
+            const originY = rect.top + rect.height / 2;
+        
+            // Generate the particles (black heart emojis)
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                emoji: emojis[Math.floor(Math.random() * emojis.length)],
+                x: originX,
+                y: originY,
+                size: 26 + Math.random() * 24,
+                speedX: (Math.random() - 0.5) * 6,
+                speedY: (Math.random() - 0.5) * 6,
+                life: 120 + Math.random() * 100 // ≈ 5 seconds
+                });
+            }
+        
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p) => {
+                ctx.font = `${p.size}px sans-serif`;
+                ctx.fillText(p.emoji, p.x, p.y);
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.life -= 1;
+                });
+        
+                const stillAlive = particles.filter(p => p.life > 0);
+                if (stillAlive.length > 0) {
+                requestAnimationFrame(draw);
+                } else {
+                canvas.style.display = "none"; // Hide after explosion completes
+                }
+            }
+        
+            draw();
+            }
+        
+            // Add event listener for "Clique aqui" download button
+            document.getElementById("downloadButton").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default action to trigger explosion first
+        
+            // Trigger the black heart emoji explosion
+            triggerBlackHeartEmojiExplosion(event.target);
+        
+            // Open the image in a new tab after explosion to trigger the download
+            setTimeout(function() {
+                window.open(event.target.href, '_blank'); // Open image to trigger download
+            }, 500); // Adjust this time to match the explosion duration
+            });
+    </script>
+
+    <script>
+
+        // Spark Effect (creates constant spark-like animation behind the countdown)
+        document.addEventListener("DOMContentLoaded", function () {
+            const canvas = document.getElementById("sparkEffectCanvas");
+            const ctx = canvas.getContext("2d");
+            const particles = [];
+
+            // Create a responsive canvas to cover the entire page
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener("resize", resizeCanvas);
+
+            // Create spark particles that originate from the countdown
+            for (let i = 0; i < 100; i++) { // More particles for continuous effect
+                particles.push({
+                    x: window.innerWidth / 2, // Originating from center of the countdown
+                    y: window.innerHeight / 2,
+                    size: 5 + Math.random() * 5,
+                    speedX: (Math.random() - 0.5) * 4, // Speed of movement
+                    speedY: (Math.random() - 0.5) * 4,
+                    life: 50 + Math.random() * 50 // Life span of each particle
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, index) => {
+                    ctx.fillStyle = "#39ff14"; // Spark color
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.life -= 1;
+
+                    // Reset particle when its life ends and move it back to the countdown center
+                    if (p.life <= 0) {
+                        p.x = window.innerWidth / 2;
+                        p.y = window.innerHeight / 2;
+                        p.life = 100 + Math.random() * 100; // Reset life
+                    }
+                });
+
+                requestAnimationFrame(draw); // Keep animating
+            }
+
+            draw();
+        });
+    </script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const groupId = params.get("groupId");
+        const name = params.get("name");
+        const guestCount = params.has("guestCount") ? parseInt(params.get("guestCount")) : 0;
+
+        // 🚨 Redirect if required parameters are missing
+        if (!groupId || !name) {
+            window.location.href = "/baile-de-favela";
+        }
+
+        const decodedName = decodeURIComponent(name);
+        document.getElementById("guestName").textContent = decodedName;
+
+        const container = document.getElementById("guestQrContainer");
+
+        // ✅ Main Guest QR
+        const qrMain = `bailedefavela-${groupId}-main`;
+        const qrUrlMain = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrMain)}`;
+
+        const mainBlock = `
+            <div style="background-color:#111; color:#fff; border:2px solid #009739; padding:16px; margin:20px auto; max-width:400px; font-size:16px; border-radius:12px; box-shadow:0 0 10px #009739;">
+            <center>
+                <p><strong>BAILE DE FAVELA</strong></p>
+                <p><strong>20 de Junho * 22h * South Beach</strong></p>
+                <p>Avenida da Marginal nº 4272, Maputo, MZ</p>  
+                <hr style="margin:0px 0;">
+                <p><strong>${decodedName}</strong></p>
+                <hr style="margin:0px 0;">
+                <p><strong>GUEST LIST MEMBRO</strong></p>
+                <img src="${qrUrlMain}" alt="QR Main" width="200" />           
+                <p>Entrada grátis até 23h.<br>
+                Das 23h à meia-noite: 500MT.</p>
+                <hr style="margin:0px 0;">
+                <p><strong>Código QR Code</strong></p>
+                <p>(não precisa scanear, apenas apresente na porta)</p>
+                <p><a href="${qrUrlMain}" target="_blank">Clique aqui se a imagem não carregar</a></p>
+            </center>
+            </div>`;
+        container.insertAdjacentHTML("beforeend", mainBlock);
+
+        // ✅ Guest QR Codes (only if guestCount > 0)
+        for (let i = 1; i <= guestCount; i++) {
+            const qrValue = `bailedefavela-${groupId}-guest${i}`;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrValue)}`;
+
+            const qrBlock = `
+            <div style="background-color:#111; color:#fff; border:2px solid #009739; padding:16px; margin:20px auto; max-width:400px; font-size:16px; border-radius:12px; box-shadow:0 0 10px #009739;">
+                <center>
+                <p><strong>BAILE DE FAVELA</strong></p>
+                <p><strong>20 de Junho * 22h * South Beach</strong></p>
+                <p>Avenida da Marginal nº 4272, Maputo, MZ</p>  
+                <hr style="margin:0px 0;">
+                <p><strong>${decodedName}</strong></p>
+                <hr style="margin:0px 0;">
+                <p><strong>CONVIDADO ${i}</strong></p>
+                <img src="${qrUrl}" alt="QR Guest ${i}" width="200" />
+                <p>Entrada grátis até 23h.<br>
+                Das 23h à meia-noite: 500MT.</p>
+                <hr style="margin:0px 0;">
+                <p><strong>Código QR Code</strong></p>
+                <p>(não precisa scanear, apenas apresente na porta)</p>
+                <p><a href="${qrUrl}" target="_blank">Clique aqui se a imagem não carregar</a></p>
+                </center>
+            </div>`;
+            container.insertAdjacentHTML("beforeend", qrBlock);
+        }
+    </script>
+
+
+
+
+</body>
+</html>
