@@ -177,23 +177,6 @@
           box-shadow: 0 0 24px #fedd00, 0 0 48px #009739;
         }
 
-        #downloadButton {
-          background-color: #fedd00;
-          color: #012169;
-          border: none;
-          padding: 14px 24px;
-          font-size: 18px;
-          font-weight: bold;
-          border-radius: 12px;
-          cursor: pointer;
-          animation: buttonPulse 2.2s infinite ease-in-out;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-      
-        #downloadButton:hover {
-          transform: scale(1.08);
-          box-shadow: 0 0 24px #fedd00, 0 0 48px #009739;
-        }
       </style>
 
     <style>
@@ -1347,21 +1330,6 @@
             // });
           </script>
 
-        <div id="vipConfirmationImage" style="display:none; text-align:center; margin-top: 20px;">
-            <img src="../assets/images/toxic-for-the-baddies-vip-member-confirmation.jpg" 
-                alt="Você é VIP TOXIC!" 
-                width="320" 
-                height="auto" 
-                style="max-width: 90%; border: 2px solid #ffea00; border-radius: 12px; box-shadow: 0 0 24px #ffea00;">
-            <p style="color: #ffea00; font-weight: bold; margin-top: 10px;">Compartilhe no Instagram e marque<br><a href="https://instagram.com/forthebaddies.mz" target="_blank" style="color:#39ff14">@forthebaddies.mz</a></p>
-            <!-- Download link styled as a button -->
-            <a id="downloadButton" href="../assets/images/toxic-for-the-baddies-vip-member-confirmation.jpg" download="toxic-for-the-baddies-vip-member-confirmation.jpg" 
-                style="color: #fff; background-color: #ffea00; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 15px; text-align: center; cursor: pointer;">
-                Clique aqui para baixar a imagem!
-            </a>   
-             <!-- Canvas for Black Hearts Emoji Explosion -->
-            <canvas id="emojiBlackHeartsExplosionCanvas" style="position: fixed; top: 0; left: 0; z-index: 10000; pointer-events: none;"></canvas>
-        </div>
 
         <div style="position: relative; font-size: 16px; text-align: center; margin: 30px auto 20px;">
 
@@ -1649,71 +1617,6 @@
             
             draw();
         }
-    </script>
-
-    <script>
-            // Function to trigger black heart emoji explosion
-            function triggerBlackHeartEmojiExplosion(button) {
-            const canvas = document.getElementById("emojiBlackHeartsExplosionCanvas");
-            const ctx = canvas.getContext("2d");
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            canvas.style.display = "block"; // Show canvas
-        
-            const emojis = ["🖤", "🥀", "🥀", "🔥", "🖤", "🖤", "🖤"];
-            const particles = [];
-        
-            // Get the position of the button that triggered the explosion
-            const rect = button.getBoundingClientRect();
-            const originX = rect.left + rect.width / 2;
-            const originY = rect.top + rect.height / 2;
-        
-            // Generate the particles (black heart emojis)
-            for (let i = 0; i < 150; i++) {
-                particles.push({
-                emoji: emojis[Math.floor(Math.random() * emojis.length)],
-                x: originX,
-                y: originY,
-                size: 26 + Math.random() * 24,
-                speedX: (Math.random() - 0.5) * 6,
-                speedY: (Math.random() - 0.5) * 6,
-                life: 120 + Math.random() * 100 // ≈ 5 seconds
-                });
-            }
-        
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach((p) => {
-                ctx.font = `${p.size}px sans-serif`;
-                ctx.fillText(p.emoji, p.x, p.y);
-                p.x += p.speedX;
-                p.y += p.speedY;
-                p.life -= 1;
-                });
-        
-                const stillAlive = particles.filter(p => p.life > 0);
-                if (stillAlive.length > 0) {
-                requestAnimationFrame(draw);
-                } else {
-                canvas.style.display = "none"; // Hide after explosion completes
-                }
-            }
-        
-            draw();
-            }
-        
-            // Add event listener for "Clique aqui" download button
-            document.getElementById("downloadButton").addEventListener("click", function(event) {
-            event.preventDefault(); // Prevent default action to trigger explosion first
-        
-            // Trigger the black heart emoji explosion
-            triggerBlackHeartEmojiExplosion(event.target);
-        
-            // Open the image in a new tab after explosion to trigger the download
-            setTimeout(function() {
-                window.open(event.target.href, '_blank'); // Open image to trigger download
-            }, 500); // Adjust this time to match the explosion duration
-            });
     </script>
 
     <script>
