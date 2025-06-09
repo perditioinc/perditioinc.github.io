@@ -1165,169 +1165,143 @@
             });
           </script>
           
-          
+    <script>
+    document.getElementById("vipForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-          
-          <script>
-            document.getElementById("vipForm").addEventListener("submit", async function (e) {
-            e.preventDefault();
+    const form = e.target;
+    const submitButton = document.getElementById("submitButton");
+    const ticketType = form.ticketType.value;
+    const guestCount = parseInt(form.guestCount.value || "0", 10);
+    const totalAmount = 500 * (1 + guestCount);
+    const timestamp = Date.now();
+    const groupId = `${form.email.value}-${timestamp}`;
 
-            const form = e.target;
-            const submitButton = document.getElementById("submitButton");
-            const ticketType = form.ticketType.value;
-            const guestCount = parseInt(form.guestCount.value || "0", 10);
-            const totalAmount = 500 * (1 + guestCount);
-            const timestamp = Date.now();  // generate once at form submission
-            const groupId = `${form.email.value}-${timestamp}`;
+    // Reset status
+    document.getElementById("statusMessage").innerText = "";
+    submitButton.disabled = true;
+    submitButton.textContent = "🔄 Processando...";
 
-            // Reset
-            document.getElementById("statusMessage").innerText = "";
-            submitButton.disabled = true;
-            submitButton.textContent = "🔄 Processando...";
+    // Validate WhatsApp
+    const whatsappNumber = form.whatsappNumber.value.trim().replace(/\s+/g, "");
+    if (!/^\d{7,}$/.test(whatsappNumber)) {
+        form.whatsappNumber.style.border = "2px solid red";
+        document.getElementById("statusMessage").innerText = "❌ Insira um número de WhatsApp válido.";
+        submitButton.disabled = false;
+        submitButton.textContent = "Entrar GUEST LIST";
+        return;
+    } else {
+        form.whatsappNumber.style.border = "";
+    }
 
-            // Validate WhatsApp number
-            const whatsappNumber = form.whatsappNumber.value.trim().replace(/\s+/g, "");
-            if (!/^\d{7,}$/.test(whatsappNumber)) {
-                form.whatsappNumber.style.border = "2px solid red";
-                document.getElementById("statusMessage").innerText = "❌ Insira um número de WhatsApp válido.";
-                submitButton.disabled = false;
-                submitButton.textContent = "Entrar GUEST LIST";
-                return;
-            } else {
-                form.whatsappNumber.style.border = "";
-            }
+    // Validate email
+    const email = form.email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById("statusMessage").innerText = "❌ Insira um endereço de e-mail válido.";
+        submitButton.disabled = false;
+        submitButton.textContent = "Entrar GUEST LIST";
+        return;
+    }
 
-            // Validate email
-            const email = form.email.value.trim();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                document.getElementById("statusMessage").innerText = "❌ Insira um endereço de e-mail válido.";
-                submitButton.disabled = false;
-                submitButton.textContent = "Entrar GUEST LIST";
-                return;
-            }
+    // Validate birthday
+    const dia = form.birthDay.value, mes = form.birthMonth.value, ano = form.birthYear.value;
+    if (!dia || !mes || !ano) {
+        document.getElementById("statusMessage").innerText = "❌ Por favor, selecione uma data de nascimento válida.";
+        submitButton.disabled = false;
+        submitButton.textContent = "Entrar GUEST LIST";
+        return;
+    }
 
-            // Validate birthday
-            const dia = form.birthDay.value, mes = form.birthMonth.value, ano = form.birthYear.value;
-            if (!dia || !mes || !ano) {
-                document.getElementById("statusMessage").innerText = "❌ Por favor, selecione uma data de nascimento válida.";
-                submitButton.disabled = false;
-                submitButton.textContent = "Entrar GUEST LIST";
-                return;
-            }
+    const birthday = `${ano}-${mes}-${dia}`;
+    const whatsapp = form.countryCode.value + whatsappNumber;
 
-            const birthday = `${ano}-${mes}-${dia}`;
-            const whatsapp = form.countryCode.value + whatsappNumber;
+    // Validate M-PESA for presale
+    let mpesaPhone = "";
+    if (ticketType === "presale") {
+        mpesaPhone = document.getElementById("mpesaPhone").value.trim();
+        if (!/^\d{8,}$/.test(mpesaPhone)) {
+        document.getElementById("statusMessage").innerText = "❌ Insira um número M-PESA válido.";
+        submitButton.disabled = false;
+        submitButton.textContent = `Entrar VIP+ e Pagar ${totalAmount}MZN`;
+        return;
+        }
 
-            // ✅ Presale logic: require M-PESA number
-            let mpesaPhone = "";
-            if (ticketType === "presale") {
-                mpesaPhone = document.getElementById("mpesaPhone").value.trim();
-                if (!/^\d{8,}$/.test(mpesaPhone)) {
-                document.getElementById("statusMessage").innerText = "❌ Insira um número M-PESA válido.";
-                submitButton.disabled = false;
-                submitButton.textContent = `Entrar VIP+ e Pagar ${totalAmount}MZN`;
-                return;
-                }
+        // Simulated M-PESA payment
+        const paymentStatus = document.getElementById("paymentStatus");
+        paymentStatus.innerText = "🔄 Processando pagamento...";
 
-                // 🔄 Optionally: trigger M-PESA payment here
-                const paymentStatus = document.getElementById("paymentStatus");
-                paymentStatus.innerText = "🔄 Processando pagamento...";
+        try {
+        const paymentResponse = await fetch("https://your-server-or-cloud-function.com/mpesa-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phoneNumber: mpesaPhone, amount: totalAmount })
+        });
 
-                try {
-                const paymentResponse = await fetch("https://your-server-or-cloud-function.com/mpesa-payment", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ phoneNumber: mpesaPhone, amount: totalAmount })
-                });
+        const paymentData = await paymentResponse.json();
+        if (!paymentData.success) throw new Error("Falha no pagamento");
+        paymentStatus.innerText = "✅ Pagamento confirmado!";
+        } catch (err) {
+        paymentStatus.innerText = "❌ Erro no pagamento. Tente novamente.";
+        submitButton.disabled = false;
+        submitButton.textContent = `Entrar VIP+ e Pagar ${totalAmount}MZN`;
+        return;
+        }
+    }
 
-                const paymentData = await paymentResponse.json();
-                if (!paymentData.success) throw new Error("Falha no pagamento");
-                paymentStatus.innerText = "✅ Pagamento confirmado!";
-                } catch (err) {
-                paymentStatus.innerText = "❌ Erro no pagamento. Tente novamente.";
-                submitButton.disabled = false;
-                submitButton.textContent = `Entrar VIP+ e Pagar ${totalAmount}MZN`;
-                return;
-                }
-            }
+    // Construct payload
+    const payload = {
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        whatsapp,
+        email,
+        birthday,
+        guestCount: guestCount.toString(),
+        ticketType,
+        mpesaPhone,
+        timestamp: timestamp.toString(),
+        groupId,
+        utm_source: form.utm_source.value,
+        utm_medium: form.utm_medium.value,
+        utm_campaign: form.utm_campaign.value,
+        ad_id: form.ad_id.value,
+        adset_id: form.adset_id.value,
+        campaign_id: form.campaign_id.value,
+        ad_name: form.ad_name.value,
+        adset_name: form.adset_name.value,
+        utm_content: form.utm_content.value,
+    };
 
-            // Send to Google Apps Script
-            const payload = {
-                firstName: form.firstName.value,
-                lastName: form.lastName.value,
-                whatsapp,
-                email,
-                birthday,
-                guestCount: guestCount.toString(),
-                ticketType,
-                mpesaPhone,
-                timestamp: timestamp.toString(),
-                groupId,
-                // Meta ADs tracking
-                utm_source: form.utm_source.value,
-                utm_medium: form.utm_medium.value,
-                utm_campaign: form.utm_campaign.value,
-                ad_id: form.ad_id.value,
-                adset_id: form.adset_id.value,
-                campaign_id: form.campaign_id.value,
-                ad_name: form.ad_name.value,
-                adset_name: form.adset_name.value,
-                // Street Team Tracking
-                utm_content: form.utm_content.value,
-            }
+    // Fire-and-forget to Apps Script
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
 
-            const formData = new URLSearchParams();
-            for (const key in payload) {
-                if (payload[key] !== undefined) {
-                    formData.append(key, payload[key]);
-                }
-            }
+    // Show instant feedback
+    const encodedName = encodeURIComponent(`${payload.firstName} ${payload.lastName}`);
+    const redirectUrl = `/baile-de-favela/ticket/?name=${encodedName}&groupId=${groupId}&guestCount=${guestCount}`;
 
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: formData
-            })
-            .then(response => {
-                const firstName = payload.firstName;
-                const lastName = payload.lastName;
-                const groupId = payload.groupId;
-                const guestCount = Number.isNaN(parseInt(payload.guestCount)) ? 1 : parseInt(payload.guestCount);
+    document.getElementById("statusMessage").innerText = "✅ Vamos " + payload.firstName + "!";
 
-                // Encode for safety
-                const encodedName = encodeURIComponent(`${firstName} ${lastName}`);
-                const redirectUrl = `/baile-de-favela/ticket/?name=${encodedName}&groupId=${groupId}&guestCount=${guestCount}`;
+    gtag('event', 'guestlist_signup', {
+        event_category: 'engagement',
+        event_label: 'bailedefavela_form',
+        value: 1
+    });
+    fbq('track', 'Lead');
 
-                document.getElementById("statusMessage").innerText = "✅ Vamos " + firstName + "!";
+    triggerEmojiExplosion();
 
-                // 🔥 Send custom GA4 event
-                gtag('event', 'guestlist_signup', {
-                    event_category: 'engagement',
-                    event_label: 'bailedefavela_form',
-                    value: 1
-                });
+    setTimeout(() => {
+        window.location.href = redirectUrl;
+    }, 1000);
+    });
+    </script>
 
-                // ✅ Meta Lead Event
-                fbq('track', 'Lead');
-
-                // Trigger the emoji explosion
-                triggerEmojiExplosion();
-
-                // Ticketing Page Redirect
-                window.location.href = redirectUrl;
-                })
-                .catch((error) => {
-                console.warn("Erro:", error);
-                document.getElementById("statusMessage").innerText = "❌ Erro ao processar. Verifique a conexão.";
-                submitButton.textContent = "Entrar GUEST LIST";
-                submitButton.disabled = false;
-                });
-            });
-
-          </script>
           
            
            <script>
