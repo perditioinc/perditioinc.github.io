@@ -14,7 +14,7 @@
 
     <!-- Open Graph / Social Media Integration -->
     <meta property="og:title" content="Baile de Favela by Perditio" />
-    <meta property="og:description" content="20 de Junho ⏰ 22h 📍 South Beach Maputo 🌞GUEST LIST🌞 grátis até 23h." />
+    <meta property="og:description" content="25 de Julho 📍 South Beach Maputo🌞" /> //🌞GUEST LIST🌞 grátis até 23h.
     <meta property="og:image" content="https://perditio.com/assets/images/baile-de-favela-website-preview-icon.jpg" />
     <meta property="og:url" content="https://perditio.com/baile-de-favela" />
     <meta name="twitter:card" content="summary_large_image">
@@ -86,7 +86,7 @@
     </style>
 
 
-<style>
+    <style>
         @keyframes highlightFlash {
         0% {
             background-color: #fedd00;
@@ -173,6 +173,24 @@
         }
       
         #submitButton:hover {
+          transform: scale(1.08);
+          box-shadow: 0 0 24px #fedd00, 0 0 48px #009739;
+        }
+
+        #waitlistButton {
+          background-color: #fedd00;
+          color: #012169;
+          border: none;
+          padding: 14px 24px;
+          font-size: 18px;
+          font-weight: bold;
+          border-radius: 12px;
+          cursor: pointer;
+          animation: buttonPulse 2.2s infinite ease-in-out;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+      
+        #waitlistButton:hover {
           transform: scale(1.08);
           box-shadow: 0 0 24px #fedd00, 0 0 48px #009739;
         }
@@ -299,10 +317,10 @@
     <!-- EMOJI CANVAS : TOP Layer -->   
     <canvas id="emojiBlackHeartsExplosionCanvas" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; display: none;"></canvas>
     <!-- EMOJI CANVAS : Layer 0-->   
-    <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;"></canvas>
+    <canvas id="emojiCanvas" style="position: fixed; top: 0; left: 0; z-index: -2; pointer-events: none;"></canvas>
 
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyhWFXZixR_Nrb0Z2HiIb69NWN0x0PqK43LI9ZiJC-y4qTSkuXlQe7rSP0Hg3yUe-20/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpucbD-75ised03ADouYLuCxL4TJBnJz6DiZ6vX3yN1VhSieRQyToisaM3CxImG6R-/exec";
       
         function updateVipNames() {
             const vipCount = document.getElementById("vip-count");
@@ -314,7 +332,7 @@
                 .then(data => {
                 if (!vipCount || !vipNameSpan) return;
 
-                vipCount.innerHTML = `as brabas e os brabos do baile : ${data.totalCount}`;
+                vipCount.innerHTML = `as brabas e os brabos do baile 20 de Junho : ${data.totalCount}`;
 
                 const nameList = data.names.map(name => `🌞 ${name}`).join(' • ');
                 const fomoLine = "🚨 Junta-te antes que feche a GUEST LIST! 🚨";
@@ -347,18 +365,17 @@
 
     <!-- CONTENT MAIN -->
         <div class="content">
-
         <!-- DATE + TIME -->
         <div style="display: flex; justify-content: center; margin-top: -20px;">
             <div class="event-date" style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
                 <span style="position:absolute;top:0;left:0;color:#fedd00;opacity:0.7;filter:blur(0.5px);animation:glitchYellow 2s infinite;z-index:0;">
-                    <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                    <b>BAILE DE FAVELA</b><br> 25 de Julho 📍South Beach
                 </span>
                 <span style="position:absolute;top:0;left:0;color:#009739;opacity:0.6;filter:blur(0.4px);animation:glitchGreen 2.5s infinite;z-index:0;">
-                    <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                    <b>BAILE DE FAVELA</b><br> 25 de Julho 📍South Beach
                 </span>
                 <span style="position:absolute;top:0;left:0;color:#012169;opacity:0.5;filter:blur(0.6px);animation:glitchBlue 1.8s infinite;z-index:0;">
-                    <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                    <b>BAILE DE FAVELA</b><br> 25 de Julho 📍South Beach
                 </span>
                 <span style="color:white;position:relative;z-index:2;
                 text-shadow:
@@ -371,7 +388,7 @@
                     1px 0 0 #000,
                 -1px 0 0 #000;
                 ">
-                <b>BAILE DE FAVELA</b><br> 20 de Junho ⏰22h 📍South Beach
+                <b>BAILE DE FAVELA</b><br> 25 de Julho 📍South Beach
                 </span>
             </div>
         </div>
@@ -449,28 +466,6 @@
     }
   </style>
 
-
-    <!-- Loading Screen (visible on page load) -->
-    <div id="loadingScreen" style="
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
-        background-color: rgba(0, 0, 0, 0.5); 
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        z-index: 9999;
-        color: #ffffff; 
-        font-size: 2rem;
-        font-weight: bold;
-        text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #012169;
-        animation: toxicPulse 2.5s infinite ease-in-out;
-    ">
-        Carregando... Aguardando sua entrada.
-    </div>
-
     <!-- Countdown Timer -->
     <div id="countdownWrapper" style="display: none; text-align: center; position: relative; z-index: 10;">
         <!-- Spark Effect Canvas (now behind the countdown) -->
@@ -526,35 +521,8 @@
         </p>
     </div>
 
-    <!-- FORM        -->
-    <div style="
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid #fedd00;
-    border-radius: 20px;
-    padding: 10px;
-    width: 90%;
-    max-width: 480px;
-    margin: 0px auto;
-    box-shadow: 0 0 15px #fedd00;
-    font-family: Helvetica, sans-serif;
-    color: white;
-    ">
-    <h2 style="
-    text-align:center;
-    font-size: 20px;
-    color: #fedd00;
-    font-weight: bold;
-    text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #009739;
-    animation: toxicPulse 2.5s infinite ease-in-out;
-    margin-bottom: 0px;
-    ">🌞GUEST LIST🌞</h2>
-
-
-    <!-- <h4 style="text-align:center; font-weight: normal; font-style: italic; color: #ccc;">
-    Pré-venda VIP+ disponível em breve.
-    </h4> -->
-    
-    <form id="vipForm">
+    <div id="waitlistFormWrapper" style="display: none;"></div>
+    <form id="waitlistForm">
         <!-- META ADs TRACKER -->
         <input type="hidden" name="utm_source" />
         <input type="hidden" name="utm_medium" />
@@ -567,6 +535,342 @@
         <!-- STREET TEAM -->
         <input type="hidden" name="utm_content" />
         <!-- FORM STARTS HERE -->
+        <div id="waitlistSection" style="
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid #fedd00;
+        border-radius: 20px;
+        padding: 10px;
+        width: 90%;
+        max-width: 480px;
+        margin: 0px auto;
+        box-shadow: 0 0 15px #fedd00;
+        font-family: Helvetica, sans-serif;
+        color: white;
+        ">
+        <h2 style="
+        text-align:center;
+        font-size: 20px;
+        color: #fedd00;
+        font-weight: bold;
+        text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #009739;
+        animation: toxicPulse 2.5s infinite ease-in-out;
+        margin-bottom: 0px;
+        ">🌞Entre na Lista de Espera🌞</h2>
+        <label for="firstNameWaitlist">PRIMEIRO NOME</label><br>
+        <input type="text" id="firstNameWaitlist" name="firstNameWaitlist" required><br>
+
+        <label for="countryCode">NÚMERO DO WHATSAPP</label><br>
+            <select id="countryCode" name="countryCode" required>
+            <option value="+93">Afghanistan (+93)</option>
+            <option value="+355">Albania (+355)</option>
+            <option value="+213">Algeria (+213)</option>
+            <option value="+376">Andorra (+376)</option>
+            <option value="+244">Angola (+244)</option>
+            <option value="+54">Argentina (+54)</option>
+            <option value="+374">Armenia (+374)</option>
+            <option value="+61">Australia (+61)</option>
+            <option value="+43">Austria (+43)</option>
+            <option value="+994">Azerbaijan (+994)</option>
+            <option value="+973">Bahrain (+973)</option>
+            <option value="+880">Bangladesh (+880)</option>
+            <option value="+375">Belarus (+375)</option>
+            <option value="+32">Belgium (+32)</option>
+            <option value="+229">Benin (+229)</option>
+            <option value="+975">Bhutan (+975)</option>
+            <option value="+591">Bolivia (+591)</option>
+            <option value="+387">Bosnia & Herzegovina (+387)</option>
+            <option value="+267">Botswana (+267)</option>
+            <option value="+55">Brazil (+55)</option>
+            <option value="+359">Bulgaria (+359)</option>
+            <option value="+226">Burkina Faso (+226)</option>
+            <option value="+257">Burundi (+257)</option>
+            <option value="+855">Cambodia (+855)</option>
+            <option value="+237">Cameroon (+237)</option>
+            <option value="+1">Canada (+1)</option>
+            <option value="+238">Cape Verde (+238)</option>
+            <option value="+236">Central African Republic (+236)</option>
+            <option value="+235">Chad (+235)</option>
+            <option value="+56">Chile (+56)</option>
+            <option value="+86">China (+86)</option>
+            <option value="+57">Colombia (+57)</option>
+            <option value="+269">Comoros (+269)</option>
+            <option value="+243">Congo (DRC) (+243)</option>
+            <option value="+242">Congo (Republic) (+242)</option>
+            <option value="+506">Costa Rica (+506)</option>
+            <option value="+385">Croatia (+385)</option>
+            <option value="+53">Cuba (+53)</option>
+            <option value="+357">Cyprus (+357)</option>
+            <option value="+420">Czech Republic (+420)</option>
+            <option value="+45">Denmark (+45)</option>
+            <option value="+253">Djibouti (+253)</option>
+            <option value="+1">Dominican Republic (+1)</option>
+            <option value="+593">Ecuador (+593)</option>
+            <option value="+20">Egypt (+20)</option>
+            <option value="+503">El Salvador (+503)</option>
+            <option value="+240">Equatorial Guinea (+240)</option>
+            <option value="+291">Eritrea (+291)</option>
+            <option value="+372">Estonia (+372)</option>
+            <option value="+251">Ethiopia (+251)</option>
+            <option value="+679">Fiji (+679)</option>
+            <option value="+358">Finland (+358)</option>
+            <option value="+33">France (+33)</option>
+            <option value="+241">Gabon (+241)</option>
+            <option value="+220">Gambia (+220)</option>
+            <option value="+995">Georgia (+995)</option>
+            <option value="+49">Germany (+49)</option>
+            <option value="+233">Ghana (+233)</option>
+            <option value="+30">Greece (+30)</option>
+            <option value="+502">Guatemala (+502)</option>
+            <option value="+224">Guinea (+224)</option>
+            <option value="+245">Guinea-Bissau (+245)</option>
+            <option value="+592">Guyana (+592)</option>
+            <option value="+509">Haiti (+509)</option>
+            <option value="+504">Honduras (+504)</option>
+            <option value="+36">Hungary (+36)</option>
+            <option value="+354">Iceland (+354)</option>
+            <option value="+91">India (+91)</option>
+            <option value="+62">Indonesia (+62)</option>
+            <option value="+98">Iran (+98)</option>
+            <option value="+964">Iraq (+964)</option>
+            <option value="+353">Ireland (+353)</option>
+            <option value="+972">Israel (+972)</option>
+            <option value="+39">Italy (+39)</option>
+            <option value="+225">Ivory Coast (+225)</option>
+            <option value="+81">Japan (+81)</option>
+            <option value="+962">Jordan (+962)</option>
+            <option value="+7">Kazakhstan (+7)</option>
+            <option value="+254">Kenya (+254)</option>
+            <option value="+965">Kuwait (+965)</option>
+            <option value="+996">Kyrgyzstan (+996)</option>
+            <option value="+856">Laos (+856)</option>
+            <option value="+371">Latvia (+371)</option>
+            <option value="+961">Lebanon (+961)</option>
+            <option value="+266">Lesotho (+266)</option>
+            <option value="+231">Liberia (+231)</option>
+            <option value="+218">Libya (+218)</option>
+            <option value="+423">Liechtenstein (+423)</option>
+            <option value="+370">Lithuania (+370)</option>
+            <option value="+352">Luxembourg (+352)</option>
+            <option value="+261">Madagascar (+261)</option>
+            <option value="+265">Malawi (+265)</option>
+            <option value="+60">Malaysia (+60)</option>
+            <option value="+960">Maldives (+960)</option>
+            <option value="+223">Mali (+223)</option>
+            <option value="+356">Malta (+356)</option>
+            <option value="+222">Mauritania (+222)</option>
+            <option value="+230">Mauritius (+230)</option>
+            <option value="+52">Mexico (+52)</option>
+            <option value="+373">Moldova (+373)</option>
+            <option value="+377">Monaco (+377)</option>
+            <option value="+976">Mongolia (+976)</option>
+            <option value="+382">Montenegro (+382)</option>
+            <option value="+212">Morocco (+212)</option>
+            <option value="+95">Myanmar (+95)</option>
+            <option value="+258" selected>Mozambique (+258)</option>
+            <option value="+264">Namibia (+264)</option>
+            <option value="+977">Nepal (+977)</option>
+            <option value="+31">Netherlands (+31)</option>
+            <option value="+64">New Zealand (+64)</option>
+            <option value="+505">Nicaragua (+505)</option>
+            <option value="+227">Niger (+227)</option>
+            <option value="+234">Nigeria (+234)</option>
+            <option value="+47">Norway (+47)</option>
+            <option value="+968">Oman (+968)</option>
+            <option value="+92">Pakistan (+92)</option>
+            <option value="+507">Panama (+507)</option>
+            <option value="+595">Paraguay (+595)</option>
+            <option value="+51">Peru (+51)</option>
+            <option value="+63">Philippines (+63)</option>
+            <option value="+48">Poland (+48)</option>
+            <option value="+351">Portugal (+351)</option>
+            <option value="+974">Qatar (+974)</option>
+            <option value="+40">Romania (+40)</option>
+            <option value="+7">Russia (+7)</option>
+            <option value="+250">Rwanda (+250)</option>
+            <option value="+966">Saudi Arabia (+966)</option>
+            <option value="+221">Senegal (+221)</option>
+            <option value="+381">Serbia (+381)</option>
+            <option value="+248">Seychelles (+248)</option>
+            <option value="+232">Sierra Leone (+232)</option>
+            <option value="+65">Singapore (+65)</option>
+            <option value="+421">Slovakia (+421)</option>
+            <option value="+386">Slovenia (+386)</option>
+            <option value="+27">South Africa (+27)</option>
+            <option value="+82">South Korea (+82)</option>
+            <option value="+34">Spain (+34)</option>
+            <option value="+94">Sri Lanka (+94)</option>
+            <option value="+249">Sudan (+249)</option>
+            <option value="+597">Suriname (+597)</option>
+            <option value="+268">Swaziland (+268)</option>
+            <option value="+46">Sweden (+46)</option>
+            <option value="+41">Switzerland (+41)</option>
+            <option value="+963">Syria (+963)</option>
+            <option value="+886">Taiwan (+886)</option>
+            <option value="+992">Tajikistan (+992)</option>
+            <option value="+255">Tanzania (+255)</option>
+            <option value="+66">Thailand (+66)</option>
+            <option value="+228">Togo (+228)</option>
+            <option value="+216">Tunisia (+216)</option>
+            <option value="+90">Turkey (+90)</option>
+            <option value="+993">Turkmenistan (+993)</option>
+            <option value="+256">Uganda (+256)</option>
+            <option value="+380">Ukraine (+380)</option>
+            <option value="+971">United Arab Emirates (+971)</option>
+            <option value="+44">United Kingdom (+44)</option>
+            <option value="+1">United States (+1)</option>
+            <option value="+598">Uruguay (+598)</option>
+            <option value="+998">Uzbekistan (+998)</option>
+            <option value="+58">Venezuela (+58)</option>
+            <option value="+84">Vietnam (+84)</option>
+            <option value="+967">Yemen (+967)</option>
+            <option value="+260">Zambia (+260)</option>
+            <option value="+263">Zimbabwe (+263)</option>
+        </select>
+        <input type="text" name="whatsappNumberWaitlist" required placeholder="WhatsApp (sem espaços)" />
+        <br><br>
+        <button type="submit" id="waitlistButton">Avise-me por WhatsApp</button>
+    </form>
+    </div>
+    </div>
+
+    <div id="waitlistConfirmation" style="display: none; color: #fff; text-align: center; margin-top: 20px; font-size: 16px;">
+    <!-- confirmation message will go here -->
+    </div>
+
+    <script>
+        // 💌 Waitlist form submission
+        document.getElementById("waitlistForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Stop default form action
+            const form = event.target;
+
+            const nameInput = document.getElementById("firstNameWaitlist");
+            const countryCode = document.getElementById("countryCode");
+            const phoneInput = document.querySelector("input[name='whatsappNumberWaitlist']");
+
+            const firstName = nameInput.value.trim();
+            const formattedName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+            const fullWhatsApp = `${countryCode.value}${phoneInput.value.trim()}`;
+
+            const confirmationBox = document.getElementById("waitlistConfirmation");
+            confirmationBox.innerHTML = `
+                <div style="
+                    background-color: rgba(0, 0, 0, 0.5);
+                    border: 1px solid #fedd00;
+                    border-radius: 20px;
+                    padding: 10px;
+                    width: 90%;
+                    max-width: 480px;
+                    margin: 0px auto;
+                    box-shadow: 0 0 15px #fedd00;
+                    font-family: Helvetica, sans-serif;
+                    color: white;
+                    text-align: center;
+                ">
+                    <h2 style="
+                        font-size: 20px;
+                        color: #fedd00;
+                        font-weight: bold;
+                        text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #009739;
+                        animation: toxicPulse 2.5s infinite ease-in-out;
+                        margin-bottom: 10px;
+                    ">🎉 Obrigada, <strong>${formattedName}</strong>!</h2>
+
+                    <p>Vais receber um link exclusivo para
+                    <br>
+                    entrares na <strong>GUEST LIST</strong> no 
+                    <br>
+                    <strong>terça-feira, 22 de julho às 9h</strong>
+                    <br>
+                    por WhatsApp <strong>+258863942677</strong>.
+                    <br><br>
+                    Verifica se recebeste uma mensagem no WhatsApp deste número para confirmar que estás na lista de espera.
+                    <br><br>
+                    Se tiveres alguma dúvida, entra em contacto com a nossa equipa, <strong>CarteBlanche</strong>, pelo
+                    <br><br>
+                    <b><a href="https://wa.me/258852828284" target="_blank">WhatsApp +258 852 828 284</a></b>.
+                    <br><br>
+                    <em>Os lugares são limitados. ⚠️</em>
+                    <br><br>
+                    Todos que entrarem na lista de espera terão acesso antecipado à lista de convidados. 🌟
+                    <br><br>
+                    <em>A lista de convidados será encerrada na<br>quinta-feira, 24 de julho, às 23h59.</em>
+                    </p>
+                    
+                </div>
+            `;
+
+            document.getElementById("waitlistForm").style.display = "none";
+            confirmationBox.style.display = "block";
+
+            // 🎯 Construct payload
+            const payload = {
+                waitlist: true,
+                firstName,
+                whatsapp: fullWhatsApp,
+                utm_source: form.utm_source?.value || "",
+                utm_medium: form.utm_medium?.value || "",
+                utm_campaign: form.utm_campaign?.value || "",
+                utm_content: form.utm_content?.value || "",
+                ad_id: form.ad_id?.value || "",
+                adset_id: form.adset_id?.value || "",
+                campaign_id: form.campaign_id?.value || "",
+                ad_name: form.ad_name?.value || "",
+                adset_name: form.adset_name?.value || ""
+            };
+
+            // 🎉 Trigger emoji animation
+            triggerEmojiExplosion();
+
+            // ✅ Send to Google Apps Script
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors", // <-- add this
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error("Failed to send waitlist data", err);
+            }
+        });
+    </script>
+
+    <div id="guestlistFormWrapper" style="display: none;">
+    <form id="vipForm">
+        <!-- FORM        -->
+        <div style="
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid #fedd00;
+        border-radius: 20px;
+        padding: 10px;
+        width: 90%;
+        max-width: 480px;
+        margin: 0px auto;
+        box-shadow: 0 0 15px #fedd00;
+        font-family: Helvetica, sans-serif;
+        color: white;
+        ">
+        <!-- META ADs TRACKER -->
+        <input type="hidden" name="utm_source" />
+        <input type="hidden" name="utm_medium" />
+        <input type="hidden" name="utm_campaign" />
+        <input type="hidden" name="ad_id" />
+        <input type="hidden" name="adset_id" />
+        <input type="hidden" name="campaign_id" />
+        <input type="hidden" name="ad_name" />      
+        <input type="hidden" name="adset_name" /> 
+        <!-- STREET TEAM -->
+        <input type="hidden" name="utm_content" />
+        <!-- FORM STARTS HERE -->
+        <h2 style="
+        text-align:center;
+        font-size: 20px;
+        color: #fedd00;
+        font-weight: bold;
+        text-shadow: 0 0 8px #fedd00, 0 0 16px #009739, 0 0 24px #009739;
+        animation: toxicPulse 2.5s infinite ease-in-out;
+        margin-bottom: 0px;
+        ">🌞GUEST LIST🌞</h2>
         <label for="countryCode">PRIMEIRO NOME</label><br>
         <input type="text" name="firstName" required placeholder="Primeiro nome" /><br>
         <label for="countryCode">SOBRENOME</label><br>
@@ -796,12 +1100,13 @@
         <input type="email" name="email" required placeholder="E-mail para confirmação" /><br><br>
         <button type="submit" id="submitButton">Entrar GUEST LIST</button>
     </form>
+    </div>
     <p id="statusMessage" style="margin-top: 10px;"></p>
     </div>
 
     <br>
 
-    <div class="perditio-text-neon-logo-container">
+    <div class="perditio-text-neon-logo-container" style="text-align: center;">
         <img 
               src="../assets/images/perditio-text.svg" 
               alt="PERDITIO TEXT Logo" 
@@ -891,7 +1196,7 @@
         </style>
                              
         <br>
-        <div class="baile-de-favela-neon-logo-container">
+        <div class="baile-de-favela-neon-logo-container" style="text-align: center;">
             <img 
               src="../assets/images/baile-de-favela-transparent-600x600-optimized-for-mobile.png" 
               alt="BAILE DE FAVELA Logo" 
@@ -924,16 +1229,16 @@
         </style>
 
         <!-- DATE + TIME -->
-        <div style="display: flex; justify-content: center; margin-top: 10px;">
+        <div style="display: flex; justify-content: center; margin-top: 10px; text-align: center;">
             <div class="event-date" style="position: relative; font-family: Helvetica, sans-serif; font-size: 5vw; font-weight: bold; white-space: nowrap;">
                 <span style="position:absolute;top:0;left:0;color:#fedd00;opacity:0.7;filter:blur(0.5px);animation:glitchYellow 2s infinite;z-index:0;">
-                    20 de Junho ⏰22h 📍South Beach
+                    25 de Julho 📍South Beach
                 </span>
                 <span style="position:absolute;top:0;left:0;color:#009739;opacity:0.6;filter:blur(0.4px);animation:glitchGreen 2.5s infinite;z-index:0;">
-                    20 de Junho ⏰22h 📍South Beach
+                    25 de Julho 📍South Beach
                 </span>
                 <span style="position:absolute;top:0;left:0;color:#012169;opacity:0.5;filter:blur(0.6px);animation:glitchBlue 1.8s infinite;z-index:0;">
-                    20 de Junho ⏰22h 📍South Beach
+                    25 de Julho 📍South Beach
                 </span>
                 <span style="color:white;position:relative;z-index:2;
                 text-shadow:
@@ -946,14 +1251,14 @@
                     1px 0 0 #000,
                 -1px 0 0 #000;
                 ">
-                20 de Junho ⏰22h 📍South Beach
+                25 de Julho 📍South Beach
                 </span>
             </div>
         </div>
 
         
         <!-- DATE + TIME -->
-        <div style="display: flex; justify-content: center; margin-top: 10px;">
+        <div style="display: flex; justify-content: center; margin-top: 10px; text-align: center;">
             <div class="event-location" style="position: relative; font-family: Helvetica, sans-serif; font-weight: bold; white-space: nowrap;">
                 <span class="glitch-text glitch-green" style="position:absolute;top:0;left:0;color:#fedd00;opacity:0.7;filter:blur(0.5px);animation:glitchYellow 2s infinite;z-index:0;">
                     Avenida da Marginal nº 4272<br>Maputo, MZ
@@ -1020,7 +1325,7 @@
                 <span class="genre genre6" style="color:#FF6EC7;">House</span>,            <!-- Neon Pink --><br>
                 <span class="genre genre7" style="color:#FF8C00;">Semba</span>,            <!-- Neon Orange -->
                 <span class="genre genre8" style="color:#00FF66;">Kizomba</span>,          <!-- Neon Mint -->
-                <span class="genre genre9" style="color:#9D00FF;">Brazilian Beats</span>   <!-- Neon Purple -->
+                <span class="genre genre9" style="color:#9D00FF;">Batidas Brasileiras</span>   <!-- Neon Purple -->
             </p>
         </div>
 
@@ -1085,44 +1390,44 @@
             }
         </style>
             
+        <div id="guestlistInfo" style="display: none;">
+            <div style="background-color: rgba(0, 0, 0, 0.5); color:#fff; border:2px solid #39ff14; padding:16px; margin:20px auto; max-width:400px; font-size:16px; border-radius:12px; box-shadow:0 0 10px #39ff14; text-align:center; line-height:1.6;">
+                <p><strong style="color:#fedd00;">GUEST LIST:</strong> Entrada grátis até 23h.<br>Das 23h à meia-noite: 500MT.</p>
+                <p><strong style="color:#fedd00;">Pré-venda:</strong> 500MT com entrada rápida.</p>
+                <p><strong style="color:#fedd00;">Sem cadastro:</strong> 1000MT a noite toda.</p>
+            </div>  
 
-        <div style="background-color: rgba(0, 0, 0, 0.5); color:#fff; border:2px solid #39ff14; padding:16px; margin:20px auto; max-width:400px; font-size:16px; border-radius:12px; box-shadow:0 0 10px #39ff14; text-align:center; line-height:1.6;">
-            <p><strong style="color:#fedd00;">GUEST LIST:</strong> Entrada grátis até 23h.<br>Das 23h à meia-noite: 500MT.</p>
-            <p><strong style="color:#fedd00;">Pré-venda:</strong> 500MT com entrada rápida.</p>
-            <p><strong style="color:#fedd00;">Sem cadastro:</strong> 1000MT a noite toda.</p>
-        </div>  
+            <div style="
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #009739;
+            border-radius: 12px;
+            padding: 16px;
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+            color: #ffffff;
+            font-size: 16px;
+            box-shadow: 0 0 10px #009739;
+            line-height: 1.6;">
+        
+            GUEST LIST entrada gratuita com QR Code até às 23h para si e para os seus convidados.<br>
 
-        <div style="
-        background-color: rgba(0, 0, 0, 0.5);
-        border: 2px solid #009739;
-        border-radius: 12px;
-        padding: 16px;
-        max-width: 400px;
-        margin: 20px auto;
-        text-align: center;
-        color: #ffffff;
-        font-size: 16px;
-        box-shadow: 0 0 10px #009739;
-        line-height: 1.6;">
-      
-        GUEST LIST entrada gratuita com QR Code até às 23h para você e seus convidados.<br>
-
-        <strong style="color: #fedd00;">
-        Vagas limitadas.</strong>
-        <br>
-        Cadastre-se agora para receber seu
-        <br>
-        QR Code por e-mail <strong>e também por WhatsApp</strong>.
-        <br>
-        <span style="font-size: 14px; color: #aaa;">O e-mail será enviado por <strong>team@perditio.com</strong>.
-        <br>
-        Se não receber, verifique sua caixa de spam ou entre em contato com 
-        <b><a href="https://www.instagram.com/carteblanche_music/" target="_blank">@carteblanche_music</a></b> no Instagram, 
-        ou nos envie uma mensagem no 
-        <b><a href="https://wa.me/258852828284" target="_blank">WhatsApp</a></b>.
-        </span> 
-        </div> 
-  
+            <strong style="color: #fedd00;">
+            Vagas limitadas.</strong>
+            <br>
+            Cadastre-se agora para receber seu
+            <br>
+            QR Code por e-mail <strong>e também por WhatsApp</strong>.
+            <br>
+            <span style="font-size: 14px; color: #aaa;">O e-mail será enviado por <strong>team@perditio.com</strong>.
+            <br>
+            Se não receber, verifique sua caixa de spam ou entre em contato com 
+            <b><a href="https://www.instagram.com/carteblanche_music/" target="_blank">@carteblanche_music</a></b> no Instagram, 
+            ou nos envie uma mensagem no 
+            <b><a href="https://wa.me/258852828284" target="_blank">WhatsApp</a></b>.
+            </span> 
+            </div> 
+        </div>
         <!-- OLD FORM LOCATION -->
         <a href="#vipFormAnchor" id="stickyCTAButton">⬆️</a>
 
@@ -1620,35 +1925,67 @@
     </script>
 
     <script>
-        // Countdown Timer Script
-        function updateCountdown() {
-            const targetDate = new Date('2025-06-20T19:00:00Z');  // 9:00 PM Maputo time
-            const currentDate = new Date();
-            const remainingTime = targetDate - currentDate;
+        const waitlistDeadline = new Date("2025-07-21T07:00:00Z");     // July 20, 9:00 AM Maputo
+        const guestlistDeadline = new Date("2025-07-24T22:00:00Z");    // July 25, 0:00 AM Maputo
 
-            if (remainingTime <= 0) {
-                document.getElementById('countdownWrapper').style.display = 'none'; // Hide countdown timer
-                document.getElementById('finalMessage').style.display = 'block'; // Show final message
-                document.getElementById('vipForm').style.display = 'none'; // Hide VIP form
-                return;
+        function updateCountdownWrapper() {
+            const now = new Date();
+
+            const countdownWrapper = document.getElementById("countdownWrapper");
+            const countdown = document.getElementById("countdown");
+            const countdownMessage = document.getElementById("countdownMessage");
+            const finalMessage = document.getElementById("finalMessage");
+
+            const waitlistForm = document.getElementById("waitlistFormWrapper");
+            const guestlistForm = document.getElementById("guestlistFormWrapper");
+            const guestlistInfo = document.getElementById("guestlistInfo");
+
+            if (now < waitlistDeadline) {
+            // ⏳ WAITLIST PHASE
+            countdownWrapper.style.display = "block";
+            finalMessage.style.display = "none";
+            waitlistForm.style.display = "block";
+            guestlistForm.style.display = "none";
+            guestlistInfo.style.display = "none";
+
+            const remaining = waitlistDeadline - now;
+            updateCountdownDisplay(countdown, remaining);
+            countdownMessage.innerHTML = `⏳ A lista de convidados abre em breve!`;
+
+            } else if (now >= waitlistDeadline && now < guestlistDeadline) {
+            // ✅ GUEST LIST PHASE
+            countdownWrapper.style.display = "block";
+            finalMessage.style.display = "none";
+            waitlistForm.style.display = "none";
+            guestlistForm.style.display = "block";
+            guestlistInfo.style.display = "block";
+
+            const remaining = guestlistDeadline - now;
+            updateCountdownDisplay(countdown, remaining);
+            countdownMessage.innerHTML = `⚠️ A GUEST LIST fecha em breve!<br>Não perca sua chance.`;
+
+            } else {
+            // ❌ GUEST LIST CLOSED
+            countdownWrapper.style.display = "none";
+            finalMessage.style.display = "block";
+            waitlistForm.style.display = "none";
+            guestlistForm.style.display = "none";
+            guestlistInfo.style.display = "none";
             }
-
-            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            document.getElementById('countdownMessage').innerHTML = `Até o encerramento da entrada GUEST LIST!<br>Não deixe para depois... ⏰`;
         }
 
-        setInterval(updateCountdown, 1000); // Update every second
+        function updateCountdownDisplay(el, ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const days = Math.floor(totalSeconds / (3600 * 24));
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
 
-        // Hide loading screen once the page content is ready
-        window.addEventListener('load', () => {
-            document.getElementById('loadingScreen').style.display = 'none';  // Hide the loading screen
-            document.getElementById('countdownWrapper').style.display = 'block';     // Show countdown timer
-        });
+            el.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateCountdownWrapper, 1000);
+        window.addEventListener("load", updateCountdownWrapper);
 
         // Spark Effect (creates constant spark-like animation behind the countdown)
         document.addEventListener("DOMContentLoaded", function () {
@@ -1803,5 +2140,6 @@
         }
         });
     </script>
+
 </body>
 </html>
